@@ -264,6 +264,12 @@ ${StyledInputForm}:valid ~ label {
 `;
 
 
+export const StyledSpan = styled.span`
+color: white;
+font-size: 16px;
+`;
+
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

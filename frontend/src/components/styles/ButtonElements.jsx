@@ -51,3 +51,28 @@ export const BtnLink = styled.button`
   font-size: 32px;
 
 `;
+
+export const BtnLinkLog = styled(BtnLink)`
+    font-size: 16px;
+    color: #069;
+    text-transform: none;
+    display: inline-block;
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #0087ca;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+`;

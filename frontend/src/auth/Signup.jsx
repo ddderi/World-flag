@@ -1,27 +1,22 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signUpUser } from '../requests/RequestUser';
-import { useNavigate } from 'react-router-dom';
-import { Btnlog } from '../components/styles/ButtonElements';
+import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
 import {
     StyledFormCont,
     StyledForm,
     StyledInputForm,
     StyledFormHeading,
-    StyledInputContainer
+    StyledInputContainer,
+    StyledSpan
 }
     from '../components/styles/GeneralElements';
 
-export default function Signup({ setUser, setLogged }) {
+export default function Signup({ setUser, setLogged, navigateTo }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
-    const navigate = useNavigate();
-
-
-    const navigateToHome = () => {
-        navigate('/')
-    };
+ 
 
 
     const signup = async (info) => {
@@ -34,7 +29,7 @@ export default function Signup({ setUser, setLogged }) {
             setUser(result.user.username)
             setLogged(true)
             setTimeout(() => {
-                navigateToHome()
+                navigateTo('home')
             }, 1000);
             return result
         } catch (error) {
@@ -69,6 +64,7 @@ export default function Signup({ setUser, setLogged }) {
                     <StyledInputForm {...register('passwordConfirmation')} type="text" required />
                     <label htmlFor='passwordConfirmation'>Password confirmation</label>
                 </StyledInputContainer>
+                <StyledSpan>You already have an account ? Click <BtnLinkLog type='button' onClick={() => navigateTo('login')} >here</BtnLinkLog></StyledSpan>
                 <Btnlog type="submit">Submit</Btnlog>
             </StyledForm>
         </StyledFormCont>
