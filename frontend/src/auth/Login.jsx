@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { loggingUser } from '../requests/RequestUser';
 import {
@@ -7,16 +7,15 @@ import {
   StyledInputForm,
   StyledFormHeading,
   StyledInputContainer,
-  StyledSpan
+  StyledSpan,
+  StyledSpanMessage
 }
   from '../components/styles/GeneralElements';
-import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements'
+import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
 
-function Login({ setUser, logged, setLogged, navigateTo }) {
+function Login({ setUser, setLogged, navigateTo, message, setMessage }) {
 
   const { register, handleSubmit, reset } = useForm()
-  const [message, setMessage] = useState('')
-
 
   const logInUser = async (data) => {
     try {
@@ -42,17 +41,17 @@ function Login({ setUser, logged, setLogged, navigateTo }) {
   return (
     <StyledFormCont>
       <StyledFormHeading>Login</StyledFormHeading>
-      {message !== undefined ? <span style={{ color: 'red' }}>{message.message}</span> : null}
+      {message !== undefined ? <StyledSpanMessage>{message.message}</StyledSpanMessage> : null}
       <StyledForm onSubmit={handleSubmit((data) => {
         logInUser(data)
         reset()
       })}>
         <StyledInputContainer>
-          <StyledInputForm {...register('username', { required: true })}  type="text" required />
+          <StyledInputForm {...register('username', { required: true })} type="text" required />
           <label htmlFor='username'>Username</label>
         </StyledInputContainer>
         <StyledInputContainer>
-          <StyledInputForm {...register('password')} type="password"  required />
+          <StyledInputForm {...register('password')} type="password" required />
           <label htmlFor="password" >Password</label>
         </StyledInputContainer>
         <StyledSpan>You don't have an account ? Click <BtnLinkLog type='button' onClick={() => navigateTo('signup')} >here</BtnLinkLog></StyledSpan>

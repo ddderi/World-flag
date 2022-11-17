@@ -2,7 +2,7 @@ import { flagCall, updateScoreUser } from '../requests/RequestUser';
 import { countries } from '../data/countries';
 
 
-export const testbutton = async (setAnswer, result) => {
+export const triggerAnswers = async (setAnswer, result) => {
     let optionsAnswer = []
     console.log(result)
     for (let i = 0; i < 3; i++) {
@@ -37,10 +37,8 @@ export const startGame = async (setResult, setAnswer, setFlag, result) => {
             console.log(key, countries[index][key])
             setResult(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
-            // const settingFlag = await setFlag(resultFlag.request.responseURL)
-            // const answer = await testbutton(setAnswer, countries[index][key])
             setFlag(resultFlag.request.responseURL)
-            testbutton(setAnswer, countries[index][key])
+            triggerAnswers(setAnswer, countries[index][key])
         })
     } catch (error) {
         console.log(error)

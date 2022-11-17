@@ -37,7 +37,6 @@ export default function Home({ user, navigateTo }) {
         :
         <>
           <StyledHeading>Welcome, Click <BtnLink onClick={() => navigateTo('login')} >here</BtnLink> for logging-in </StyledHeading>
-          {/* or <BtnLink onClick={() => navigateTo('signup')}>here</BtnLink> for signing-up </StyledHeading> */}
         </>
       }
     </StyledCont>

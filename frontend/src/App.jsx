@@ -13,6 +13,7 @@ function App() {
   const [user, setUser] = useState('')
   const [logged, setLogged] = useState(false)
   const [userScore, setUserScore] = useState('')
+  const [message, setMessage] = useState('')
   const navigate = useNavigate();
 
   const navigateTo = (location) => {
@@ -46,8 +47,8 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
-          <Route path="/account" element={<Account user={user} />} />
+          <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+          <Route path="/account" element={<Account message={message} setMessage={setMessage} user={user} />} />
           <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
         </Routes>
 

@@ -269,6 +269,24 @@ color: white;
 font-size: 16px;
 `;
 
+export const StyledSpanMessage = styled(StyledSpan)`
+display: inline-block;
+color: red;
+margin-bottom: 4%; 
+text-align: center;
+width: 100%;
+
+`;
+
+export const StyledSpanMessageGreen = styled(StyledSpan)`
+display: inline-block;
+color: red;
+margin-bottom: 4%; 
+text-align: center;
+width: 100%;
+
+`;
+
 
 export const StyledForm = styled.form`
   display: flex;

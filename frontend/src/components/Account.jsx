@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { changePassword } from '../requests/RequestUser';
 import {
@@ -6,16 +6,15 @@ import {
   StyledForm,
   StyledInputForm,
   StyledFormHeading,
-  LabelAccount
+  LabelAccount,
+  StyledSpanMessage
 }
   from '../components/styles/GeneralElements';
 import { Btnlog } from './styles/ButtonElements';
 
-export default function Account({ user }) {
+export default function Account({ user, message, setMessage }) {
 
   const { register, handleSubmit, reset } = useForm()
-  const [message, setMessage] = useState('')
-
 
   const changePw = async (info) => {
     try {
@@ -41,8 +40,8 @@ export default function Account({ user }) {
           })
           reset()
         })}>
-          {message ? <span style={{ color: 'red' }}>{message}</span> : null}
           <StyledFormHeading>{user}</StyledFormHeading>
+          {message ? <StyledSpanMessage>{message}</StyledSpanMessage> : null}
           <LabelAccount htmlFor="currentpassword">Current password</LabelAccount>
           <StyledInputForm {...register("currentpassword")} required />
           <LabelAccount htmlFor="password">New password</LabelAccount>

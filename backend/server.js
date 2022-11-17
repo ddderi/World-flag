@@ -18,9 +18,6 @@ app.use(cors({
     credentials: true 
 }));
 
-// sequelize.sync().then(result => {
-//     console.log(result)
-// }).catch( err => console.log(err))
 
 
 const PORT = process.env.PORT || 1234;
