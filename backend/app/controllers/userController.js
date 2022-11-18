@@ -26,16 +26,14 @@ const signup = async (req, res) => {
         }
         const user = await User.create(data)
 
-        // JWT TO DO HERE
         if (user) {
             let token = jwt.sign({ id: user.id }, process.env.TOKEN_KEY, {
                 expiresIn: "2h"
             });
-            res.cookie("jwt", token, { maxAge: 86000, httpOnly: true, httpOnly: true })
+            res.cookie("jwt", token, { maxAge: 10 * 90000 * 24, httpOnly: true, httpOnly: true })
             console.log("user", JSON.stringify(user, null, 2));
             return res.status(201).json({ user, login: true, message: 'Account succesfully created !' })
         } else {
-            console.log('bug')
             return res.status(409).send("details are not correct")
         }
 
@@ -56,12 +54,12 @@ const login = async (req, res) => {
                     expiresIn: "2h"
                 });
                 res.cookie(`jwt`, token, { maxAge: 10 * 90000 * 24, httpOnly: true })
-                return res.status(200).json({ message: 'succesfully connected', user, success: true })
+                return res.status(200).json({ message: 'succesfully connected', user, login: true })
             } else {
-                return res.status(401).json({ message: "identification incorrect", success: false })
+                return res.status(401).json({ message: "identification incorrect", login: false })
             }
         } else {
-            return res.status(401).json({ message: "identification incorrect" })
+            return res.status(401).json({ message: "identification incorrect", login: false })
         }
     } catch (error) {
         console.log(error)
@@ -92,20 +90,20 @@ const changePassword = async (req, res, next) => {
                         const userFound = await User.findOne({ where: { id: verifiedJWT.id } })
                         if (isSame && userFound) {
                             const newUser = await userFound.update({ password: await bcrypt.hash(newPassword, 10) })
-                            res.status(201).json({ message: 'password properly updated', newUser, success: true })
+                            res.status(201).json({ message: 'password properly updated', newUser, success: true, login: true })
                         } else {
-                            res.status(401).json({ message: 'Problem with your identifications', success: false })
+                            res.status(401).json({ message: 'Problem with your identifications', success: false, login: true })
                         }
                     }
                 } else {
-                    res.status(401).json({ error, message: "a problem occured", success: false })
+                    res.status(401).json({ error, message: "A problem occured, you should reconnect", login: false })
                 }
             } catch (error) {
-                res.status(401).json({ error, message: "a problem occured", success: false })
+                res.status(401).json({ error, message: "a problem occured", login: false})
             }
         })
     } catch (error) {
-        res.status(400).json({ error, message: "a problem occured" })
+        res.status(400).json({ error, message: "a problem occured", login: false})
     }
 }
 

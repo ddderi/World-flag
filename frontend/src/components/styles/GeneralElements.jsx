@@ -138,6 +138,7 @@ export const StyledGameChild = styled.div`
     justify-content: center;
      align-items: center;
     width: 100%;
+    height: 105px;
   }
 `;
 
@@ -147,29 +148,32 @@ export const StyledGameChildAnswer = styled.div`
   position: relative;
   background-color: #fafafa;
   border-radius: 3px 3px;
-  box-shadow: 1px 1px 1px gray;
+  //box-shadow: 1px 1px 1px gray;
   cursor: pointer;
+  opacity: 0.85;
   @media screen and (min-width: 570px) and  (max-width: 1300px){
-    position: relative;
-    background-color: #fafafa;
-    border-radius: 3px 3px;
-    box-shadow: 1px 1px 1px gray;
-    cursor: pointer;
     margin-bottom: 1%;
     width: 70%;
   }
   @media screen and (max-width: 570px){
-    position: relative;
-    background-color: #fafafa;
-    border-radius: 3px 3px;
-    box-shadow: 1px 1px 1px gray;
-    cursor: pointer;
     margin-bottom: 1%;
     width: 90%;
   }
+  &:hover {
+    opacity: 1;
+    
+  }
+`;
+
+export const StyledGameChildAnswerGreen = styled(StyledGameChildAnswer)`
+
+background-color: green;
+
 `;
 
 
+//background-color: ${props => props.coloringanswer};
+// background-color: #e57373;
 
 export const StyledRecordsCont = styled.div`
   grid-column-start: 3;
@@ -294,6 +298,10 @@ export const StyledForm = styled.form`
   text-align: center;
 `;
 
-
+export const StyledSpanResult = styled.span`
+  color: ${props => props.coloring};
+  font-weight: bold;
+  width: 50%;
+`;
 
 

@@ -71,7 +71,7 @@ export default function navbar({ logged, setUser, setLogged, user }) {
                 <NavLinkDropDown to='/login' image={logoutlogo} onClick={() => logout(setUser, setLogged)} >
                   Log-out
                 </NavLinkDropDown>
-                <NavLinkDropDown to='/' >
+                <NavLinkDropDown to='/account' >
                   {user}
                 </NavLinkDropDown>
               </>

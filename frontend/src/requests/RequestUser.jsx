@@ -13,27 +13,31 @@ export async function loggingUser(data, setMessage) {
     }
 }
 
-export async function signUpUser(data){
+export async function signUpUser(info){
     try{
-        const result = await axiosInstance.post('/signup', data, {withCredentials: true})
+        const result = await axiosInstance.post('/signup', info, {withCredentials: true})
         return result.data
     }catch(error){
         console.log(error)
     }
 }
 
-export async function changePassword(data, setMessage){
+export async function changePassword(setLogged, info, setMessage){
     try{
-        const result = await axiosInstance.put('/change_password', data, {withCredentials: true})
+        const result = await axiosInstance.put('/change_password', info, {withCredentials: true})
         return result.data
     }catch(error){
+        
         console.log(error)
         setMessage(error.response.data.message)
+        if(!error.response.data.login){
+            setLogged(false)
+        }
     }
 }
 
 
-export async function checkCookie(setUser, setLogged){
+export async function checkCookie(navigateTo, setUser, setLogged){
     try{
         const result = await axiosInstance.get('/cookie', { withCredentials: true})
         setLogged(result.data.login)
@@ -42,6 +46,9 @@ export async function checkCookie(setUser, setLogged){
         if(!error.response.data.login){
             localStorage.removeItem('user')
             setUser('')
+            setTimeout(() => {
+                navigateTo('login')
+              }, 2000);
         }
         console.log(error)
     }

@@ -20,7 +20,7 @@ function Login({ setUser, setLogged, navigateTo, message, setMessage }) {
   const logInUser = async (data) => {
     try {
       const result = await loggingUser(data, setMessage, setUser)
-      if (result.success) {
+      if (result.login) {
         setMessage(result.message)
         localStorage.setItem('score', JSON.stringify(result.user.bestscores))
         localStorage.setItem('user', JSON.stringify(result.user.username))

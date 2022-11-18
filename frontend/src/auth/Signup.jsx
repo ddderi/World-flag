@@ -16,7 +16,7 @@ export default function Signup({ setUser, setLogged, navigateTo }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
- 
+
 
 
     const signup = async (info) => {
@@ -57,11 +57,11 @@ export default function Signup({ setUser, setLogged, navigateTo }) {
                     <label htmlFor='username'>Username</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
-                    <StyledInputForm {...register('password')} type="text" required />
+                    <StyledInputForm {...register('password')} type="password" required />
                     <label htmlFor='password'>Password</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
-                    <StyledInputForm {...register('passwordConfirmation')} type="text" required />
+                    <StyledInputForm {...register('passwordConfirmation')} type="password" required />
                     <label htmlFor='passwordConfirmation'>Password confirmation</label>
                 </StyledInputContainer>
                 <StyledSpan>You already have an account ? Click <BtnLinkLog type='button' onClick={() => navigateTo('login')} >here</BtnLinkLog></StyledSpan>

@@ -12,13 +12,14 @@ import {
   from '../components/styles/GeneralElements';
 import { Btnlog } from './styles/ButtonElements';
 
-export default function Account({ user, message, setMessage }) {
+export default function Account({ setLogged, user, message, setMessage }) {
 
   const { register, handleSubmit, reset } = useForm()
 
   const changePw = async (info) => {
     try {
-      const result = await changePassword(info, setMessage)
+      const result = await changePassword(setLogged, info, setMessage)
+      console.log(result)
       if (result) {
         setMessage(result.message)
       }

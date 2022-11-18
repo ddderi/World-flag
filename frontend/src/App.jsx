@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Account from "./components/Account";
 import Signup from "./auth/Signup";
+import { bestPlayers } from './requests/RequestUser';
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
   const [logged, setLogged] = useState(false)
   const [userScore, setUserScore] = useState('')
   const [message, setMessage] = useState('')
+  const [players, setPlayers] = useState([])
+  const [updated, setUpdated] = useState(false)
   const navigate = useNavigate();
 
   const navigateTo = (location) => {
@@ -34,10 +37,17 @@ function App() {
 
 
   useEffect(() => {
-    checkCookie(setUser, setLogged)
+    checkCookie(navigateTo, setUser, setLogged)
+    console.log('trigger cookie')
+  }, [setLogged])
 
-  }, [])
 
+  useEffect(() => {
+    
+    bestPlayers(setPlayers, players, updated, setUpdated)
+    console.log('trigger best records')
+    
+  }, [updated])
 
 
   return (
@@ -45,10 +55,10 @@ function App() {
       <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
       <div className="app">
         <Routes>
-          <Route path="/home" element={<Home navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} />} />
+          <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
-          <Route path="/account" element={<Account message={message} setMessage={setMessage} user={user} />} />
+          <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />
           <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
         </Routes>
 

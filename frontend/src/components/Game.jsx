@@ -9,13 +9,13 @@ import {
 import { BtnlogGame } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
 
-export default function Game({ setMessage, setScore, score, setUpdated }) {
+export default function Game({ setMessage, setScore, score, setUpdated, setColor, fontColor }) {
 
   const [flag, setFlag] = useState('https://www.placecage.com/300/200')
   const [result, setResult] = useState('')
   const [input, setInput] = useState('')
   const [answer, setAnswer] = useState([])
-
+  const [coloranswer, setColoranswer] = useState('')
 
   const startNewGame = async () => {
     try {
@@ -26,7 +26,7 @@ export default function Game({ setMessage, setScore, score, setUpdated }) {
     }
   }
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer onClick={(e) => handleSubmit(e, result, e.target.innerHTML, setMessage, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer)} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' coloringanswer={fontColor('#fafafa')} onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessage, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
