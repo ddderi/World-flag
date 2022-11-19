@@ -30,9 +30,10 @@ export const triggerAnswers = async (setAnswer, result) => {
 }
 
 
-export const startGame = async (setResult, setAnswer, setFlag, result) => {
+export const startGame = async (setResult, setAnswer, setFlag, setScore, setDisplayed) => {
     try {
         setAnswer([])
+        setDisplayed(false)
         const index = Math.floor(Math.random() * countries.length)
         Object.keys(countries[index]).forEach(async (key) => {
             console.log(key, countries[index][key])
@@ -46,8 +47,12 @@ export const startGame = async (setResult, setAnswer, setFlag, result) => {
     }
 }
 
+const dialogDiv = () => {
 
-export const handleSubmit = (e, result, input, etarget, setMessage, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer) => {
+}
+
+
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed) => {
     e.preventDefault()
     console.log(result)
     console.log(input)
@@ -62,7 +67,7 @@ export const handleSubmit = (e, result, input, etarget, setMessage, setScore, sc
     
     // console.log(mydiv)
     if (result === input) {
-        setMessage(`Good answer, keep going !`)
+        setMessageFooter(`Good answer, keep going !`)
         setScore(score + 1)
         setColor(true)
         console.log(result)
@@ -70,12 +75,12 @@ export const handleSubmit = (e, result, input, etarget, setMessage, setScore, sc
         etarget.style.backgroundColor = 'green'
         setTimeout(() => {
             etarget.style.backgroundColor = ''
-            startGame(setResult, setAnswer, setFlag, result)
+            startGame(setResult, setAnswer, setFlag, result, setDisplayed)
         }, 1500);
     } else if (!result || result === '') {
-        alert("You didnt start a game, please press start game !");
+        setDisplayed(true)
     } else if (result !== input) {
-        setMessage(`Bad answer, it was ${result}, try again!`)
+        setMessageFooter(`Bad answer, it was ${result}, try again!`)
         etarget.style.backgroundColor = 'red'
         const mydiv = document.getElementsByClassName('answer')
             for(let i =0;i<mydiv.length;i++){
@@ -87,15 +92,17 @@ export const handleSubmit = (e, result, input, etarget, setMessage, setScore, sc
         setColor(false)
         if (score > localStorage.getItem('score')) {
             updateScoreUser(score, setUpdated)
-            setScore(0)
             localStorage.setItem('score', JSON.stringify(score))
         }
+        setLastscore(score)
         setFlag('https://www.placecage.com/300/200')
         setResult('')
+        setScore(0)
     } else {
-        setMessage(`A problem occured. couldn't upload your new score ...`)
+        setMessageFooter(`A problem occured. couldn't upload your new score ...`)
         setFlag('https://www.placecage.com/300/200')
         setResult('')
+        setScore(0)
     }
     setInput('')
 }

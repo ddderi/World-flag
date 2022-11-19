@@ -6,6 +6,7 @@ export async function loggingUser(data, setMessage) {
     try {
         const result = await axiosInstance.post('/login', data, { withCredentials: true });
         console.log(result)
+        setMessage('')
         return result.data
     } catch(error) {
         console.log(error)
@@ -36,24 +37,6 @@ export async function changePassword(setLogged, info, setMessage){
     }
 }
 
-
-export async function checkCookie(navigateTo, setUser, setLogged){
-    try{
-        const result = await axiosInstance.get('/cookie', { withCredentials: true})
-        setLogged(result.data.login)
-        return result.data
-    }catch(error){
-        if(!error.response.data.login){
-            localStorage.removeItem('user')
-            setUser('')
-            setTimeout(() => {
-                navigateTo('login')
-              }, 2000);
-        }
-        console.log(error)
-    }
-}
-
 export async function logout(setUser, setLogged){
     try{
         const result = await axiosInstance.get('/logout', {withCredentials: true})
@@ -66,6 +49,29 @@ export async function logout(setUser, setLogged){
         console.log(error)
     }
 }
+
+
+export async function checkCookie(navigateTo, setUser, setLogged, setMessage){
+    try{
+        console.log('Checking if user is connected')
+        const result = await axiosInstance.get('/cookie', { withCredentials: true})
+        setLogged(result.data.login)
+        return result.data
+    }catch(error){
+        if(!error.response.data.login){
+            localStorage.removeItem('user')
+            setUser('')
+            setTimeout(() => {
+                navigateTo('login')
+              }, 2000);
+        }
+        console.log(error)
+        setMessage(error.response.data.message)
+        logout(setUser, setLogged)
+    }
+}
+
+
 
 
 export async function flagCall(country){

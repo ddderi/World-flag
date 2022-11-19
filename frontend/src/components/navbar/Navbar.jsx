@@ -66,13 +66,10 @@ export default function navbar({ logged, setUser, setLogged, user }) {
             {logged ?
               <>
                 <NavLinkDropDown to='/account' image={loginlogo} >
-                  Account
+                  {user}
                 </NavLinkDropDown>
                 <NavLinkDropDown to='/login' image={logoutlogo} onClick={() => logout(setUser, setLogged)} >
                   Log-out
-                </NavLinkDropDown>
-                <NavLinkDropDown to='/account' >
-                  {user}
                 </NavLinkDropDown>
               </>
               :

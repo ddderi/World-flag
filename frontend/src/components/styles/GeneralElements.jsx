@@ -1,16 +1,26 @@
 import styled from 'styled-components';
 
 export const StyledCont = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: space-evenly;
-  justify-content: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: space-evenly;
+  // justify-content: center;
   text-align: center;
   width: 55%;
   position:absolute;
 	left:50%;
-	top:57%;
+	top:60%;
 	transform: translate(-50%,-50%);
+  @media screen and (max-width: 1300px) and (max-height: 500px){
+    width: 75%;
+    top:75%;
+  }
+  @media screen and (max-height: 380px){
+    width: 75%;
+    top:95%;
+  }
+
+
 `;
 
 export const StyledHeading = styled.h1`
@@ -165,15 +175,6 @@ export const StyledGameChildAnswer = styled.div`
   }
 `;
 
-export const StyledGameChildAnswerGreen = styled(StyledGameChildAnswer)`
-
-background-color: green;
-
-`;
-
-
-//background-color: ${props => props.coloringanswer};
-// background-color: #e57373;
 
 export const StyledRecordsCont = styled.div`
   grid-column-start: 3;
@@ -190,6 +191,9 @@ export const StyledRecordsCont = styled.div`
   padding-bottom: 2%;
   @media screen and (max-width: 1100px){
     margin-left: 0;
+  }
+  @media screen and (max-width: 450px){
+    display: none;
   }
 `;
 
@@ -305,3 +309,25 @@ export const StyledSpanResult = styled.span`
 `;
 
 
+export const StyledErrorBox = styled.div`
+  display: ${props => props.display};
+  background-color: white;
+  z-index: 3;
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  width: 80%;
+  height: 100px;
+  text-align: center;
+  border-radius: 10px 10px;
+  box-shadow: 1px 1px 3px black;
+`;
+
+export const StyledErrorBoxChild = styled.div`
+  margin: auto;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+`;

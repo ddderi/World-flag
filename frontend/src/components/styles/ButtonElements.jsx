@@ -76,3 +76,10 @@ export const BtnLinkLog = styled(BtnLink)`
     transform-origin: bottom left;
   }
 `;
+
+
+export const ButtonError = styled.button`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+`;

@@ -8,8 +8,9 @@ import {
 } from './styles/GeneralElements';
 import { BtnlogGame } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
+import { checkCookie } from '../requests/RequestUser';
 
-export default function Game({ setMessage, setScore, score, setUpdated, setColor, fontColor }) {
+export default function Game({ setDisplayed, setMessageFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
 
   const [flag, setFlag] = useState('https://www.placecage.com/300/200')
   const [result, setResult] = useState('')
@@ -19,18 +20,26 @@ export default function Game({ setMessage, setScore, score, setUpdated, setColor
 
   const startNewGame = async () => {
     try {
-      const resultat = await startGame(setResult, setAnswer, setFlag, result)
+      const resultat = await startGame(setResult, setAnswer, setFlag, setScore, setDisplayed)
       return resultat
     } catch (error) {
       console.log(error)
     }
   }
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' coloringanswer={fontColor('#fafafa')} onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessage, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer)} key={index}>{data}</StyledGameChildAnswer> })
+
+function startNewGameClick(){
+  startNewGame()
+  checkCookie(navigateTo, setUser, setLogged, setMessage)
+}
+// coloringanswer={fontColor('#fafafa')}
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer'  onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
-      <BtnlogGame onClick={() => startNewGame()} >Start Game</BtnlogGame>
+      <BtnlogGame onClick={() => 
+        startNewGameClick()
+        } >Start Game</BtnlogGame>
       <StyledGameChildLeft>
         <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
       </StyledGameChildLeft>

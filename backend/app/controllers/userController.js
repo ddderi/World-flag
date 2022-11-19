@@ -90,20 +90,20 @@ const changePassword = async (req, res, next) => {
                         const userFound = await User.findOne({ where: { id: verifiedJWT.id } })
                         if (isSame && userFound) {
                             const newUser = await userFound.update({ password: await bcrypt.hash(newPassword, 10) })
-                            res.status(201).json({ message: 'password properly updated', newUser, success: true, login: true })
+                            return res.status(201).json({ message: 'password properly updated', newUser, success: true, login: true })
                         } else {
-                            res.status(401).json({ message: 'Problem with your identifications', success: false, login: true })
+                            return res.status(401).json({ message: 'Problem with your identifications', success: false, login: true })
                         }
                     }
                 } else {
-                    res.status(401).json({ error, message: "A problem occured, you should reconnect", login: false })
+                    return res.status(401).json({ error, message: "A problem occured, you should reconnect", login: false })
                 }
             } catch (error) {
-                res.status(401).json({ error, message: "a problem occured", login: false})
+                return res.status(401).json({ error, message: "a problem occured", login: false})
             }
         })
     } catch (error) {
-        res.status(400).json({ error, message: "a problem occured", login: false})
+        return res.status(400).json({ error, message: "a problem occured", login: false})
     }
 }
 
@@ -114,9 +114,9 @@ const userLogged = async (req, res) => {
         const token = req.cookies.jwt
         jwt.verify(token, process.env.TOKEN_KEY, (error, verifiedJWT) => {
             if (error) {
-                res.status(403).json({ message: "you are not connected", login: false })
+                return res.status(403).json({ message: "You are not connected, please connect", login: false })
             } else {
-                res.status(201).json({ login: true })
+                return res.status(201).json({ login: true })
             }
         })
     } catch (error) {
@@ -130,7 +130,7 @@ const deleteUser = async (req, res) => {
         const { id } = req.params
         const user = await User.findOne({ where: { id } })
         const deleting = await user.destroy()
-        res.status(200).json({ message: 'user succesfully deleted' })
+        return res.status(200).json({ message: 'user succesfully deleted' })
     } catch (error) {
         console.log(error)
     }
@@ -147,19 +147,19 @@ const updateScore = async (req, res) => {
                     const user = await User.findOne({ where: { id: verifiedJWT.id } });
                     if (user) {
                         const newUser = await user.update({ bestscores: score })
-                        res.status(201).json({ message: 'Sour score is updated', newUser, updated: true })
+                        return res.status(201).json({ message: 'Sour score is updated', newUser, updated: true })
                     } else {
-                        res.status(401).json({ message: 'Coudlnt update score' })
+                        return res.status(401).json({ message: 'Coudlnt update score' })
                     }
                 } else {
-                    res.status(401).json({ error, message: "a problem occured" })
+                    return res.status(401).json({ error, message: "a problem occured" })
                 }
             } catch (error) {
-                res.status(401).json({ error, message: "a problem occured" })
+                return res.status(401).json({ error, message: "a problem occured" })
             }
         })
     } catch (error) {
-        res.status(400).json({ error, message: "a problem occured" })
+        return res.status(400).json({ error, message: "a problem occured" })
     }
 }
 
@@ -172,7 +172,7 @@ const bestPlayers = async (req, res) => {
             ],
             limit: 5
         })
-        res.status(201).json({ users })
+        return res.status(201).json({ users })
     } catch (error) {
         console.log(error)
     }

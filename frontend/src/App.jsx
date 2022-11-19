@@ -9,6 +9,7 @@ import Account from "./components/Account";
 import Signup from "./auth/Signup";
 import { bestPlayers } from './requests/RequestUser';
 
+
 function App() {
 
   const [user, setUser] = useState('')
@@ -37,7 +38,7 @@ function App() {
 
 
   useEffect(() => {
-    checkCookie(navigateTo, setUser, setLogged)
+    checkCookie(navigateTo, setUser, setLogged, setMessage)
     console.log('trigger cookie')
   }, [setLogged])
 
@@ -55,7 +56,7 @@ function App() {
       <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
       <div className="app">
         <Routes>
-          <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} />} />
+          <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
           <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />

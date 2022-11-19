@@ -100,21 +100,39 @@ export const NavLinkDropDown = styled(Link)`
   text-decoration: none;
   color: black;
   text-align: center;
-  transition: 0.5s;
+  border-radius: 3px 3px;
+  //display: inline-block;
+  position: relative;
+  //transition: 0.5s;
   &:before {
     background-image: url(${props => props.image});
     background-size: 100% 100%;
     display: inline-block;
     content: "";
     color: rgba(0,0,0,0);
-    padding-right: 4%;
+    margin-right: 5%;
     width: 20px;
     heigth: 50px;
     position: relative;
   }
  
-  &:hover {
-    background-color: grey;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #FA8072;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-in-out;
   }
+
+    &:hover::after {
+      
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
 `;
 
