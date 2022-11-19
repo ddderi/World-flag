@@ -114,7 +114,7 @@ const userLogged = async (req, res) => {
         const token = req.cookies.jwt
         jwt.verify(token, process.env.TOKEN_KEY, (error, verifiedJWT) => {
             if (error) {
-                return res.status(403).json({ message: "You are not connected, please connect", login: false })
+                return res.status(403).json({ message: "You have been disconnected, please reconnect", login: false })
             } else {
                 return res.status(201).json({ login: true })
             }

@@ -234,6 +234,19 @@ export const StyledFormCont = styled.div`
     }
 `;
 
+export const StyledImgPassword = styled.img`
+ 
+position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 5px;
+  top: -3px;
+  // z-index: 2;
+
+  
+`;
+
+
 
 export const StyledInputContainer = styled.div`
   position:relative;
@@ -269,7 +282,18 @@ ${StyledInputForm}:valid ~ label {
   top:-12px;
 	font-size:12px;
 }
+
+// & ${StyledInputForm}:focus ~ ${StyledImgPassword}{
+
+//   display: block;
+// }
+
 `;
+
+
+
+
+
 
 
 export const StyledSpan = styled.span`

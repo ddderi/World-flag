@@ -38,16 +38,18 @@ function App() {
 
 
   useEffect(() => {
-    checkCookie(navigateTo, setUser, setLogged, setMessage)
-    console.log('trigger cookie')
+    if (logged) {
+      checkCookie(navigateTo, setUser, setLogged, setMessage)
+      console.log('trigger cookie')
+    }
   }, [setLogged])
 
 
   useEffect(() => {
-    
+
     bestPlayers(setPlayers, players, updated, setUpdated)
     console.log('trigger best records')
-    
+
   }, [updated])
 
 
@@ -64,6 +66,7 @@ function App() {
         </Routes>
 
       </div>
+
     </div>
   );
 }

@@ -8,14 +8,19 @@ import {
     StyledInputForm,
     StyledFormHeading,
     StyledInputContainer,
-    StyledSpan
+    StyledSpan,
+    StyledImgPassword
 }
     from '../components/styles/GeneralElements';
+import eyepassword from '../images/eyepassword.png';
+import eyepasswordclose from '../images/eyepasswordclose.png';
 
 export default function Signup({ setUser, setLogged, navigateTo }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
+    const [revealedone, setRevealedone] = useState(false)
+    const [revealedtwo, setRevealedtwo] = useState(false)
 
 
 
@@ -57,11 +62,13 @@ export default function Signup({ setUser, setLogged, navigateTo }) {
                     <label htmlFor='username'>Username</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
-                    <StyledInputForm {...register('password')} type="password" required />
+                    <StyledInputForm {...register('password')} type={!revealedone ? 'password' : 'text'} required />
+                    <StyledImgPassword src={!revealedone ? eyepasswordclose : eyepassword} onClick={() => { setRevealedone(!revealedone) }} />
                     <label htmlFor='password'>Password</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
-                    <StyledInputForm {...register('passwordConfirmation')} type="password" required />
+                    <StyledInputForm {...register('passwordConfirmation')} type={!revealedtwo ? 'password' : 'text'} required />
+                    <StyledImgPassword src={!revealedtwo ? eyepasswordclose : eyepassword} onClick={() => { setRevealedtwo(!revealedtwo) }} />
                     <label htmlFor='passwordConfirmation'>Password confirmation</label>
                 </StyledInputContainer>
                 <StyledSpan>You already have an account ? Click <BtnLinkLog type='button' onClick={() => navigateTo('login')} >here</BtnLinkLog></StyledSpan>
