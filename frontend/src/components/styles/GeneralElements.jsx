@@ -104,7 +104,9 @@ export const StyledGameCont = styled.div`
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
   background-color: rgba(0, 0, 0, 0.89);
+  
   @media screen and (max-width: 1300px){
+    transition: 5s;
     display: flex;
     flex-direction: column;
   }
@@ -204,10 +206,52 @@ export const LabelAccount = styled.label`
 color: white;
 `;
 
+
+// BORDER BOTTOM RADIUS LEFTRIGHT 
+
+// export const StyledRecordsChild = styled.div`
+//   width: 80%;
+//   color: white;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   padding: 0% 5% 0% 5%;
+//   border-bottom: 1px solid white;
+//   border-radius: 10px 10px;
+//   @media screen and (max-width: 1100px){
+//     width: 50%;
+//   }
+// `;
+
+// BORDER STYLISH BOTTOM TOP
+
 export const StyledRecordsChild = styled.div`
   width: 80%;
   color: white;
+display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0% 5% 0% 5%;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 5px;
+  text-transform: capitalize;
+  @media screen and (max-width: 1100px){
+    width: 50%;
+    margin: 1% 0% 1% 0%;
+  }
 `;
+
+
+
+
+
+
+
+
+
+
 
 
 export const StyledFormHeading = styled.h1`
