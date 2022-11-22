@@ -10,6 +10,7 @@ import Signup from "./auth/Signup";
 import { bestPlayers } from './requests/RequestUser';
 
 
+
 function App() {
 
   const [user, setUser] = useState('')
@@ -54,20 +55,18 @@ function App() {
 
 
   return (
-    <div className="whole">
-      <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
-      <div className="app">
-        <Routes>
-          <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
-          <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />
-          <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
-        </Routes>
-
+      <div className="whole">
+        <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
+        <div className="app">
+          <Routes>
+            <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+            <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />
+            <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
+          </Routes>
+        </div>
       </div>
-
-    </div>
   );
 }
 

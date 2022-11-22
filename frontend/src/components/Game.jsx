@@ -28,18 +28,18 @@ export default function Game({ setDisplayed, setMessageFooter, setMessage, setSc
   }
 
 
-function startNewGameClick(){
-  startNewGame()
-  checkCookie(navigateTo, setUser, setLogged, setMessage)
-}
-// coloringanswer={fontColor('#fafafa')}
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer'  onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}</StyledGameChildAnswer> })
+  function startNewGameClick() {
+    startNewGame()
+    checkCookie(navigateTo, setUser, setLogged, setMessage)
+  }
+
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
-      <BtnlogGame onClick={() => 
+      <BtnlogGame onClick={() =>
         startNewGameClick()
-        } >Start Game</BtnlogGame>
+      } >Start Game</BtnlogGame>
       <StyledGameChildLeft>
         <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
       </StyledGameChildLeft>

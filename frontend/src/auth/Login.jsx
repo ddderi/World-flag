@@ -57,7 +57,7 @@ function Login({ setUser, setLogged, navigateTo, message, setMessage }) {
       })}>
         <StyledInputContainer>
           {console.log(message)}
-          <StyledInputForm {...register('username', { required: true })} type="text" required />
+          <StyledInputForm {...register('username', { required: true })} type="text" autoComplete="off" required />
           <label htmlFor='username'>Username</label>
         </StyledInputContainer>
         <StyledInputContainer>

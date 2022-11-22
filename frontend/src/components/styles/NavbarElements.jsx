@@ -1,6 +1,7 @@
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 import dropDownIcon from '../../images/btndropdown.png';
+import Select from 'react-select';
 
 export const Nav = styled.nav`
   display: flex;
@@ -25,6 +26,9 @@ height: 100%;
 justify-content:center;
 align-items: center;
 transition: 0.5s;
+width: 100%;
+padding: 0% 1.5% 0% 1.5%;
+    white-space: nowrap;
   @media screen and (max-width: 765px){
     display: none;
   }
@@ -40,7 +44,6 @@ export const NavMenuPar = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.89);
   color: white;
- // IMG BACKGROUND TO PUT HERE
 `;
 
 export const NavMenu = styled.div`
@@ -136,3 +139,36 @@ export const NavLinkDropDown = styled(Link)`
     }
 `;
 
+export const StyledSelect = styled.div`
+position: relative;
+
+right: 11%;
+
+@media screen and (max-width: 765px){
+  position: absolute;
+  left: 5px;
+}
+
+
+`;
+
+export const StyledSelectChild = styled(Select)`
+.react-select-container {
+  color: white;
+}
+
+.react-select__single-value{
+color: white;
+}
+
+.react-select__menu{
+width: 100px;
+margin-top: 5px;
+}
+
+
+.react-select__indicators {
+  display: none;
+}
+
+`;

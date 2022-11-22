@@ -43,7 +43,7 @@ export default function Account({ setLogged, user, message, setMessage }) {
         })}>
           <StyledFormHeading>{user}</StyledFormHeading>
           {message ? <StyledSpanMessage>{message}</StyledSpanMessage> : null}
-          <LabelAccount htmlFor="currentpassword">Current password</LabelAccount>
+          <LabelAccount htmlFor="currentpassword">current password</LabelAccount>
           <StyledInputForm {...register("currentpassword")} required />
           <LabelAccount htmlFor="password">New password</LabelAccount>
           <StyledInputForm {...register("newPassword")} required />

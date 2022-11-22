@@ -11,6 +11,7 @@ export const StyledCont = styled.div`
 	left:50%;
 	top:60%;
 	transform: translate(-50%,-50%);
+
   @media screen and (max-width: 1300px) and (max-height: 500px){
     width: 75%;
     top:75%;
@@ -19,9 +20,9 @@ export const StyledCont = styled.div`
     width: 75%;
     top:95%;
   }
-
-
 `;
+
+
 
 export const StyledHeading = styled.h1`
 background-color: rgba(0, 0, 0, 0.89);
@@ -139,6 +140,7 @@ export const StyledGameChild = styled.div`
   margin: 0;
   width: 100%;
   display: grid;
+  padding: 4%;
   grid-template-rows: 22% 22% 22% 22%;
   grid-template-columns: 90%;
   grid-row-gap: 3%;
@@ -148,7 +150,8 @@ export const StyledGameChild = styled.div`
     justify-content: center;
      align-items: center;
     width: 100%;
-    height: 105px;
+    height: 100%;
+    padding: 0%;
   }
 `;
 
@@ -335,7 +338,7 @@ export const StyledSpanResult = styled.span`
 
 export const StyledErrorBox = styled.div`
   display: ${props => props.display};
-  background-color: white;
+  background-color: rgba(255,255,255,1);
   z-index: 3;
   position: absolute;
   left: 10%;
@@ -343,6 +346,7 @@ export const StyledErrorBox = styled.div`
   width: 80%;
   height: 100px;
   text-align: center;
+  
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px black;
 `;
@@ -351,7 +355,8 @@ export const StyledErrorBoxChild = styled.div`
   margin: auto;
   height: 100px;
   display: flex;
+  padding-left: 2%;
+  padding-rigth: 2%;
   justify-content: center;
   align-items: center;
-
 `;

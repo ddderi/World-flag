@@ -36,7 +36,7 @@ export default function Home({ setMessage, user, navigateTo, setPlayers, players
 
 
   return (
-    <StyledCont>
+    <StyledCont >
       {user ?
         <>
           <StyledHeading>the Flag Quizz</StyledHeading>
