@@ -25,7 +25,6 @@ display: flex;
 height: 100%;
 justify-content:center;
 align-items: center;
-transition: 0.5s;
 width: 100%;
 padding: 0% 1.5% 0% 1.5%;
     white-space: nowrap;
@@ -38,6 +37,66 @@ padding: 0% 1.5% 0% 1.5%;
     color: black;
   }
 `;
+
+export const DivNavBar = styled.div`
+text-decoration: none;
+color: white;
+width: 25%;
+text-align: center;
+display: flex;
+height: 100%;
+justify-content:center;
+align-items: center;
+width: 100%;
+padding: 0% 1.5% 0% 1.5%;
+background-color: red;
+
+`;
+
+
+export const StyledLinkNavBar = styled.div`
+
+// position:absolute;
+// 	left:50%;
+// 	top:50%;
+// 	transform: translate(-50%,-50%);
+//   background-color: rgba(0, 0, 0, 0.89);
+// 	border-radius:3px;
+// 	padding:70px 100px;
+//   @media screen and (max-width: 500px){
+//       width: 40%;
+//     }
+
+
+
+// text-decoration: none;
+// color: white;
+// width: 25%;
+// text-align: center;
+// display: flex;
+// height: 100%;
+// justify-content:center;
+// align-items: center;
+// width: 100%;
+// padding: 0% 1.5% 0% 1.5%;
+//     white-space: nowrap;
+//   @media screen and (max-width: 765px){
+//     display: none;
+//   }
+
+//   &:hover {
+//     background-color: white;
+//     color: black;
+//   }
+
+`;
+
+
+// export const Navbar = styled.div`
+//   width: 100%;
+//   background-color: rgba(0, 0, 0, 0.89);
+//   color: white;
+// `;
 
 
 export const NavMenuPar = styled.div`

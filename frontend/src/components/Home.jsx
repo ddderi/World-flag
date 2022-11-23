@@ -12,17 +12,17 @@ import {
   StyledErrorBoxChild
 } from './styles/GeneralElements';
 import { BtnLink, ButtonError } from '../components/styles/ButtonElements';
+import { useSpring, animated } from 'react-spring';
 
 export default function Home({ setMessage, user, navigateTo, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
 
   const [messageFooter, setMessageFooter] = useState('Start the game now !')
-  // const [players, setPlayers] = useState([])
-  // const [updated, setUpdated] = useState(false)
   const [color, setColor] = useState('')
   const [score, setScore] = useState(0)
   const [lastscore, setLastscore] = useState('')
   const [displayed, setDisplayed] = useState(false)
 
+  const fade = useSpring({from: {opacity: 0,}, opacity: 1,})
 
   function fontColor(basicfont) {
     if (color === true) {
@@ -36,7 +36,7 @@ export default function Home({ setMessage, user, navigateTo, setPlayers, players
 
 
   return (
-    <StyledCont >
+    <StyledCont as={animated.div} style={fade} >
       {user ?
         <>
           <StyledHeading>the Flag Quizz</StyledHeading>
@@ -46,10 +46,10 @@ export default function Home({ setMessage, user, navigateTo, setPlayers, players
           </StyledCore>
           <StyledErrorBox display={!displayed ? 'none' : 'block'} >
             <StyledErrorBoxChild>
-            <span>You didnt start a game, please press start game !</span>
-            <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
+              <span>You didnt start a game, please press start game !</span>
+              <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
             </StyledErrorBoxChild>
-            </StyledErrorBox>
+          </StyledErrorBox>
           <StyledFooter>
             {!lastscore ?
               <StyledFooterDiv>

@@ -8,6 +8,7 @@ import About from "./components/About";
 import Account from "./components/Account";
 import Signup from "./auth/Signup";
 import { bestPlayers } from './requests/RequestUser';
+import { useSpring, animated } from 'react-spring';
 
 
 
@@ -54,19 +55,22 @@ function App() {
   }, [updated])
 
 
+
+
+
   return (
-      <div className="whole">
-        <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
-        <div className="app">
-          <Routes>
-            <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
-            <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />
-            <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
-          </Routes>
-        </div>
+    <div className="whole">
+      <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
+      <div className="app">
+        <Routes>
+          <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login  message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+          <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />
+          <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
+        </Routes>
       </div>
+    </div>
   );
 }
 

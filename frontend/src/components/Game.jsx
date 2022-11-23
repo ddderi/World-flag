@@ -9,6 +9,7 @@ import {
 import { BtnlogGame } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
 import { checkCookie } from '../requests/RequestUser';
+// import { useSpring, animated } from 'react-spring';
 
 export default function Game({ setDisplayed, setMessageFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
 
@@ -17,6 +18,16 @@ export default function Game({ setDisplayed, setMessageFooter, setMessage, setSc
   const [input, setInput] = useState('')
   const [answer, setAnswer] = useState([])
   const [coloranswer, setColoranswer] = useState('')
+
+  // const fade = useSpring({
+  //   from: {
+  //     opacity: 0
+  //   },
+  //   to: {
+  //     opacity: 1
+  //   }
+  // })
+
 
   const startNewGame = async () => {
     try {
@@ -33,10 +44,11 @@ export default function Game({ setDisplayed, setMessageFooter, setMessage, setSc
     checkCookie(navigateTo, setUser, setLogged, setMessage)
   }
 
-  const possibleAnwsers = answer.map((data, index) => { 
-    return <StyledGameChildAnswer className='answer' onClick={(e) => 
-    handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}
-    </StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => {
+    return <StyledGameChildAnswer className='answer' onClick={(e) =>
+      handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}
+    </StyledGameChildAnswer>
+  })
 
   return (
     <StyledGameCont>
@@ -46,7 +58,7 @@ export default function Game({ setDisplayed, setMessageFooter, setMessage, setSc
       <StyledGameChildLeft>
         <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
       </StyledGameChildLeft>
-      <StyledGameChild>
+      <StyledGameChild  >
         {possibleAnwsers}
       </StyledGameChild>
     </StyledGameCont>
