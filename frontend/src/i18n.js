@@ -12,11 +12,10 @@ const resources = {
             logoutnavbar: 'Log-out',
             loginnavbar: 'Login',
             signupnavbar: 'Sign-up',
-            headerhome: 'Le quizz des drapeaux',
+            headerhome: 'The flag quizz',
             errorspanstart: "You didnt start a game, please press start game !",
             scoreleft: "Score : ",
             scoremiddle:  "Last score : ",
-            scoreright: "",
             messageFooter: {
                 1: 'Start the game now !',
                 2: 'Good answer, keep going !',
@@ -59,7 +58,14 @@ const resources = {
                 newpassword: 'New password',
                 button: 'Change your password',
                 errormessage: 'You need to be connected for accessing your account details'
+            },
+            game: {
+                button: 'start game'
+            },
+            records: {
+                header: 'Ladder'
             }
+
         }
     },
     fr: {
@@ -73,7 +79,6 @@ const resources = {
             errorspanstart: `Vous n'avez pas commencer une partie, appuyez sur "commencer" !`,
             scoreleft: "Point(s) : ",
             scoremiddle:  "Dernier score : ",
-            scoreright: "",
             messageFooter: {
                 1: 'Commencez le jeu maintenant !',
                 2: 'Bonne reponse, continuez ainsi !',
@@ -115,7 +120,13 @@ const resources = {
                 currentpassword: 'Mot de passe actuel',
                 newpassword: 'Nouveau mot de passe',
                 button: '   Mettre a jour    ',
-                errormessage: 'Vous devez etre connecter pour acceder a votre details'
+                errormessage: 'Vous devez etre connecter pour acceder a vos details'
+            },
+            game: {
+                button: 'commencer'
+            },
+            records: {
+                header: 'Classement'
             }
 
         }
@@ -126,7 +137,60 @@ const resources = {
             aboutnavbar: 'Informacion',
             logoutnavbar: 'Desconectarse',
             loginnavbar: 'Conectar',
-            signupnavbar: 'Inscribirse'
+            signupnavbar: 'Inscribirse',
+            headerhome: 'El concurso de las banderas',
+            errorspanstart: `No habeis comenzado el juego, pulse "empezar" !`,
+            scoreleft: "Punto(s) : ",
+            scoremiddle:  "Ultima punctuacion : ",
+            messageFooter: {
+                1: 'Comience el juego ahora',
+                2: 'Buena respuesta, continue asi',
+                3: `Respuesta incorrecta, era {{result}}, intente otra vez !`
+            },
+            unconnected: {
+                1: 'Bienvenido, haga clic aqui ',
+                2: ' aqui ',
+                3: ' para conectarse'
+            },
+            login: {
+                heading: 'Conectarse',
+                message: {
+                    1: 'Estas conectado !'
+                },
+                username: 'Seudonimo',
+                password: 'contrasena',
+                account: `No tienes una cuenta ? Clic `,
+                here: 'aqui',
+                button: 'Conectarse'
+            },
+            signup: {
+                heading: `Inscribirse`,
+                message: {
+                    1: 'Felicitaciones, tu cuenta ha sido creada !'
+                },
+                username: 'Seudonimo',
+                password: 'contrasena',
+                passwordcon: 'Confirmacion de contrasena',
+                account: `Tienes una cuenta ? Clic `,
+                here: 'aqui',
+                button: 'Inscribirse'
+            },
+            account: {
+                message: {
+                    1: 'Tu contrasena ha sido actualizada',
+                    2: 'Era una problema con tus identificadores'
+                },
+                currentpassword: 'Contrasena actual',
+                newpassword: 'Nueva contrasena',
+                button: ' Actualizar ',
+                errormessage: 'Debe iniciar sesion para acceder a tus detalles'
+            },
+            game: {
+                button: 'Empezar'
+            },
+            records: {
+                header: 'Clasificacion'
+            }
         }
     }
 };

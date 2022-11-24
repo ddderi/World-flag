@@ -29,7 +29,7 @@ export const triggerAnswers = async (setAnswer, result) => {
 }
 
 
-export const startGame = async (setResult, setAnswer, setFlag, setScore, setDisplayed) => {
+export const startGame = async (setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
     try {
         setResult('')
         setAnswer([])
@@ -37,6 +37,7 @@ export const startGame = async (setResult, setAnswer, setFlag, setScore, setDisp
         const index = Math.floor(Math.random() * countries.length)
         Object.keys(countries[index]).forEach(async (key) => {
             setResult(countries[index][key])
+            setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
             setFlag(resultFlag.request.responseURL)
             triggerAnswers(setAnswer, countries[index][key])
@@ -48,8 +49,10 @@ export const startGame = async (setResult, setAnswer, setFlag, setScore, setDisp
 
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed) => {
     e.preventDefault()
+    setMessageFooter('')
+    
     if (result === input) {
         setMessageFooter('messageFooter.2')
         setScore(score + 1)
@@ -59,7 +62,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setSco
         etarget.style.backgroundColor = 'green'
         setTimeout(() => {
             etarget.style.backgroundColor = ''
-            startGame(setResult, setAnswer, setFlag, result, setDisplayed)
+            startGame(setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
         }, 1500);
     } else if (!result || result === '') {
         setDisplayed(true)
@@ -80,10 +83,12 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setSco
         setLastscore(score)
         setFlag('https://www.placecage.com/300/200')
         setScore(0)
+        setResult('')
     } else {
         setMessageFooter(`A problem occured. couldn't upload your new score ...`)
         setFlag('https://www.placecage.com/300/200')
         setScore(0)
+        setResult('')
     }
     setInput('')
 }

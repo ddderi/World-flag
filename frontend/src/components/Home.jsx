@@ -25,7 +25,8 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
   const [displayed, setDisplayed] = useState(false)
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [result, setResult] = useState('')
+  const [result, setResult] = useState('');
+  const [resultFooter, setResultFooter] = useState('')
 
   const navigateTo = (location) => {
     navigate(`/${location}`)
@@ -51,7 +52,7 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
         <>
           <StyledHeading>{t('headerhome')}</StyledHeading>
           <StyledCore>
-            <Game result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+            <Game result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
             <Records setPlayers={setPlayers} players={players} updated={updated} setUpdated={setUpdated} />
           </StyledCore>
           <StyledErrorBox display={!displayed ? 'none' : 'block'} >
@@ -64,7 +65,7 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
             {!lastscore ?
               <StyledFooterDiv>
                 <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: result})}</StyledSpanResult>
+                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: resultFooter})}</StyledSpanResult>
                 {/* messageFooter
                 {t('messageFooter.1')} */}
                 {/* {t(`${messageFooter.3}`)} */}
@@ -75,7 +76,7 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
                   <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
                   <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
                 </StyledFooterDiv>
-                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: result})}</StyledSpanResult>
+                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: resultFooter})}</StyledSpanResult>
               </StyledFooterDiv>
 
             }

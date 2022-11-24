@@ -58,7 +58,7 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
           <StyledInputForm {...register("newPassword")} required />
           <Btnlog type='submit'>{t('account.button')}</Btnlog>
         </StyledForm>
-        : <StyledFormHeading>You need to be connected for accessing your account details</StyledFormHeading>}
+        : <StyledFormHeading>{t('account.errormessage')}</StyledFormHeading>}
     </StyledFormCont>
   )
 }
