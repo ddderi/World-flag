@@ -65,10 +65,7 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
             {!lastscore ?
               <StyledFooterDiv>
                 <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: resultFooter})}</StyledSpanResult>
-                {/* messageFooter
-                {t('messageFooter.1')} */}
-                {/* {t(`${messageFooter.3}`)} */}
+                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, { result: resultFooter })}</StyledSpanResult>
               </StyledFooterDiv>
               :
               <StyledFooterDiv>
@@ -76,7 +73,7 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
                   <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
                   <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
                 </StyledFooterDiv>
-                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: resultFooter})}</StyledSpanResult>
+                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, { result: resultFooter })}</StyledSpanResult>
               </StyledFooterDiv>
 
             }

@@ -39,9 +39,9 @@ export default function Navbar({ logged, setUser, setLogged, user }) {
           <NavLink to='/home' >
             {t('homenavbar')}
           </NavLink>
-          <NavLink to='/about' >
+          {/* <NavLink to='/about' >
             {t('aboutnavbar')}
-          </NavLink>
+          </NavLink> */}
           {logged ?
             <>
               <NavLink to='/login' onClick={() => logout(setUser, setLogged)} >
@@ -70,27 +70,27 @@ export default function Navbar({ logged, setUser, setLogged, user }) {
           <StyledDropDown>
 
             <NavLinkDropDown to='/home' image={homelogo} >
-            {t('homenavbar')}
+              {t('homenavbar')}
             </NavLinkDropDown>
-            <NavLinkDropDown to='/about' image={aboutlogo} >
-            {t('aboutnavbar')}
-            </NavLinkDropDown>
+            {/* <NavLinkDropDown to='/about' image={aboutlogo} >
+              {t('aboutnavbar')}
+            </NavLinkDropDown> */}
             {logged ?
               <>
                 <NavLinkDropDown to='/account' image={loginlogo} >
                   {user}
                 </NavLinkDropDown>
                 <NavLinkDropDown to='/login' image={logoutlogo} onClick={() => logout(setUser, setLogged)} >
-                {t('logoutnavbar')}
+                  {t('logoutnavbar')}
                 </NavLinkDropDown>
               </>
               :
               <>
                 <NavLinkDropDown to='/login' image={loginlogo} >
-                {t('loginnavbar')}
+                  {t('loginnavbar')}
                 </NavLinkDropDown>
                 <NavLinkDropDown to='/signup' image={signuplogo} >
-                {t('signupnavbar')}
+                  {t('signupnavbar')}
                 </NavLinkDropDown>
               </>
             }

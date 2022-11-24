@@ -52,7 +52,7 @@ export const startGame = async (setResult, setResultFooter, setAnswer, setFlag, 
 export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed) => {
     e.preventDefault()
     setMessageFooter('')
-    
+
     if (result === input) {
         setMessageFooter('messageFooter.2')
         setScore(score + 1)

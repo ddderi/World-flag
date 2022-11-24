@@ -12,7 +12,7 @@ export default function SelectNav() {
     { value: 'es', label: 'Español' }
   ]
 
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
 
   const colorStyles = {
@@ -28,17 +28,13 @@ export default function SelectNav() {
     i18n.changeLanguage(lng.value)
   }
 
-  // const changeLanguage = (lng) => {
-  //   console.log(lng)
-  //   i18n.changeLanguage(lng)
-  // }
 
   return (
     <StyledSelectChild options={languages}
       classNamePrefix="react-select"
       onChange={handleChange}
       styles={colorStyles}
-      defaultValue={{label: 'English'}}
+      defaultValue={{ label: 'English' }}
     />
 
   )

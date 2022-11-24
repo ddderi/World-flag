@@ -99,11 +99,11 @@ const changePassword = async (req, res, next) => {
                     return res.status(401).json({ error, message: "A problem occured, you should reconnect", login: false })
                 }
             } catch (error) {
-                return res.status(401).json({ error, message: "a problem occured", login: false})
+                return res.status(401).json({ error, message: "a problem occured", login: false })
             }
         })
     } catch (error) {
-        return res.status(400).json({ error, message: "a problem occured", login: false})
+        return res.status(400).json({ error, message: "a problem occured", login: false })
     }
 }
 

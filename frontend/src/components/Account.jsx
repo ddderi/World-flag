@@ -53,7 +53,7 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
           <StyledFormHeading>{user}</StyledFormHeading>
           {message ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
           <LabelAccount htmlFor="currentpassword">{t('account.currentpassword')}</LabelAccount>
-          <StyledInputForm style={{marginBottom: '4%'}} {...register("currentpassword")} required />
+          <StyledInputForm style={{ marginBottom: '4%' }} {...register("currentpassword")} required />
           <LabelAccount htmlFor="password">{t('account.newpassword')}</LabelAccount>
           <StyledInputForm {...register("newPassword")} required />
           <Btnlog type='submit'>{t('account.button')}</Btnlog>

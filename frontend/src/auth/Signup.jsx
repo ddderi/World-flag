@@ -19,7 +19,7 @@ import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 
 
-export default function Signup({navigateTo, setUser, setLogged }) {
+export default function Signup({ navigateTo, setUser, setLogged }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')

@@ -19,7 +19,7 @@ import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 
 
-function Login({navigateTo, setUser, setLogged, message, setMessage }) {
+function Login({ navigateTo, setUser, setLogged, message, setMessage }) {
 
   const { register, handleSubmit, reset } = useForm();
   const [revealed, setRevealed] = useState(false);

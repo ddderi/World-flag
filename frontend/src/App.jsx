@@ -56,7 +56,7 @@ function App() {
       <div className="app" >
         <Routes>
           <Route path="/home" element={<Home players={players} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
-          <Route path="/about" element={<About />} />
+          {/* <Route path="/about" element={<About />} /> */}
           <Route path="/login" element={<Login navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
           <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
           <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
