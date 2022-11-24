@@ -3,9 +3,11 @@ import { StyledRecordsCont, StyledRecordsChild, StyledHeadingFooter } from './st
 
 export default function Records({ players }) {
 
-  const playersMappedArray = players.map((data, index) => { return <StyledRecordsChild key={index} >
-    <span>{data.username}</span><span>{data.bestscores}</span>
-    </StyledRecordsChild> })
+  const playersMappedArray = players.map((data, index) => {
+    return <StyledRecordsChild key={index} >
+      <span>{data.username}</span><span>{data.bestscores}</span>
+    </StyledRecordsChild>
+  })
 
 
   return (

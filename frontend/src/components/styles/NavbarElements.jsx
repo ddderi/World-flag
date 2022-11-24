@@ -84,7 +84,7 @@ export const StyledDropDown = styled.div`
   position: absolute;
   background-color: white;
   border-radius: 3px 3px;
-  width: 100px;
+  width: 175px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   ${StyledDropDownParent}:hover &{
@@ -92,6 +92,7 @@ export const StyledDropDown = styled.div`
     right: 0;
     flex-direction: column;
     text-align: center;
+   
   }
 `;
 

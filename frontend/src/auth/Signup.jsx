@@ -9,19 +9,23 @@ import {
     StyledFormHeading,
     StyledInputContainer,
     StyledSpan,
-    StyledImgPassword
+    StyledImgPassword,
+    StyledSpanMessage
 }
     from '../components/styles/GeneralElements';
 import eyepassword from '../images/eyepassword.png';
 import eyepasswordclose from '../images/eyepasswordclose.png';
+import { useSpring, animated } from 'react-spring';
+import { useTranslation } from 'react-i18next';
 
-export default function Signup({ setUser, setLogged, navigateTo }) {
+
+export default function Signup({navigateTo, setUser, setLogged }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
     const [revealedone, setRevealedone] = useState(false)
     const [revealedtwo, setRevealedtwo] = useState(false)
-
+    const { t } = useTranslation();
 
 
     const signup = async (info) => {
@@ -42,12 +46,15 @@ export default function Signup({ setUser, setLogged, navigateTo }) {
         }
     }
 
-
+    const fade = useSpring({
+        from: { opacity: 0 }, opacity: 1
+    })
 
     return (
-        <StyledFormCont>
-            <StyledFormHeading>Registration</StyledFormHeading>
-            {message !== undefined ? <StyledFormHeading>{message.message}</StyledFormHeading> : null}
+        <StyledFormCont as={animated.div} style={fade}>
+            {console.log(message)}
+            <StyledFormHeading>{t('signup.heading')}</StyledFormHeading>
+            {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
                 signup({
                     username: data.username,
@@ -59,20 +66,20 @@ export default function Signup({ setUser, setLogged, navigateTo }) {
 
                 <StyledInputContainer>
                     <StyledInputForm {...register('username')} type="text" required />
-                    <label htmlFor='username'>Username</label>
+                    <label htmlFor='username'>{t('signup.username')}</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
                     <StyledInputForm {...register('password')} type={!revealedone ? 'password' : 'text'} required />
                     <StyledImgPassword src={!revealedone ? eyepasswordclose : eyepassword} onClick={() => { setRevealedone(!revealedone) }} />
-                    <label htmlFor='password'>Password</label>
+                    <label htmlFor='password'>{t('signup.password')}</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
                     <StyledInputForm {...register('passwordConfirmation')} type={!revealedtwo ? 'password' : 'text'} required />
                     <StyledImgPassword src={!revealedtwo ? eyepasswordclose : eyepassword} onClick={() => { setRevealedtwo(!revealedtwo) }} />
-                    <label htmlFor='passwordConfirmation'>Password confirmation</label>
+                    <label htmlFor='passwordConfirmation'>{t('signup.passwordcon')}</label>
                 </StyledInputContainer>
-                <StyledSpan>You already have an account ? Click <BtnLinkLog type='button' onClick={() => navigateTo('login')} >here</BtnLinkLog></StyledSpan>
-                <Btnlog type="submit">Submit</Btnlog>
+                <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>
+                <Btnlog type="submit">{t('signup.button')}</Btnlog>
             </StyledForm>
         </StyledFormCont>
     )

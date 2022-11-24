@@ -32,7 +32,7 @@ const signup = async (req, res) => {
             });
             res.cookie("jwt", token, { maxAge: 10 * 90000 * 24, httpOnly: true, httpOnly: true })
             console.log("user", JSON.stringify(user, null, 2));
-            return res.status(201).json({ user, login: true, message: 'Account succesfully created !' })
+            return res.status(201).json({ user, login: true, message: 'signup.message.1' })
         } else {
             return res.status(409).send("details are not correct")
         }
@@ -54,7 +54,7 @@ const login = async (req, res) => {
                     expiresIn: "2h"
                 });
                 res.cookie(`jwt`, token, { maxAge: 10 * 90000 * 24, httpOnly: true })
-                return res.status(200).json({ message: 'succesfully connected', user, login: true })
+                return res.status(200).json({ message: 'login.message.1', user, login: true })
             } else {
                 return res.status(401).json({ message: "identification incorrect", login: false })
             }
@@ -90,9 +90,9 @@ const changePassword = async (req, res, next) => {
                         const userFound = await User.findOne({ where: { id: verifiedJWT.id } })
                         if (isSame && userFound) {
                             const newUser = await userFound.update({ password: await bcrypt.hash(newPassword, 10) })
-                            return res.status(201).json({ message: 'password properly updated', newUser, success: true, login: true })
+                            return res.status(201).json({ message: 'account.message.1', newUser, success: true, login: true })
                         } else {
-                            return res.status(401).json({ message: 'Problem with your identifications', success: false, login: true })
+                            return res.status(401).json({ message: 'account.message.2', success: false, login: true })
                         }
                     }
                 } else {

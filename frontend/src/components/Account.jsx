@@ -11,17 +11,23 @@ import {
 }
   from '../components/styles/GeneralElements';
 import { Btnlog } from './styles/ButtonElements';
+import { useSpring, animated } from 'react-spring';
+import { useTranslation } from 'react-i18next';
 
-export default function Account({ setLogged, user, message, setMessage }) {
+export default function Account({ navigateTo, setLogged, setUser, user, message, setMessage }) {
 
-  const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, reset } = useForm();
+  const { t } = useTranslation();
 
   const changePw = async (info) => {
     try {
-      const result = await changePassword(setLogged, info, setMessage)
+      const result = await changePassword(navigateTo, setLogged, setUser, info, setMessage)
       console.log(result)
       if (result) {
         setMessage(result.message)
+        setTimeout(() => {
+          navigateTo('home')
+        }, 2000);
       }
       return result
     } catch (error) {
@@ -29,9 +35,12 @@ export default function Account({ setLogged, user, message, setMessage }) {
     }
   }
 
+  const fade = useSpring({
+    from: { opacity: 0 }, opacity: 1
+  })
 
   return (
-    <StyledFormCont>
+    <StyledFormCont as={animated.div} style={fade}>
       {user ?
         <StyledForm onSubmit={handleSubmit((data) => {
           changePw({
@@ -42,12 +51,12 @@ export default function Account({ setLogged, user, message, setMessage }) {
           reset()
         })}>
           <StyledFormHeading>{user}</StyledFormHeading>
-          {message ? <StyledSpanMessage>{message}</StyledSpanMessage> : null}
-          <LabelAccount htmlFor="currentpassword">current password</LabelAccount>
-          <StyledInputForm {...register("currentpassword")} required />
-          <LabelAccount htmlFor="password">New password</LabelAccount>
+          {message ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
+          <LabelAccount htmlFor="currentpassword">{t('account.currentpassword')}</LabelAccount>
+          <StyledInputForm style={{marginBottom: '4%'}} {...register("currentpassword")} required />
+          <LabelAccount htmlFor="password">{t('account.newpassword')}</LabelAccount>
           <StyledInputForm {...register("newPassword")} required />
-          <Btnlog type='submit'>Change your password</Btnlog>
+          <Btnlog type='submit'>{t('account.button')}</Btnlog>
         </StyledForm>
         : <StyledFormHeading>You need to be connected for accessing your account details</StyledFormHeading>}
     </StyledFormCont>

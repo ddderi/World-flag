@@ -10,7 +10,6 @@ import Signup from "./auth/Signup";
 import { bestPlayers } from './requests/RequestUser';
 
 
-
 function App() {
 
   const [user, setUser] = useState('')
@@ -25,7 +24,6 @@ function App() {
     navigate(`/${location}`)
   };
 
-
   useEffect(() => {
     const userScore = JSON.parse(localStorage.getItem('score'))
     const userCred = JSON.parse(localStorage.getItem('user'));
@@ -39,34 +37,32 @@ function App() {
 
 
   useEffect(() => {
-    if (logged) {
-      checkCookie(navigateTo, setUser, setLogged, setMessage)
-      console.log('trigger cookie')
-    }
-  }, [setLogged])
-
-
-  useEffect(() => {
-
-    bestPlayers(setPlayers, players, updated, setUpdated)
-    console.log('trigger best records')
-
+    checkCookie(user, navigateTo, setUser, setLogged, setMessage)
+    // eslint-disable-next-line
   }, [updated])
 
 
+  useEffect(() => {
+    bestPlayers(setPlayers, players, updated, setUpdated)
+    // eslint-disable-next-line
+  }, [updated])
+
+
+
+
   return (
-      <div className="whole">
-        <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
-        <div className="app">
-          <Routes>
-            <Route path="/home" element={<Home players={players} navigateTo={navigateTo} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login message={message} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} logged={logged} />} />
-            <Route path="/account" element={<Account setLogged={setLogged} message={message} setMessage={setMessage} user={user} />} />
-            <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
-          </Routes>
-        </div>
+    <div className="whole" >
+      <Navbar logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
+      <div className="app" >
+        <Routes>
+          <Route path="/home" element={<Home players={players} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+          <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
+          <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
+        </Routes>
       </div>
+    </div>
   );
 }
 

@@ -4,10 +4,16 @@ import {
   StyledCoreAbout,
   StyledFooter
 } from './styles/GeneralElements';
+import { useSpring, animated } from 'react-spring';
 
 export default function About() {
+
+  const fade = useSpring({
+    from: {opacity: 0}, opacity: 1
+  })
+
   return (
-    <StyledCont>
+    <StyledCont as={animated.div} style={fade}>
       <StyledCoreAbout>
         more info about the app dads adadadadaddd adadad addqdqd qdqqdq dqdq dqqq dqdqq dqq
       </StyledCoreAbout>

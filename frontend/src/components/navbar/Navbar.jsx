@@ -18,31 +18,34 @@ import aboutlogo from '../../images/aboutlogo.png';
 import logoutlogo from '../../images/logoutlogo.png';
 import { useTranslation } from 'react-i18next';
 import SelectNav from './SelectNav';
+import { useSpring, animated } from 'react-spring';
 
-export default function Navbar({ languages, logged, setUser, setLogged, user }) {
+export default function Navbar({ logged, setUser, setLogged, user }) {
 
   const { t } = useTranslation();
 
+  const fade = useSpring({
+    from: { opacity: 0 }, opacity: 1
+  })
+
+
   return (
-    <NavMenuPar>
+    <NavMenuPar as={animated.div} style={fade}>
       <Nav >
         <NavMenu>
           <StyledSelect>
             <SelectNav />
           </StyledSelect>
           <NavLink to='/home' >
-            {/* <Trans i18nKey='description.part1'>
-            Home
-            </Trans> */}
-          {t('home')}
+            {t('homenavbar')}
           </NavLink>
           <NavLink to='/about' >
-            {t('about')}
+            {t('aboutnavbar')}
           </NavLink>
           {logged ?
             <>
               <NavLink to='/login' onClick={() => logout(setUser, setLogged)} >
-              {t('logout')}
+                {t('logoutnavbar')}
               </NavLink>
               <NavLink to='/account' >
                 {user}
@@ -51,10 +54,10 @@ export default function Navbar({ languages, logged, setUser, setLogged, user }) 
             :
             <>
               <NavLink to='/login' >
-              {t('login')}
+                {t('loginnavbar')}
               </NavLink>
               <NavLink to='/signup' >
-              {t('signup')}
+                {t('signupnavbar')}
               </NavLink>
             </>
           }
@@ -63,14 +66,14 @@ export default function Navbar({ languages, logged, setUser, setLogged, user }) 
 
           <StyledIcone>
           </StyledIcone>
-          
+
           <StyledDropDown>
 
             <NavLinkDropDown to='/home' image={homelogo} >
-              Home
+            {t('homenavbar')}
             </NavLinkDropDown>
             <NavLinkDropDown to='/about' image={aboutlogo} >
-              About
+            {t('aboutnavbar')}
             </NavLinkDropDown>
             {logged ?
               <>
@@ -78,23 +81,20 @@ export default function Navbar({ languages, logged, setUser, setLogged, user }) 
                   {user}
                 </NavLinkDropDown>
                 <NavLinkDropDown to='/login' image={logoutlogo} onClick={() => logout(setUser, setLogged)} >
-                  Log-out
+                {t('logoutnavbar')}
                 </NavLinkDropDown>
               </>
               :
               <>
                 <NavLinkDropDown to='/login' image={loginlogo} >
-                  Login
+                {t('loginnavbar')}
                 </NavLinkDropDown>
                 <NavLinkDropDown to='/signup' image={signuplogo} >
-                  Sign-up
+                {t('signupnavbar')}
                 </NavLinkDropDown>
               </>
             }
           </StyledDropDown>
-
-
-
         </StyledDropDownParent>
       </Nav>
     </NavMenuPar>

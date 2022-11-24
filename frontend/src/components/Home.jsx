@@ -12,17 +12,24 @@ import {
   StyledErrorBoxChild
 } from './styles/GeneralElements';
 import { BtnLink, ButtonError } from '../components/styles/ButtonElements';
+import { useSpring, animated } from 'react-spring';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-export default function Home({ setMessage, user, navigateTo, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
+export default function Home({ setMessage, user, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
 
-  const [messageFooter, setMessageFooter] = useState('Start the game now !')
-  // const [players, setPlayers] = useState([])
-  // const [updated, setUpdated] = useState(false)
+  const [messageFooter, setMessageFooter] = useState('messageFooter.1')
   const [color, setColor] = useState('')
   const [score, setScore] = useState(0)
   const [lastscore, setLastscore] = useState('')
   const [displayed, setDisplayed] = useState(false)
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [result, setResult] = useState('')
 
+  const navigateTo = (location) => {
+    navigate(`/${location}`)
+  };
 
   function fontColor(basicfont) {
     if (color === true) {
@@ -34,35 +41,41 @@ export default function Home({ setMessage, user, navigateTo, setPlayers, players
     }
   }
 
+  const fade = useSpring({
+    from: { opacity: 0 }, opacity: 1
+  })
 
   return (
-    <StyledCont >
+    <StyledCont as={animated.div} style={fade} >
       {user ?
         <>
-          <StyledHeading>the Flag Quizz</StyledHeading>
+          <StyledHeading>{t('headerhome')}</StyledHeading>
           <StyledCore>
-            <Game setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+            <Game result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
             <Records setPlayers={setPlayers} players={players} updated={updated} setUpdated={setUpdated} />
           </StyledCore>
           <StyledErrorBox display={!displayed ? 'none' : 'block'} >
             <StyledErrorBoxChild>
-            <span>You didnt start a game, please press start game !</span>
-            <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
+              <span>{t("errorspanstart")}</span>
+              <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
             </StyledErrorBoxChild>
-            </StyledErrorBox>
+          </StyledErrorBox>
           <StyledFooter>
             {!lastscore ?
               <StyledFooterDiv>
-                <span style={{ width: '50%', fontWeight: 'bold' }}>Your score : {score} </span>
-                <StyledSpanResult coloring={fontColor('white')} >{messageFooter}</StyledSpanResult>
+                <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
+                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: result})}</StyledSpanResult>
+                {/* messageFooter
+                {t('messageFooter.1')} */}
+                {/* {t(`${messageFooter.3}`)} */}
               </StyledFooterDiv>
               :
               <StyledFooterDiv>
                 <StyledFooterDiv>
-                  <span style={{ width: '50%', fontWeight: 'bold' }}>Your score : {score} </span>
-                  <span style={{ width: '50%', fontWeight: 'bold' }}>Last score : {lastscore}</span>
+                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
+                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
                 </StyledFooterDiv>
-                <StyledSpanResult coloring={fontColor('white')} >{messageFooter}</StyledSpanResult>
+                <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, {result: result})}</StyledSpanResult>
               </StyledFooterDiv>
 
             }
@@ -70,7 +83,7 @@ export default function Home({ setMessage, user, navigateTo, setPlayers, players
         </>
         :
         <>
-          <StyledHeading>Welcome, Click <BtnLink onClick={() => navigateTo('login')} >here</BtnLink> for logging-in </StyledHeading>
+          <StyledHeading>{t('unconnected.1')}<BtnLink onClick={() => navigateTo('login')} >{t('unconnected.2')}</BtnLink>{t('unconnected.3')}</StyledHeading>
         </>
       }
     </StyledCont>
