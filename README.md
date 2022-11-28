@@ -1,3 +1,0 @@
-# World-flag
-
-redux branch
