@@ -13,6 +13,7 @@ import ConfirmationCode from "./auth/ConfirmationCode";
 
 function App() {
 
+  const [triggered, setTriggered] = useState(false)
   const [user, setUser] = useState('')
   const [logged, setLogged] = useState(false)
   const [userScore, setUserScore] = useState('')
@@ -23,34 +24,35 @@ function App() {
 
 
 
-// ddw
+  // ddw
 
-// const getUser = () => {
-//   const user = localStorage.getItem('CognitoIdentityServiceProvider.18uphqh3ksjmn1rrkec2g8ujb7.LastAuthUser')
-//   if(user){
-//     console.log(`${user} is connected`)
-//   }else{
-//     console.log('not connected')
-//   }
+  // const getUser = () => {
+  //   const user = localStorage.getItem('CognitoIdentityServiceProvider.18uphqh3ksjmn1rrkec2g8ujb7.LastAuthUser')
+  //   if(user){
+  //     console.log(`${user} is connected`)
+  //   }else{
+  //     console.log('not connected')
+  //   }
 
-// }
-
-useEffect(() => {
-  const user = localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser')
-  if(user){
-    setUser(user)
-    setLogged(true)
-  }
-  // else{
-  //   setUser('')
-  //   setLogged(false)
   // }
-}, [])
+
+
+  useEffect(() => {
+    const userlogged = localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser')
+    if (userlogged) {
+      setUser(localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser'))
+      setLogged(true)
+    } else {
+      setLogged(false)
+      setUser('')
+    }
+
+  }, [logged])
 
 
 
 
-//dsadad
+  //dsadad
 
   const navigateTo = (location) => {
     navigate(`/${location}`)
@@ -86,11 +88,11 @@ useEffect(() => {
       <Navbar navigateTo={navigateTo} logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
       <div className="app" >
         <Routes>
-          <Route path="/home" element={<Home players={players} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
+          <Route path="/" element={<Home players={players} user={user} logged={logged} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           {/* <Route path="/about" element={<About />} /> */}
-          
+
           <Route path="/confirmation" element={<ConfirmationCode navigateTo={navigateTo} />} />
-          <Route path="/login" element={<Login navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+          <Route path="/login" element={<Login setTriggered={setTriggered} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
           <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
           <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
         </Routes>

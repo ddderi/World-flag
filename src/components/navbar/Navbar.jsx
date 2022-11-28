@@ -50,7 +50,7 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
           <StyledSelect>
             <SelectNav />
           </StyledSelect>
-          <NavLink to='/home' >
+          <NavLink to='/' >
             {t('homenavbar')}
           </NavLink>
           {/* <NavLink to='/about' >
@@ -84,7 +84,7 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
 
           <StyledDropDown>
 
-            <NavLinkDropDown to='/home' image={homelogo} >
+            <NavLinkDropDown to='/' image={homelogo} >
               {t('homenavbar')}
             </NavLinkDropDown>
             {/* <NavLinkDropDown to='/about' image={aboutlogo} >

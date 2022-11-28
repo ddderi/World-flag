@@ -86,8 +86,11 @@ export async function logout(setUser, setLogged) {
 
 export async function flagCall(country) {
     try {
-        // const result = await axios.get(`https://countryflagsapi.com/png/${country}`, {withCredentials: true})
-        const result = await axios.get(`https://flagcdn.com/w160/${country}.png`, {withCredentials: true})
+        const result = await axios.get(`https://countryflagsapi.com/png/${country}`, {withCredentials: true} ,{headers: {
+            'Access-Control-Allow-Origin' : true,
+            'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',  
+        }})
+        //const result = await axios.get(`https://flagcdn.com/w160/${country}.png`, {withCredentials: true})
         return result
     } catch (error) {
         console.log(error)

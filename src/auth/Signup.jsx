@@ -76,7 +76,7 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
             //     console.log(data)
             // })
 
-
+           
             setTimeout(() => {
                 navigateTo('confirmation')
             }, 1000);

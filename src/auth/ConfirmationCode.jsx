@@ -25,7 +25,7 @@ export default function ConfirmationCode({ navigateTo }) {
             const user = await Auth.confirmSignUp(data.username, data.code);
             console.log(user)
             setTimeout(() => {
-                navigateTo('home')
+                navigateTo('/')
             }, 2000);
             return user
         } catch (error) {

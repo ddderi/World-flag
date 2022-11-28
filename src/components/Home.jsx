@@ -46,14 +46,14 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
     from: { opacity: 0 }, opacity: 1
   })
 
-console.log(user)
+ 
 
   return (
     <StyledCont as={animated.div} style={fade} >
-      
+
       {user ?
         <>
-        
+
           <StyledHeading>{t('headerhome')}</StyledHeading>
           <StyledCore>
             <Game result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />

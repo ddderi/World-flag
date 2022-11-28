@@ -57,8 +57,9 @@ function Login({ navigateTo, setUser, setLogged, message, setMessage }) {
 async function signIn(data) {
   try {
       const user = await Auth.signIn(data.username, data.password);
+      setLogged(true)
       setTimeout(() => {
-        navigateTo('home')
+        navigateTo('')
     }, 1000);
       return user
   } catch (error) {
