@@ -17,6 +17,7 @@ import eyepassword from '../images/eyepassword.png';
 import eyepasswordclose from '../images/eyepasswordclose.png';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
+import { Auth } from 'aws-amplify';
 
 
 function Login({ navigateTo, setUser, setLogged, message, setMessage }) {
@@ -27,36 +28,98 @@ function Login({ navigateTo, setUser, setLogged, message, setMessage }) {
 
 
 
-  const logInUser = async (data) => {
-    try {
-      const result = await loggingUser(data, setMessage)
-      if (result.login) {
-        setMessage(result.message)
-        localStorage.setItem('score', JSON.stringify(result.user.bestscores))
-        localStorage.setItem('user', JSON.stringify(result.user.username))
-        setUser(result.user.username)
-        setLogged(true)
-        setTimeout(() => {
-          navigateTo('home')
-        }, 2000);
-      }
-      return result
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const logInUser = async (data) => {
+  //   try {
+  //     const result = await loggingUser(data, setMessage)
+  //     if (result.login) {
+  //       setMessage(result.message)
+  //       localStorage.setItem('score', JSON.stringify(result.user.bestscores))
+  //       localStorage.setItem('user', JSON.stringify(result.user.username))
+  //       setUser(result.user.username)
+  //       setLogged(true)
+  //       setTimeout(() => {
+  //         navigateTo('home')
+  //       }, 2000);
+  //     }
+  //     return result
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   const fade = useSpring({
     from: { opacity: 0 }, opacity: 1
   })
 
+
+//AWS
+
+async function signIn(data) {
+  try {
+      const user = await Auth.signIn(data.username, data.password);
+      setTimeout(() => {
+        navigateTo('home')
+    }, 1000);
+      return user
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+
+
+
+const getToken = async ()=>{
+  var data = await Auth.currentSession()
+  // console.log(data)
+  // console.log(data.idToken.jwtToken)
+
+  if(data){
+    console.log('user CONNECTED')
+  }else if(!data){
+    console.log('UN CONNECTED')
+  }
+
+
+  return data.idToken.jwtToken
+}
+
+const getUser = () => {
+  const user = localStorage.getItem('CognitoIdentityServiceProvider.18uphqh3ksjmn1rrkec2g8ujb7.LastAuthUser')
+  if(user){
+    console.log(`${user} is connected`)
+  }else{
+    console.log('not connected')
+  }
+
+}
+
+
+
+async function signOut() {
+  try {
+      await Auth.signOut();
+  } catch (error) {
+      console.log('error signing out: ', error);
+  }
+}
+
+
   return (
     <StyledFormCont as={animated.div} style={fade} >
       <StyledFormHeading>{t('login.heading')}</StyledFormHeading>
+      <button onClick={() => {
+        getToken()
+      }} >testtttt</button>
 
+      <button onClick={() => {signOut()}} >logout </button>
+      <button onClick={() => {
+        getUser()
+      }}>test userrr </button>
       {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
       <StyledForm onSubmit={handleSubmit((data) => {
-        logInUser(data)
+        // logInUser(data)
+        signIn(data)
         reset()
       })}>
         <StyledInputContainer>

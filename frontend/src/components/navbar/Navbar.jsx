@@ -19,14 +19,28 @@ import logoutlogo from '../../images/logoutlogo.png';
 import { useTranslation } from 'react-i18next';
 import SelectNav from './SelectNav';
 import { useSpring, animated } from 'react-spring';
+import { Auth } from 'aws-amplify';
 
-export default function Navbar({ logged, setUser, setLogged, user }) {
+
+
+export default function Navbar({ navigateTo, logged, setUser, setLogged, user }) {
 
   const { t } = useTranslation();
 
   const fade = useSpring({
     from: { opacity: 0 }, opacity: 1
   })
+
+  async function signOut() {
+    try {
+        await Auth.signOut();
+        setUser('')
+        setLogged(false)
+        navigateTo('login')
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+}
 
 
   return (
@@ -44,7 +58,8 @@ export default function Navbar({ logged, setUser, setLogged, user }) {
           </NavLink> */}
           {logged ?
             <>
-              <NavLink to='/login' onClick={() => logout(setUser, setLogged)} >
+              {/* <NavLink to='/login' onClick={() => logout(setUser, setLogged)} > */}
+              <NavLink to='/login' onClick={() => signOut()} >
                 {t('logoutnavbar')}
               </NavLink>
               <NavLink to='/account' >
@@ -80,7 +95,7 @@ export default function Navbar({ logged, setUser, setLogged, user }) {
                 <NavLinkDropDown to='/account' image={loginlogo} >
                   {user}
                 </NavLinkDropDown>
-                <NavLinkDropDown to='/login' image={logoutlogo} onClick={() => logout(setUser, setLogged)} >
+                <NavLinkDropDown to='/login' image={logoutlogo} onClick={() => signOut()} >
                   {t('logoutnavbar')}
                 </NavLinkDropDown>
               </>

@@ -31,7 +31,7 @@ export default function Game({ result, setResult, user, setDisplayed, setMessage
 
   function startNewGameClick() {
     startNewGame()
-    checkCookie(user, navigateTo, setUser, setLogged, setMessage)
+    // checkCookie(user, navigateTo, setUser, setLogged, setMessage)
   }
 
   const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}</StyledGameChildAnswer> })

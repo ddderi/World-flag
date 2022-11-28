@@ -264,7 +264,7 @@ export const StyledFormHeading = styled.h1`
   color:#fff;	
   text-transform:uppercase;
   font-size: 23px;
-  margin: -50px 0 80px 0;
+  margin: 2% 0 15% 0;
   display: block;
   text-align: center;
 `;
@@ -281,10 +281,15 @@ export const StyledFormCont = styled.div`
 	transform: translate(-50%,-50%);
   background-color: rgba(0, 0, 0, 0.89);
 	border-radius:3px;
-	padding:70px 100px;
-  @media screen and (max-width: 500px){
-      width: 40%;
-    }
+	padding: 70px 100px;
+  // @media screen and (max-width: 500px){
+  //     width: 55%;
+  //   }
+    @media screen and (max-width: 391px) {
+      width: 80%;
+      padding: 8% 8%;
+    } 
+
 `;
 
 export const StyledImgPassword = styled.img`
@@ -303,6 +308,7 @@ position: absolute;
 
 export const StyledInputContainer = styled.div`
   position:relative;
+  width: 100%;
   margin-bottom:25px;
 & label {
   position:absolute;
