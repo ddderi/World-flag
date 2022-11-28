@@ -85,7 +85,7 @@ const getToken = async ()=>{
 }
 
 const getUser = () => {
-  const user = localStorage.getItem('CognitoIdentityServiceProvider.18uphqh3ksjmn1rrkec2g8ujb7.LastAuthUser')
+  const user = localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser.LastAuthUser')
   if(user){
     console.log(`${user} is connected`)
   }else{
@@ -99,6 +99,8 @@ const getUser = () => {
 async function signOut() {
   try {
       await Auth.signOut();
+      setLogged(false)
+      setUser('')
   } catch (error) {
       console.log('error signing out: ', error);
   }
