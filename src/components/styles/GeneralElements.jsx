@@ -173,7 +173,7 @@ export const StyledGameChild = styled.div`
   grid-column-start: 2;
   grid-column-end: 2;
   margin: 0;
-  width: 80%;
+  width: 90%;
   display: grid;
   // padding: 4%;
   height: 100px;
