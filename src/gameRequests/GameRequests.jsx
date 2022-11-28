@@ -39,8 +39,8 @@ export const startGame = async (setResult, setResultFooter, setAnswer, setFlag, 
             setResult(countries[index][key])
             setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
-            console.log(resultFlag)
-            //setFlag(resultFlag.request.responseURL)
+            //console.log(resultFlag)
+            setFlag(resultFlag.request.responseURL)
             triggerAnswers(setAnswer, countries[index][key])
         })
     } catch (error) {

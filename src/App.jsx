@@ -22,7 +22,9 @@ function App() {
   const [updated, setUpdated] = useState(false)
   const navigate = useNavigate();
 
-
+  const navigateTo = (location) => {
+    navigate(`/${location}`)
+  };
 
   // ddw
 
@@ -45,6 +47,7 @@ function App() {
     } else {
       setLogged(false)
       setUser('')
+      // navigateTo('login')
     }
 
   }, [logged])
@@ -54,9 +57,7 @@ function App() {
 
   //dsadad
 
-  const navigateTo = (location) => {
-    navigate(`/${location}`)
-  };
+  
 
   // useEffect(() => {
   //   const userScore = JSON.parse(localStorage.getItem('score'))

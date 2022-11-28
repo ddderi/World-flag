@@ -15,15 +15,20 @@ export const StyledCont = styled.div`
   width: 55%;
   position:absolute;
 	left:50%;
-	top:60%;
+	top:44%;
+  width: 85%;
 	transform: translate(-50%,-50%);
-  @media screen and (max-width: 1100px) and (max-height: 782px){
+  @media screen and (max-width: 905px){
     
-    width: 90%;
+    width: 85%;
   }
-  @media screen and (max-height: 500px){
-    height: 70%;
-  }
+  // @media screen and (max-height: 500px){
+  //   height: 70%;
+  // }
+  @media screen and (min-width: 906px) {
+    width: 65%;
+    
+  } 
 
 `;
 
@@ -47,17 +52,17 @@ border-bottom: 2px solid white;
 export const StyledCore = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
- @media screen and (max-width: 1100px){
+ @media screen and (min-width: 906px){
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  @media screen and (max-width: 1100px) and (max-height: 782px){
+  // @media screen and (min-width: 906px){
     
-    display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  //   display: flex;
+  // flex-direction: row;
+  // justify-content: space-evenly;
   
-  }
+  // }
 }
 `;
 
@@ -109,11 +114,11 @@ export const StyledGameCont = styled.div`
   box-shadow: 1px 1px 3px gray;
   background-color: rgba(0, 0, 0, 0.89);
   
-  @media screen and (max-width: 1300px){
-    transition: 5s;
-    display: flex;
-    flex-direction: column;
-  }
+  // @media screen and (max-width: 1300px){
+  //   transition: 5s;
+  //   display: flex;
+  //   flex-direction: column;
+  // }
 `;
 
 export const StyledGameChildLeft = styled.div`
@@ -150,16 +155,16 @@ export const StyledGameChild = styled.div`
   grid-template-rows: 22% 22% 22% 22%;
   grid-template-columns: 90%;
   grid-row-gap: 3%;
-  @media screen and (max-width: 1300px){
+  // @media screen and (max-width: 1300px){
     
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-     align-items: center;
-    width: 100%;
-    height: 105px;
-    padding: 0%;
-  }
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //    align-items: center;
+  //   width: 100%;
+  //   height: 105px;
+  //   padding: 0%;
+  // }
 `;
 
 
@@ -194,18 +199,18 @@ export const StyledRecordsCont = styled.div`
   box-shadow: 1px 1px 3px gray;
   background-color: rgba(0, 0, 0, 0.89);
   display: flex;
-  margin-left: 2%;
+  // margin-left: 2%;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding-bottom: 2%;
-  @media screen and (max-width: 1100px) and (max-height: 782px){
-    width: 40%;
-    margin-left: 0;
-  }
-  @media screen and (max-width: 450px){
-    display: none;
-  }
+  // padding-bottom: 2%;
+  // @media screen and (max-width: 1100px) and (max-height: 782px){
+  //   width: 40%;
+  //   margin-left: 0;
+  // }
+  // @media screen and (max-width: 450px){
+  //   display: none;
+  // }
 `;
 
 export const LabelAccount = styled.label`
