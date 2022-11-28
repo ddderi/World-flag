@@ -15,16 +15,18 @@ export const StyledCont = styled.div`
   width: 55%;
   position:absolute;
 	left:50%;
-	top:44%;
+	top:50%;
   width: 85%;
 	transform: translate(-50%,-50%);
   @media screen and (max-width: 905px){
     
     width: 85%;
   }
-  // @media screen and (max-height: 500px){
-  //   height: 70%;
-  // }
+  @media screen and (max-width: 280px) {
+    
+    top:55%;
+    
+    }
   @media screen and (min-width: 906px) {
     width: 65%;
     
@@ -65,6 +67,7 @@ width: 100%;
 //   display: flex;
 //   flex-direction: column;
 //   row-gap: 10px;
+//}
   @media screen and (min-width: 765px) {
 
   display: grid;
@@ -73,7 +76,7 @@ width: 100%;
 
   
   }
-}
+
 `;
 
 export const StyledCoreAbout = styled.div`
@@ -95,12 +98,20 @@ overflow: hidden;
 export const StyledFooter = styled.div`
   background-color: rgba(0, 0, 0, 0.89);
   color: white;
+  height: 50px;
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
   margin-top: 1%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 280px) {
+    height: 90px;
+  
+    
+    }
+
+
 `;
 
 export const StyledFooterDiv = styled.div`
@@ -432,7 +443,7 @@ export const StyledForm = styled.form`
 export const StyledSpanResult = styled.span`
   color: ${props => props.coloring};
   font-weight: bold;
-  width: 50%;
+  width: 90%;
 `;
 
 

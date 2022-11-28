@@ -87,20 +87,20 @@ export const StyledDropDown = styled.div`
   width: 175px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  ${StyledDropDownParent}:active &{
-    display: flex;
-    right: 0;
-    flex-direction: column;
-    text-align: center;
-   
-  }
-  // ${StyledDropDownParent}:hover &{
+  // ${StyledDropDownParent}:active &{
   //   display: flex;
   //   right: 0;
   //   flex-direction: column;
   //   text-align: center;
    
   // }
+  ${StyledDropDownParent}:hover &{
+    display: flex;
+    right: 0;
+    flex-direction: column;
+    text-align: center;
+   
+  }
 `;
 
 
