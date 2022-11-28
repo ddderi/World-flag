@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledRecordsCont, StyledRecordsChild, StyledHeadingFooter } from './styles/GeneralElements';
+import { StyledRecordsCont, StyledRecordsChild, StyledHeadingRecords } from './styles/GeneralElements';
 import { useTranslation } from 'react-i18next';
 
 export default function Records({ players }) {
@@ -15,7 +15,7 @@ export default function Records({ players }) {
 
   return (
     <StyledRecordsCont>
-      <StyledHeadingFooter>{t("records.header")}</StyledHeadingFooter>
+      <StyledHeadingRecords>{t("records.header")}</StyledHeadingRecords>
       {playersMappedArray}
     </StyledRecordsCont>
   )

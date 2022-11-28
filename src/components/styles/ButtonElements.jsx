@@ -21,7 +21,7 @@ export const Btnlog = styled.button`
   color: #fff;
 	padding:10px 20px;
 	text-transform:uppercase;
-	margin-top:25px;
+	margin: 4%;
 	border-radius:2px;
 	cursor:pointer;
 	position:relative;
@@ -32,12 +32,13 @@ export const Btnlog = styled.button`
 `;
 
 export const BtnlogGame = styled(Btnlog)`
-  width: 50%;
-  position: relative;
-  left: 50%;
-  @media screen and (max-width: 1300px){
-    left: 25%;
-  }
+  width: 45%;
+  padding-botton:
+  // position: relative;
+  // left: 50%;
+  // @media screen and (max-width: 1300px){
+  //   left: 25%;
+  // }
 `;
 
 export const BtnLink = styled.button`

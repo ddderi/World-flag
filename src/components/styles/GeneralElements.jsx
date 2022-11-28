@@ -50,19 +50,29 @@ border-bottom: 2px solid white;
 `;
 
 export const StyledCore = styled.div`
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100%;
+// margin: 0;
+
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr;
+  // column-gap: 10px;
+//  @media screen and (min-width: 906px){
+//   display: flex;
+//   flex-direction: column;
+//   row-gap: 10px;
+  @media screen and (min-width: 765px) {
+
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
- @media screen and (min-width: 906px){
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  // @media screen and (min-width: 906px){
-    
-  //   display: flex;
-  // flex-direction: row;
-  // justify-content: space-evenly;
+   grid-template-columns: 1fr 1fr 1fr;
+   column-gap: 10px;
+
   
-  // }
+  }
 }
 `;
 
@@ -102,31 +112,45 @@ export const StyledFooterDiv = styled.div`
 `;
 
 
+
 export const StyledGameCont = styled.div`
-  padding: 1%;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  display: grid;
-  grid-template-columns: 65% 35%;
-  column-gap: 10px;
-  row-gap: 10px;
+  // padding: 1%;
+  // grid-column-start: 1;
+  // grid-column-end: 3;
+  // display: grid;
+  // grid-template-columns: 65% 35%;
+  // column-gap: 10px;
+  // row-gap: 10px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
   background-color: rgba(0, 0, 0, 0.89);
-  
-  // @media screen and (max-width: 1300px){
-  //   transition: 5s;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 0%;
+  // @media screen and (min-width: 765px) and (max-width: 1150px){
+    
   //   display: flex;
-  //   flex-direction: column;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  
+  
   // }
+  @media screen and (min-width: 765px) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+  }
+
 `;
 
 export const StyledGameChildLeft = styled.div`
-  grid-column-start: 1;
-  grid-column-end: 1;
-  @media screen and (max-width: 1040px){
-    margin: 0;
-  }
+  // grid-column-start: 1;
+  // grid-column-end: 1;
+  
 `;
 
 
@@ -136,10 +160,10 @@ export const StyledImgFlag = styled.img`
   pointer-events: none;
   border: 8px solid white;
   @media screen and (max-width: 570px){
-    width: 90%;
+    width: 76%;
   }
-  @media screen and (max-width: 870px){
-    max-width: 90%;
+  @media screen and (max-width: 440px){
+    width: 85%;
   }
 `;
 
@@ -149,12 +173,20 @@ export const StyledGameChild = styled.div`
   grid-column-start: 2;
   grid-column-end: 2;
   margin: 0;
-  width: 100%;
+  width: 80%;
   display: grid;
-  padding: 4%;
+  // padding: 4%;
+  height: 100px;
   grid-template-rows: 22% 22% 22% 22%;
-  grid-template-columns: 90%;
+  grid-template-columns: 100%;
   grid-row-gap: 3%;
+
+  @media screen and (min-width: 550px){
+    width: 65%;
+  }
+  @media screen and (min-width: 1400px){
+    width: 55%;
+  }
   // @media screen and (max-width: 1300px){
     
   //   display: flex;
@@ -176,14 +208,14 @@ export const StyledGameChildAnswer = styled.div`
   //box-shadow: 1px 1px 1px gray;
   cursor: pointer;
   opacity: 0.85;
-  @media screen and (min-width: 570px) and  (max-width: 1300px){
-    margin-bottom: 1%;
-    width: 70%;
-  }
-  @media screen and (max-width: 570px){
-    margin-bottom: 1%;
-    width: 90%;
-  }
+  // @media screen and (min-width: 570px) and  (max-width: 1300px){
+  //   margin-bottom: 1%;
+  //   width: 70%;
+  // }
+  // @media screen and (max-width: 570px){
+  //   margin-bottom: 1%;
+  //   width: 90%;
+  // }
   &:hover {
     opacity: 1;
     
@@ -192,22 +224,23 @@ export const StyledGameChildAnswer = styled.div`
 
 
 export const StyledRecordsCont = styled.div`
+  display: none;
   grid-column-start: 3;
   grid-column-end: 3;
   color: white;
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
   background-color: rgba(0, 0, 0, 0.89);
-  display: flex;
+ 
   // margin-left: 2%;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  // flex-direction: column;
+  // justify-content: space-evenly;
+  // align-items: center;
   // padding-bottom: 2%;
-  // @media screen and (max-width: 1100px) and (max-height: 782px){
-  //   width: 40%;
-  //   margin-left: 0;
-  // }
+  @media screen and (min-width: 765px) {
+    display: block;
+    height: 100%;
+  }
   // @media screen and (max-width: 450px){
   //   display: none;
   // }
@@ -255,7 +288,13 @@ display: flex;
 `;
 
 
+export const StyledHeadingRecords = styled(StyledHeadingFooter)`
 
+display: none;
+@media screen and (min-width: 765px) {
+  display: block;
+}
+`;
 
 
 
