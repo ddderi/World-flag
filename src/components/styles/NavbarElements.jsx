@@ -11,8 +11,8 @@ export const Nav = styled.nav`
   width: 50%;
   @media screen and (max-width: 765px){
     width: 98%;
-    justify-content: flex-end;
-    align-items: center;  
+    
+    // align-items: center;  
   }
 `;
 
@@ -29,14 +29,21 @@ transition: 0.5s;
 width: 100%;
 padding: 0% 1.5% 0% 1.5%;
     white-space: nowrap;
-  @media screen and (max-width: 765px){
-    display: none;
-  }
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+    // @media screen and (max-width: 765px){
+    //     display: inline-block;
+    //     height: 100%;
+    //   }
 
-  &:hover {
-    background-color: white;
-    color: black;
-  }
+    // if drop down enabled, uncommented 
+  // @media screen and (max-width: 765px){
+  //   display: none;
+  // }
+
+ 
 `;
 
 
@@ -51,20 +58,22 @@ export const NavMenu = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  @media screen and (max-width: 765px){
-    padding-left: 40%
-  }
+  // @media screen and (max-width: 765px){
+  //   padding-left: 40%
+  // }
 `;
 
 export const StyledDropDownParent = styled.div`
   display: none;
-  @media screen and (max-width: 765px){
-  display: inline-block;
-  position: relative;
-  float: right;
-   width: 30px;
-   height: 35px;
-}
+
+  // drop down disabled
+//   @media screen and (max-width: 765px){
+//   display: inline-block;
+//   position: relative;
+//   float: right;
+//    width: 30px;
+//    height: 35px;
+// }
 `;
 
 
@@ -171,10 +180,10 @@ position: relative;
 
 right: 11%;
 
-@media screen and (max-width: 765px){
-  position: absolute;
-  left: 5px;
-}
+// @media screen and (max-width: 765px){
+//   position: absolute;
+//   left: 5px;
+// }
 
 
 `;

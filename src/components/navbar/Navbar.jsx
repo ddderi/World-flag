@@ -77,7 +77,7 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
             </>
           }
         </NavMenu>
-        <StyledDropDownParent>
+        {/* <StyledDropDownParent>
 
           <StyledIcone>
           </StyledIcone>
@@ -107,7 +107,7 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
               </>
             }
           </StyledDropDown>
-        </StyledDropDownParent>
+        </StyledDropDownParent> */}
       </Nav>
     </NavMenuPar>
   )

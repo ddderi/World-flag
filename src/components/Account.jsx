@@ -7,7 +7,9 @@ import {
   StyledInputForm,
   StyledFormHeading,
   LabelAccount,
-  StyledSpanMessage
+  StyledSpanMessage,
+  StyledFormContAccount,
+  StyledInputContainer
 }
   from '../components/styles/GeneralElements';
 import { Btnlog } from './styles/ButtonElements';
@@ -40,7 +42,7 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
   })
 
   return (
-    <StyledFormCont as={animated.div} style={fade}>
+    <StyledFormContAccount as={animated.div} style={fade}>
       {user ?
         <StyledForm onSubmit={handleSubmit((data) => {
           changePw({
@@ -59,6 +61,7 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
           <Btnlog type='submit'>{t('account.button')}</Btnlog>
         </StyledForm>
         : <StyledFormHeading>{t('account.errormessage')}</StyledFormHeading>}
-    </StyledFormCont>
+    </StyledFormContAccount>
   )
 }
+
