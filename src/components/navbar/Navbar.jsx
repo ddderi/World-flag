@@ -33,14 +33,14 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
 
   async function signOut() {
     try {
-        await Auth.signOut();
-        setUser('')
-        setLogged(false)
-        navigateTo('login')
+      await Auth.signOut();
+      setUser('')
+      setLogged(false)
+      navigateTo('login')
     } catch (error) {
-        console.log('error signing out: ', error);
+      console.log('error signing out: ', error);
     }
-}
+  }
 
 
   return (
@@ -87,9 +87,6 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
             <NavLinkDropDown to='/' image={homelogo} >
               {t('homenavbar')}
             </NavLinkDropDown>
-            {/* <NavLinkDropDown to='/about' image={aboutlogo} >
-              {t('aboutnavbar')}
-            </NavLinkDropDown> */}
             {logged ?
               <>
                 <NavLinkDropDown to='/account' image={loginlogo} >

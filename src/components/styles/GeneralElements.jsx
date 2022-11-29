@@ -333,13 +333,18 @@ export const StyledFormCont = styled.div`
   position:absolute;
 	left:50%;
 	top:50%;
+  width: 70%;
+      padding: 6% 6%;
 	transform: translate(-50%,-50%);
   background-color: rgba(0, 0, 0, 0.89);
 	border-radius:3px;
-	padding: 70px 100px;
-  // @media screen and (max-width: 500px){
-  //     width: 55%;
-  //   }
+	// padding: 70px 100px;
+  @media screen and (min-width: 700px){
+      width: 55%;
+    }
+    @media screen and (min-width: 1200px){
+      width: 30%;
+    }
     @media screen and (max-width: 391px) {
       width: 80%;
       padding: 8% 8%;

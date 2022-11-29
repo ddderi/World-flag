@@ -94,14 +94,33 @@ export const StyledDropDown = styled.div`
   //   text-align: center;
    
   // }
-  ${StyledDropDownParent}:hover &{
-    display: flex;
-    right: 0;
-    flex-direction: column;
-    text-align: center;
+  // ${StyledDropDownParent}:hover &{
+  //   display: flex;
+  //   right: 0;
+  //   flex-direction: column;
+  //   text-align: center;
    
-  }
+  // }
+
+  @media(hover: hover) and (pointer: fine) {
+    ${StyledDropDownParent}:hover &{
+      display: flex;
+      right: 0;
+      flex-direction: column;
+      text-align: center;
+     
+    }
+}
+
+
 `;
+
+
+// @media(hover: hover) and (pointer: fine) {
+//   .menu-link:hover {
+//       /* Targeting devices with mouse cursor and :hover */
+//   }
+// }
 
 
 

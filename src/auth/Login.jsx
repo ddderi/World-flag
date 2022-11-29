@@ -111,14 +111,6 @@ async function signOut() {
   return (
     <StyledFormCont as={animated.div} style={fade} >
       <StyledFormHeading>{t('login.heading')}</StyledFormHeading>
-      <button onClick={() => {
-        getToken()
-      }} >testtttt</button>
-
-      <button onClick={() => {signOut()}} >logout </button>
-      <button onClick={() => {
-        getUser()
-      }}>test userrr </button>
       {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
       <StyledForm onSubmit={handleSubmit((data) => {
         // logInUser(data)
