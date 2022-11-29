@@ -50,7 +50,7 @@ export const startGame = async (setResult, setResultFooter, setAnswer, setFlag, 
 
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore) => {
     e.preventDefault()
     setMessageFooter('')
 
@@ -81,7 +81,9 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
             updateScoreUser(score, setUpdated)
             localStorage.setItem('score', JSON.stringify(score))
         }
-        setLastscore(score)
+        if (score > lastscore) {
+            setLastscore(score)
+        }
         setFlag('https://www.placecage.com/300/200')
         setScore(0)
         setResult('')

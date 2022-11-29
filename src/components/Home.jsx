@@ -56,7 +56,7 @@ export default function Home({ setMessage, user, setPlayers, players, updated, s
 
           <StyledHeading>{t('headerhome')}</StyledHeading>
           <StyledCore>
-            <Game result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+            <Game lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
             <Records setPlayers={setPlayers} players={players} updated={updated} setUpdated={setUpdated} />
           </StyledCore>
           <StyledErrorBox display={!displayed ? 'none' : 'block'} >

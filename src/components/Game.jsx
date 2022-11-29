@@ -11,7 +11,7 @@ import { startGame, handleSubmit } from '../gameRequests/GameRequests';
 import { checkCookie } from '../requests/RequestUser';
 import { useTranslation } from 'react-i18next';
 
-export default function Game({ result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
+export default function Game({ lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
 
   const [flag, setFlag] = useState('https://www.placecage.com/300/200');
   const [input, setInput] = useState('');
@@ -34,7 +34,7 @@ export default function Game({ result, setResult, user, setDisplayed, setMessage
     // checkCookie(user, navigateTo, setUser, setLogged, setMessage)
   }
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed)} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit( e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
