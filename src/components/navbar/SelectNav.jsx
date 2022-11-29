@@ -31,6 +31,7 @@ export default function SelectNav() {
 
   return (
     <StyledSelectChild options={languages}
+    inputProps={{readOnly:true}}
       classNamePrefix="react-select"
       onChange={handleChange}
       styles={colorStyles}
