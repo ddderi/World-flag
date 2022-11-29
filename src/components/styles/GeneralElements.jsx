@@ -338,22 +338,26 @@ export const StyledFormCont = styled.div`
 	transform: translate(-50%,-50%);
   background-color: rgba(0, 0, 0, 0.89);
 	border-radius:3px;
-	// padding: 70px 100px;
-  // @media screen and (min-width: 700px){
-  //     width: 55%;
-  //   }
+  @media screen and (max-width: 550px) {
+    width: 80%;
+    padding: 8% 8%;
+  } 
   @media screen and (min-width: 551px) and (max-width: 791px){
-    width: 45%;
+    width: 60%;
     padding: 8% 8%;
   }
     @media screen and (min-width: 792px){
       width: 28%;
       padding: 8% 8%;
     }
-    @media screen and (max-width: 550px) {
-      width: 80%;
-      padding: 8% 8%;
-    } 
+    @media screen and (min-width: 1005px) and (max-width: 1320px){
+      width: 30%;
+      padding: 4% 4%;
+    }
+    @media screen  and (min-width: 1320px){
+      width: 30%;
+      padding: 4% 4%;
+    }
 
 `;
 
