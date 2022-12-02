@@ -4,14 +4,26 @@ import {
   StyledGameChild,
   StyledGameChildLeft,
   StyledGameChildAnswer,
-  StyledImgFlag
+  StyledImgFlag,
+  StyledUnconnected
 } from './styles/GeneralElements';
-import { BtnlogGame } from '../components/styles/ButtonElements';
+import { BtnlogGame, BtnLink } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
-import { checkCookie } from '../requests/RequestUser';
 import { useTranslation } from 'react-i18next';
+import { API, graphqlOperation } from "aws-amplify";
 
-export default function Game({ lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
+import {
+  createPoint as createPointMutation,
+  updatePoint as updatePointMutation,
+
+} from '../graphql/mutations';
+import { fetchScores } from "../requests/RequestUser";
+import { Auth } from 'aws-amplify';
+
+export default function Game({ logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
+
+
+
 
   const [flag, setFlag] = useState('https://www.placecage.com/300/200');
   const [input, setInput] = useState('');
@@ -21,7 +33,7 @@ export default function Game({ lastscore, result, setResult, user, setDisplayed,
 
   const startNewGame = async () => {
     try {
-      const resultat = await startGame(setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
+      const resultat = await startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
       return resultat
     } catch (error) {
       console.log(error)
@@ -30,23 +42,105 @@ export default function Game({ lastscore, result, setResult, user, setDisplayed,
 
 
   function startNewGameClick() {
-    startNewGame()
-    // checkCookie(user, navigateTo, setUser, setLogged, setMessage)
+    if (logged) {
+      startNewGame()
+    } else {
+      setMessage('Please logged-in to start playing')
+      navigateTo('login')
+    }
   }
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit( e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore)} key={index}>{data}</StyledGameChildAnswer> })
+  async function createPoint() {
+
+   
+    console.log(user)
+    const data = {
+      score: score,
+      owner: user
+    }
+    var connected = await Auth.currentUserInfo()
+    if (connected !== null) {
+      const result = await API.graphql({
+        query: createPointMutation,
+        variables: { input: data }
+      })
+      localStorage.setItem('existscore', JSON.stringify(true))
+      localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
+      return result
+    } else {
+      console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
+    }
+  }
+
+
+  async function updatePoint() {
+    const id = JSON.parse(localStorage.getItem('scoreid'))
+    const data = {
+      id: id,
+      score: score,
+      owner: user
+    }
+    var connected = await Auth.currentUserInfo()
+    if (connected !== null) {
+      const result = await API.graphql({
+        query: updatePointMutation,
+        variables: {
+          input: data
+        },
+      })
+      return result
+    } else {
+      console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
+    }
+  }
+
+
+  // fetch les 5 premiers scores
+
+  // export const fetchScores = async() => {
+  //   const apiData = await API.graphql({ 
+  //     query: listPoints,
+  //     variables: {filter: {username: {eq: user}}}
+  //   })
+
+  //   console.log(apiData.data.listPoints.items)
+  //   return apiData 
+  // }
+
+  const checkUser = async () => {
+    var connected = await Auth.currentUserInfo()
+    if (connected !== null) {
+      console.log('yes connected')
+    } else {
+      console.log('not connected')
+    }
+    return connected
+  }
+
+
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
-      <BtnlogGame onClick={() =>
-        startNewGameClick()
-      }>{t("game.button")}</BtnlogGame>
-      <StyledGameChildLeft>
-        <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
-      </StyledGameChildLeft>
-      <StyledGameChild>
-        {possibleAnwsers}
-      </StyledGameChild>
+      <button onClick={() => { checkUser() }} type="submit" > A ESSAYER </button>
+      {/* {user ? */}
+        <>
+          <button onClick={() => { fetchScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button>
+          <BtnlogGame onClick={() =>
+            startNewGameClick()
+          }>{t("game.button")}</BtnlogGame>
+          <StyledGameChildLeft>
+            <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
+          </StyledGameChildLeft>
+          <StyledGameChild>
+            {possibleAnwsers}
+          </StyledGameChild>
+        </>
+        {/* :
+        <>
+          <StyledUnconnected>{t('unconnected.1')}<BtnLink onClick={() => navigateTo('login')} >{t('unconnected.2')}</BtnLink>{t('unconnected.3')}</StyledUnconnected>
+        </>
+      } */}
     </StyledGameCont>
   )
 }

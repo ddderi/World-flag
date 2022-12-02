@@ -11,11 +11,11 @@ import {
   NavLinkDropDown,
   StyledSelect
 } from '../styles/NavbarElements';
-import homelogo from '../../images/homelogo.png';
-import loginlogo from '../../images/loginlogo.png';
-import signuplogo from '../../images/signuplogo.png';
-import aboutlogo from '../../images/aboutlogo.png';
-import logoutlogo from '../../images/logoutlogo.png';
+// import homelogo from '../../images/homelogo.png';
+// import loginlogo from '../../images/loginlogo.png';
+// import signuplogo from '../../images/signuplogo.png';
+// import aboutlogo from '../../images/aboutlogo.png';
+// import logoutlogo from '../../images/logoutlogo.png';
 import { useTranslation } from 'react-i18next';
 import SelectNav from './SelectNav';
 import { useSpring, animated } from 'react-spring';
@@ -23,7 +23,7 @@ import { Auth } from 'aws-amplify';
 
 
 
-export default function Navbar({ navigateTo, logged, setUser, setLogged, user }) {
+export default function Navbar({ setMessage, navigateTo, logged, setUser, setLogged, user }) {
 
   const { t } = useTranslation();
 
@@ -36,11 +36,16 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
       await Auth.signOut();
       setUser('')
       setLogged(false)
+      setMessage('')
       navigateTo('login')
     } catch (error) {
       console.log('error signing out: ', error);
     }
   }
+
+const  userCapitalize = (user) => {
+  return user.charAt(0).toUpperCase() + user.slice(1)
+}
 
 
   return (
@@ -63,7 +68,7 @@ export default function Navbar({ navigateTo, logged, setUser, setLogged, user })
                 {t('logoutnavbar')}
               </NavLink>
               <NavLink to='/account' >
-                {user}
+                {userCapitalize(user)}
               </NavLink>
             </>
             :

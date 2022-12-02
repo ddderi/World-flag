@@ -1,6 +1,40 @@
 import axios from "axios";
+import { API } from "aws-amplify";
+import { getPointUser, getPoint } from '../graphql/queries';
+import { listPoints } from '../graphql/queries';
+import { createPoint } from "../graphql/mutations";
+// import { getPointUser, getMyPoint, getPoint } from "../graphql/custom-queries";
 
 const axiosInstance = axios.create({ baseURL: "http://localhost:1234" });
+
+
+// function for fetching user last score
+
+
+export const fetchScores = async (user, setExistscore) => {
+    try {
+        const apiData = await API.graphql({
+            query: listPoints,
+            variables: { filter: { owner: { eq: user } } }
+        })
+        console.log(apiData.data.listPoints.items)
+        if (apiData.data.listPoints.items.length > 0) {
+            localStorage.setItem('scoreid', JSON.stringify(apiData.data.listPoints.items[0].id))
+            localStorage.setItem('userscore', JSON.stringify(apiData.data.listPoints.items[0].score))
+            localStorage.setItem('existscore', JSON.stringify(true))
+        } else {
+
+            localStorage.setItem('userscore', JSON.stringify(0))
+            localStorage.setItem('existscore', JSON.stringify(false))
+            setExistscore(false)
+        }
+        return apiData
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 
 
 
@@ -13,9 +47,7 @@ export async function flagCall(country) {
     try {
         const newcountry = country.toLowerCase()
         // const result = await axios.get(`https://countryflagsapi.com/png/${country}`, {headers: {
-        //     'Access-Control-Allow-Origin' : "http://localhost:3000/",
-        //     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',  
-        // }})
+
         const result = await axios.get(`https://flagcdn.com/w320/${newcountry}.png`)
         return result
     } catch (error) {
@@ -37,15 +69,3 @@ export async function updateScoreUser(score, setUpdated) {
     }
 }
 
-export async function bestPlayers(setPlayers, players, updated, setUpdated) {
-    try {
-        const result = await axiosInstance.get('/players', { withCredentials: true })
-        if (result.data.users !== players || updated === true) {
-            setPlayers(result.data.users)
-            setUpdated(false)
-        }
-        return result.data
-    } catch (error) {
-        console.log(error)
-    }
-}

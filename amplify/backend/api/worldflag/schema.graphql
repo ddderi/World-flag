@@ -1,0 +1,6 @@
+type Point @model @aws_cognito_user_pools @auth(rules: [{allow: owner}, {allow: public, operations: [read]}]) {
+  id: ID!
+  score: Int!
+  owner: String!
+}
+ 

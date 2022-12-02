@@ -15,23 +15,42 @@ import {
 import { Btnlog } from './styles/ButtonElements';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
+import { Auth } from 'aws-amplify';
+import { CognitoAccessToken } from 'amazon-cognito-identity-js';
+import * as AWS from "@aws-sdk/client-cognito-identity-provider";
+
 
 export default function Account({ navigateTo, setLogged, setUser, user, message, setMessage }) {
 
   const { register, handleSubmit, reset } = useForm();
   const { t } = useTranslation();
+  const client = new AWS.CognitoIdentityProvider({ region: "us-west-2" });
 
-  const changePw = async (info) => {
+
+  async function changeCred(data) {
     try {
-      const result = await changePassword(navigateTo, setLogged, setUser, info, setMessage)
-      console.log(result)
-      if (result) {
-        setMessage(result.message)
-        setTimeout(() => {
-          navigateTo('home')
-        }, 2000);
+      let token = localStorage.getItem(`CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.${user}.accessToken`)
+
+      var connected = await Auth.currentUserInfo()
+      if (connected) {
+        var params = {
+          AccessToken: token,
+          PreviousPassword: data.currentpassword,
+          ProposedPassword: data.newPassword
+
+        }
+        client.changePassword(params, (err, data) => {
+          if (err) { console.log(err) }
+          else {
+            setMessage('Your credentials have been successfully updated !')
+
+            setTimeout(() => {
+              navigateTo('')
+            }, 2000);
+          }
+        })
       }
-      return result
+      return connected
     } catch (error) {
       console.log(error)
     }
@@ -45,11 +64,7 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
     <StyledFormContAccount as={animated.div} style={fade}>
       {user ?
         <StyledForm onSubmit={handleSubmit((data) => {
-          changePw({
-            username: user,
-            password: data.currentpassword,
-            newPassword: data.newPassword
-          })
+          changeCred(data)
           reset()
         })}>
           <StyledFormHeading>{user}</StyledFormHeading>

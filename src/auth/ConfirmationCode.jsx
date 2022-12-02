@@ -14,18 +14,24 @@ import {
 import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
 import { Auth } from 'aws-amplify';
 import { useSpring, animated } from 'react-spring';
+import { createPointTable } from '../requests/RequestUser';
+
+
 
 export default function ConfirmationCode({ navigateTo }) {
 
     const { register, handleSubmit, reset } = useForm()
 
 
+
+
     async function confirmSignUp(data) {
         try {
             const user = await Auth.confirmSignUp(data.username, data.code);
             console.log(user)
+            
             setTimeout(() => {
-                navigateTo('/')
+                navigateTo('')
             }, 2000);
             return user
         } catch (error) {

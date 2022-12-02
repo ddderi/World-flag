@@ -494,3 +494,14 @@ export const StyledErrorBoxChild = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const StyledUnconnected = styled.div`
+color: white;
+height: 300px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+
+
+`;

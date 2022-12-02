@@ -19,6 +19,8 @@ import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
 import UserPool from "../UserPool";
+import { createPoint } from "../graphql/mutations";
+import { API } from "aws-amplify";
 
 
 export default function Signup({ navigateTo, setUser, setLogged }) {
@@ -55,6 +57,27 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
 
     // AWS 
 
+
+
+    // async function createPointTable(username) {
+    //     try {
+    //         const data = {
+    //             score: 0,
+    //             username: username,
+    //         }
+    //         const result = await API.graphql({
+    //             query: createPoint,
+    //             variables: { input: data }
+    //         })
+    //         console.log(result)
+    //         return result
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
+
+
     async function signUp(data) {
         try {
             const { user } = await Auth.signUp({
@@ -76,7 +99,7 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
             //     console.log(data)
             // })
 
-           
+
             setTimeout(() => {
                 navigateTo('confirmation')
             }, 1000);
@@ -126,7 +149,7 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
                 reset()
             })}>
                 <StyledInputContainer>
-                    <StyledInputForm {...register('username')}  type="text" required />
+                    <StyledInputForm {...register('username')} type="text" required />
                     <label htmlFor='username'>{t('signup.username')}</label>
                 </StyledInputContainer>
                 <StyledInputContainer>
@@ -140,7 +163,7 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
                     <label htmlFor='passwordConfirmation'>{t('signup.passwordcon')}</label>
                 </StyledInputContainer> */}
                 <StyledInputContainer>
-                    <StyledInputForm {...register('email')}  type="text" required />
+                    <StyledInputForm {...register('email')} type="text" required />
                     <label htmlFor='email'>Email</label>
                 </StyledInputContainer>
                 <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>

@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "worldflag",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authworldflag147559ca",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-11-29T08:17:43.248Z"
+}

@@ -29,14 +29,17 @@ export const triggerAnswers = async (setAnswer, result) => {
 }
 
 
-export const startGame = async (setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
+export const startGame = async (setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
     try {
+        setMessageFooter('')
+        //setResultFooter('')
         setResult('')
         setAnswer([])
         setDisplayed(false)
         const index = Math.floor(Math.random() * countries.length)
         Object.keys(countries[index]).forEach(async (key) => {
             setResult(countries[index][key])
+            console.log(countries[index][key])
             setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
             //console.log(resultFlag)
@@ -50,20 +53,19 @@ export const startGame = async (setResult, setResultFooter, setAnswer, setFlag, 
 
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user) => {
     e.preventDefault()
-    setMessageFooter('')
+    //setMessageFooter('')
 
     if (result === input) {
         setMessageFooter('messageFooter.2')
         setScore(score + 1)
         setColor(true)
-        console.log(result)
         console.log(etarget.style.backgroundColor)
         etarget.style.backgroundColor = 'green'
         setTimeout(() => {
             etarget.style.backgroundColor = ''
-            startGame(setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+            startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
         }, 1500);
     } else if (!result || result === '') {
         setDisplayed(true)
@@ -77,9 +79,16 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
             }
         }
         setColor(false)
-        if (score > localStorage.getItem('score')) {
-            updateScoreUser(score, setUpdated)
-            localStorage.setItem('score', JSON.stringify(score))
+        if (score > localStorage.getItem('userscore')) {
+            if(existscore === false){
+                createPoint(score, user)
+            }else if(existscore === true){
+                updatePoint(score)
+            }
+            // updateScoreUser(score, setUpdated)
+            // PUT UPDATE FUNCTION HERE
+            console.log('ITS HAPPENING BCS ')
+            localStorage.setItem('userscore', JSON.stringify(score))
         }
         if (score > lastscore) {
             setLastscore(score)
