@@ -27,6 +27,7 @@ export const listPoints = /* GraphQL */ `
         updatedAt
       }
       nextToken
+      sorting
     }
   }
 `;

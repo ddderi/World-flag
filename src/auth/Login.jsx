@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { fetchScores, loggingUser } from '../requests/RequestUser';
+import { registerScores, loggingUser } from '../requests/RequestUser';
 import {
   StyledFormCont,
   StyledForm,
@@ -41,7 +41,7 @@ function Login({ navigateTo, setUser, setLogged, message, setMessage, setExistsc
     try {
       const user = await Auth.signIn(data.username, data.password);
       setLogged(true)
-      fetchScores(data.username, setExistscore)
+      registerScores(data.username, setExistscore)
 
       setTimeout(() => {
         navigateTo('')

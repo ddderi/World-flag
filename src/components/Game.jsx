@@ -17,7 +17,8 @@ import {
   updatePoint as updatePointMutation,
 
 } from '../graphql/mutations';
-import { fetchScores } from "../requests/RequestUser";
+import { listPoints } from '../graphql/queries';
+import { registerScores } from "../requests/RequestUser";
 import { Auth } from 'aws-amplify';
 
 export default function Game({ logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
@@ -25,7 +26,7 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
 
 
 
-  const [flag, setFlag] = useState('https://www.placecage.com/300/200');
+  const [flag, setFlag] = useState('');
   const [input, setInput] = useState('');
   const [answer, setAnswer] = useState([]);
   const [coloranswer, setColoranswer] = useState('');
@@ -106,6 +107,23 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
   //   return apiData 
   // }
 
+  const fetchBestScores = async() => {
+    try{
+      const result = await API.graphql({
+        query: listPoints,
+        authMode: "API_KEY",
+        variables: {limit: 4}
+       
+      })
+      console.log(result)
+      return result
+    }catch(error){
+      console.log(error)
+    }
+
+  }
+
+
   const checkUser = async () => {
     var connected = await Auth.currentUserInfo()
     if (connected !== null) {
@@ -121,10 +139,11 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
 
   return (
     <StyledGameCont>
-      <button onClick={() => { checkUser() }} type="submit" > A ESSAYER </button>
+      <button onClick={() => { fetchBestScores() }} type="submit" > A ESSAYER </button>
+      {/* <button onClick={() => { checkUser() }} type="submit" > A ESSAYER </button> */}
       {/* {user ? */}
         <>
-          <button onClick={() => { fetchScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button>
+          <button onClick={() => { registerScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button>
           <BtnlogGame onClick={() =>
             startNewGameClick()
           }>{t("game.button")}</BtnlogGame>

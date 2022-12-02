@@ -1,6 +1,5 @@
 import axios from "axios";
 import { API } from "aws-amplify";
-import { getPointUser, getPoint } from '../graphql/queries';
 import { listPoints } from '../graphql/queries';
 import { createPoint } from "../graphql/mutations";
 // import { getPointUser, getMyPoint, getPoint } from "../graphql/custom-queries";
@@ -11,7 +10,7 @@ const axiosInstance = axios.create({ baseURL: "http://localhost:1234" });
 // function for fetching user last score
 
 
-export const fetchScores = async (user, setExistscore) => {
+export const registerScores = async (user, setExistscore) => {
     try {
         const apiData = await API.graphql({
             query: listPoints,
