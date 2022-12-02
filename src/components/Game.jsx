@@ -51,8 +51,6 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
   }
 
   async function createPoint() {
-
-   
     console.log(user)
     const data = {
       score: score,
@@ -66,6 +64,7 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
       })
       localStorage.setItem('existscore', JSON.stringify(true))
       localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
+      setExistscore(true)
       return result
     } else {
       console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')

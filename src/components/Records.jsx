@@ -6,11 +6,12 @@ export default function Records({ players }) {
 
   const { t } = useTranslation();
 
-  const playersMappedArray = players.map((data, index) => {
-    return <StyledRecordsChild key={index} >
-      <span>{data.username}</span><span>{data.bestscores}</span>
-    </StyledRecordsChild>
-  })
+  const playersMappedArray = []
+  // players.map((data, index) => {
+  //   return <StyledRecordsChild key={index} >
+  //     <span>{data.username}</span><span>{data.bestscores}</span>
+  //   </StyledRecordsChild>
+  // })
 
 
   return (

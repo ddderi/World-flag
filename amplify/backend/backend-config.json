@@ -48,15 +48,15 @@
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AWS_IAM"
-            },
-            {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
-                "apiKeyExpirationDays": 7,
-                "apiKeyExpirationDate": "2022-12-08T22:15:30.786Z",
+                "apiKeyExpirationDays": 365,
+                "apiKeyExpirationDate": "2023-12-02T06:17:04.096Z",
                 "description": "apikeyworldflag"
               }
+            },
+            {
+              "authenticationType": "AWS_IAM"
             }
           ]
         }
