@@ -17,16 +17,16 @@ import {
   updatePoint as updatePointMutation,
 
 } from '../graphql/mutations';
-import { listPoints } from '../graphql/queries';
 import { registerScores } from "../requests/RequestUser";
 import { Auth } from 'aws-amplify';
+import img from '../images/dummy_300x200_ffffff_cccccc.png'
 
-export default function Game({ logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
+export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
 
 
 
 
-  const [flag, setFlag] = useState('');
+  const [flag, setFlag] = useState(img);
   const [input, setInput] = useState('');
   const [answer, setAnswer] = useState([]);
   const [coloranswer, setColoranswer] = useState('');
@@ -107,21 +107,7 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
   //   return apiData 
   // }
 
-  const fetchBestScores = async() => {
-    try{
-      const result = await API.graphql({
-        query: listPoints,
-        authMode: "API_KEY",
-        variables: {limit: 4}
-       
-      })
-      console.log(result)
-      return result
-    }catch(error){
-      console.log(error)
-    }
-
-  }
+  
 
 
   const checkUser = async () => {
@@ -135,15 +121,15 @@ export default function Game({ logged, setExistscore, existscore, lastscore, res
   }
 
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user)} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
-      <button onClick={() => { fetchBestScores() }} type="submit" > A ESSAYER </button>
+      {/* <button onClick={() => { fetchBestScores() }} type="submit" > A ESSAYER </button> */}
       {/* <button onClick={() => { checkUser() }} type="submit" > A ESSAYER </button> */}
       {/* {user ? */}
         <>
-          <button onClick={() => { registerScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button>
+          {/* <button onClick={() => { registerScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button> */}
           <BtnlogGame onClick={() =>
             startNewGameClick()
           }>{t("game.button")}</BtnlogGame>

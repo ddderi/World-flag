@@ -16,7 +16,7 @@ import { useSpring, animated } from 'react-spring';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-export default function Home({ logged, setExistscore, existscore, setMessage, user, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
+export default function Home({ setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
 
   const [messageFooter, setMessageFooter] = useState('messageFooter.1')
   const [color, setColor] = useState('')
@@ -46,7 +46,6 @@ export default function Home({ logged, setExistscore, existscore, setMessage, us
     from: { opacity: 0 }, opacity: 1
   })
 
-console.log(score)
 
   return (
     <StyledCont as={animated.div} style={fade} >
@@ -56,7 +55,7 @@ console.log(score)
 
       <StyledHeading>{t('headerhome')}</StyledHeading>
       <StyledCore>
-        <Game logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+        <Game setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setUpdated={setUpdated} setColor={setColor} fontColor={fontColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
         <Records setPlayers={setPlayers} players={players} updated={updated} setUpdated={setUpdated} />
       </StyledCore>
       <StyledErrorBox display={!displayed ? 'none' : 'block'} >

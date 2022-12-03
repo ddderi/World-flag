@@ -283,19 +283,20 @@ color: white;
 export const StyledRecordsChild = styled.div`
   width: 80%;
   color: white;
-display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0% 5% 0% 5%;
+  margin: 2% auto 2% auto;
+  padding: 1% 5% 1% 5%;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
   border-top-left-radius: 10px;
   border-bottom-right-radius: 5px;
   text-transform: capitalize;
-  @media screen and (max-width: 1100px){
-    width: 50%;
-    margin: 1% 0% 1% 0%;
-  }
+  // @media screen and (max-width: 1100px){
+  //   width: 80%;
+  //   margin: 1% 0% 1% 0%;
+  // }
 `;
 
 

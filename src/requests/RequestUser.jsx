@@ -1,13 +1,11 @@
 import axios from "axios";
 import { API } from "aws-amplify";
 import { listPoints } from '../graphql/queries';
-import { createPoint } from "../graphql/mutations";
-// import { getPointUser, getMyPoint, getPoint } from "../graphql/custom-queries";
+
+
 
 const axiosInstance = axios.create({ baseURL: "http://localhost:1234" });
 
-
-// function for fetching user last score
 
 
 export const registerScores = async (user, setExistscore) => {
@@ -56,15 +54,87 @@ export async function flagCall(country) {
 
 
 
-export async function updateScoreUser(score, setUpdated) {
+// export async function updateScoreUser(score, setUpdated) {
+//     try {
+//         const result = await axiosInstance.put(`/scores`, { score }, { withCredentials: true })
+//         if (result.data.updated) {
+//             setUpdated(true)
+//         }
+//         return result
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+
+
+
+export async function fetchBestScores(setPlayers) {
+    let arrayToDisplay = []
+    let firstScore = 0
+    let secondScore = 0
+    let thirdScore = 0
+    let fourthScore = 0
+    let fifthScore = 0
     try {
-        const result = await axiosInstance.put(`/scores`, { score }, { withCredentials: true })
-        if (result.data.updated) {
-            setUpdated(true)
+        const result = await API.graphql({
+            query: listPoints,
+            authMode: "API_KEY",
+        })
+        console.log(result.data.listPoints.items)
+        if(result.data.listPoints.items[0].updatedAt < result.data.listPoints.items[1].updatedAt){
+            console.log('ca veut dire que le 2 decembre est inferieur au 3 decembre ')
+
         }
+        result.data.listPoints.items.map((data, index) => {
+
+            if (data.score > firstScore || data.score === firstScore) {
+                arrayToDisplay.unshift(data)
+                secondScore = firstScore
+                thirdScore = secondScore
+                fourthScore = thirdScore
+                fifthScore = fourthScore
+                firstScore = data.score
+            }
+            else if (data.score > secondScore || data.score === secondScore) {
+                let firstpartnewarray = arrayToDisplay.slice(0, 1)
+                let secondpartnewarray = arrayToDisplay.slice(1)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                thirdScore = secondScore
+                fourthScore = thirdScore
+                fifthScore = fourthScore
+                secondScore = data.score
+            } else if (data.score > thirdScore || data.score === thirdScore) {
+                let firstpartnewarray = arrayToDisplay.slice(0, 2)
+                let secondpartnewarray = arrayToDisplay.slice(2)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fourthScore = thirdScore
+                fifthScore = fourthScore
+                thirdScore = data.score
+            } else if (data.score > fourthScore || data.score === fourthScore ) {
+                let firstpartnewarray = arrayToDisplay.slice(0, 3)
+                let secondpartnewarray = arrayToDisplay.slice(3)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fifthScore = fourthScore
+                fourthScore = data.score
+            }else if(data.score > fifthScore || data.score === fifthScore ){
+                let firstpartnewarray = arrayToDisplay.slice(0, 4)
+                let secondpartnewarray = arrayToDisplay.slice(4)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fourthScore = data.score
+            }
+            console.log(arrayToDisplay)
+            return arrayToDisplay
+           
+        })
+        setPlayers(arrayToDisplay)
         return result
     } catch (error) {
         console.log(error)
     }
-}
 
+}

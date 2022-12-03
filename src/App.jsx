@@ -9,7 +9,7 @@ import Account from "./components/Account";
 import Signup from "./auth/Signup";
 import { bestPlayers } from './requests/RequestUser';
 import ConfirmationCode from "./auth/ConfirmationCode";
-import { fetchScores } from "./requests/RequestUser";
+import { fetchBestScores } from "./requests/RequestUser";
 
 
 function App() {
@@ -19,9 +19,11 @@ function App() {
   const [logged, setLogged] = useState(false)
   const [userScore, setUserScore] = useState('')
   const [message, setMessage] = useState('')
-  const [players, setPlayers] = useState([])
   const [updated, setUpdated] = useState(false)
   const [existscore, setExistscore] = useState(true)
+  const [players, setPlayers] = useState([])
+  const [triggerscore, setTriggerscore] = useState(false)
+
 
   const navigate = useNavigate();
 
@@ -57,11 +59,25 @@ function App() {
     }
   }, [])
 
-useEffect(() => {
 
+  useEffect(() => {
+    fetchBestScores(setPlayers)
 
-  
-}, [])
+ console.log('happening first render')
+  }, [])
+
+ 
+  useEffect(() => {
+    if(triggerscore){
+      setTimeout(() => {
+        fetchBestScores(setPlayers)
+
+      }, 2000)
+   
+    console.log('happening bcs updated ')
+    }
+
+  }, [triggerscore])
 
 
 
@@ -70,7 +86,7 @@ useEffect(() => {
       <Navbar setMessage={setMessage} navigateTo={navigateTo} logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
       <div className="app" >
         <Routes>
-          <Route path="/" element={<Home logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
+          <Route path="/" element={<Home setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           {/* <Route path="/about" element={<About />} /> */}
 
           <Route path="/confirmation" element={<ConfirmationCode navigateTo={navigateTo} />} />

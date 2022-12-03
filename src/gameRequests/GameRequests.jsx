@@ -53,7 +53,7 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
 
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore) => {
     e.preventDefault()
     //setMessageFooter('')
 
@@ -88,6 +88,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
             // updateScoreUser(score, setUpdated)
             // PUT UPDATE FUNCTION HERE
             console.log('ITS HAPPENING BCS ')
+            setTriggerscore(true)
             localStorage.setItem('userscore', JSON.stringify(score))
         }
         if (score > lastscore) {

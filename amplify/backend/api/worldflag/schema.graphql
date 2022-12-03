@@ -1,4 +1,4 @@
-type Point @model @aws_cognito_user_pools @auth(rules: [{allow: owner}, {allow: public, provider: apiKey, operations: [read, delete]}]) {
+type Point @model @aws_cognito_user_pools @searchable @auth(rules: [{allow: owner}, {allow: public, provider: apiKey, operations: [read, delete]}]) {
   id: ID!
   score: Int!
   owner: String!

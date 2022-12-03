@@ -63,7 +63,7 @@ const resources = {
                 button: 'start game'
             },
             records: {
-                header: 'Ladder'
+                header: 'Ladder top 5'
             }
 
         }
@@ -126,7 +126,7 @@ const resources = {
                 button: 'commencer'
             },
             records: {
-                header: 'Classement'
+                header: 'Classement top 5'
             }
 
         }
@@ -189,7 +189,7 @@ const resources = {
                 button: 'Empezar'
             },
             records: {
-                header: 'Clasificacion'
+                header: 'Clasificacion top 5'
             }
         }
     }
