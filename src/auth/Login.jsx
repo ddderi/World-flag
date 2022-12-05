@@ -55,21 +55,6 @@ function Login({ navigateTo, setUser, setLogged, message, setMessage, setExistsc
 
 
 
-
-
-  // const getUser = () => {
-  //   const user = localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser.LastAuthUser')
-  //   if(user){
-  //     console.log(`${user} is connected`)
-  //   }else{
-  //     console.log('not connected')
-  //   }
-
-  // }
-
-
-
-
   return (
     <StyledFormCont as={animated.div} style={fade} >
       <StyledFormHeading>{t('login.heading')}</StyledFormHeading>

@@ -9,7 +9,8 @@ import {
   StyledDropDown,
   StyledDropDownParent,
   NavLinkDropDown,
-  StyledSelect
+  StyledSelect,
+  NavLinkLadder
 } from '../styles/NavbarElements';
 // import homelogo from '../../images/homelogo.png';
 // import loginlogo from '../../images/loginlogo.png';
@@ -23,7 +24,7 @@ import { Auth } from 'aws-amplify';
 
 
 
-export default function Navbar({ setMessage, navigateTo, logged, setUser, setLogged, user }) {
+export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, setUser, setLogged, user }) {
 
   const { t } = useTranslation();
 
@@ -43,9 +44,9 @@ export default function Navbar({ setMessage, navigateTo, logged, setUser, setLog
     }
   }
 
-const  userCapitalize = (user) => {
-  return user.charAt(0).toUpperCase() + user.slice(1)
-}
+  const userCapitalize = (user) => {
+    return user.charAt(0).toUpperCase() + user.slice(1)
+  }
 
 
   return (
@@ -70,6 +71,14 @@ const  userCapitalize = (user) => {
               <NavLink to='/account' >
                 {userCapitalize(user)}
               </NavLink>
+              {/* {ladderNavbar ? */}
+                <NavLinkLadder display={!ladderNavbar ? 'none' : ''} to='/records' >
+                  Ladder
+                </NavLinkLadder>
+                {/* : 
+                  <>
+                  </>
+                  } */}
             </>
             :
             <>

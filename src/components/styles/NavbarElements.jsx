@@ -46,6 +46,12 @@ padding: 0% 1.5% 0% 1.5%;
  
 `;
 
+export const NavLinkLadder = styled(NavLink)`
+@media screen and (min-width: 765px){
+        display: none;
+      }
+
+`;
 
 export const NavMenuPar = styled.div`
   width: 100%;

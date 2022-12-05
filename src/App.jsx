@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Account from "./components/Account";
 import Signup from "./auth/Signup";
+import Records from "./components/Records";
 import { bestPlayers } from './requests/RequestUser';
 import ConfirmationCode from "./auth/ConfirmationCode";
 import { fetchBestScores } from "./requests/RequestUser";
@@ -23,6 +24,19 @@ function App() {
   const [existscore, setExistscore] = useState(true)
   const [players, setPlayers] = useState([])
   const [triggerscore, setTriggerscore] = useState(false)
+  const [ladderNavbar, setLadderNavbar] = useState(false)
+
+  useEffect(() => {
+    if(window.innerWidth < 765){
+      setLadderNavbar(true)
+      console.log('happening first')
+    }else{
+      setLadderNavbar(false)
+      console.log('happening')
+    }
+
+  })
+
 
 
   const navigate = useNavigate();
@@ -83,12 +97,12 @@ function App() {
 
   return (
     <div className="whole" >
-      <Navbar setMessage={setMessage} navigateTo={navigateTo} logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
+      <Navbar ladderNavbar={ladderNavbar} setMessage={setMessage} navigateTo={navigateTo} logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
       <div className="app" >
         <Routes>
           <Route path="/" element={<Home setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           {/* <Route path="/about" element={<About />} /> */}
-
+          <Route path="/records" element={<Records players={players} ladderNavbar={ladderNavbar} />} />
           <Route path="/confirmation" element={<ConfirmationCode navigateTo={navigateTo} />} />
           <Route path="/login" element={<Login setExistscore={setExistscore} setUserScore={setUserScore} setTriggered={setTriggered} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
           <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
