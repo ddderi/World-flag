@@ -27,14 +27,11 @@ function App() {
   const [ladderNavbar, setLadderNavbar] = useState(false)
 
   useEffect(() => {
-    if(window.innerWidth < 765){
+    if (window.innerWidth < 765) {
       setLadderNavbar(true)
-      console.log('happening first')
-    }else{
+    } else {
       setLadderNavbar(false)
-      console.log('happening')
     }
-
   })
 
 
@@ -77,18 +74,18 @@ function App() {
   useEffect(() => {
     fetchBestScores(setPlayers)
 
- console.log('happening first render')
+    console.log('happening first render')
   }, [])
 
- 
+
   useEffect(() => {
-    if(triggerscore){
+    if (triggerscore) {
       setTimeout(() => {
         fetchBestScores(setPlayers)
 
       }, 2000)
-   
-    console.log('happening bcs updated ')
+
+      console.log('happening bcs updated ')
     }
 
   }, [triggerscore])

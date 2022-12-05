@@ -7,7 +7,6 @@ export default function Records({ ladderNavbar, players }) {
 
   const { t } = useTranslation();
 
-//  const [ladderNavbar, setLadderNavbar] = useState(true)
 
   const playersMappedArray = players.slice(0, 5).map((data, index) => {
     return <StyledRecordsChildAll key={index} >
@@ -21,22 +20,22 @@ export default function Records({ ladderNavbar, players }) {
       </StyledRecordsChildBtm>
     </StyledRecordsChildAll>
   })
- 
+
   console.log(ladderNavbar)
 
   return (
     <>
-    {ladderNavbar ? 
-       <StyledRecordsContPhone>
-       <StyledHeadingRecordsPhone>{t("records.header")}</StyledHeadingRecordsPhone>
-       {playersMappedArray}
-     </StyledRecordsContPhone>
-      :
-    <StyledRecordsCont>
-      <StyledHeadingRecords>{t("records.header")}</StyledHeadingRecords>
-      {playersMappedArray}
-    </StyledRecordsCont>
-    }
+      {ladderNavbar ?
+        <StyledRecordsContPhone>
+          <StyledHeadingRecordsPhone>{t("records.header")}</StyledHeadingRecordsPhone>
+          {playersMappedArray}
+        </StyledRecordsContPhone>
+        :
+        <StyledRecordsCont>
+          <StyledHeadingRecords>{t("records.header")}</StyledHeadingRecords>
+          {playersMappedArray}
+        </StyledRecordsCont>
+      }
     </>
   )
 }
