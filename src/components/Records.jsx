@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyledHeadingRecordsPhone, StyledRecordsContPhone, StyledRecordsCont, StyledRecordsChild, StyledHeadingRecords, StyledRecordsChildTop, StyledRecordsChildAll, StyledRecordsChildBtm } from './styles/GeneralElements';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import { useSpring, animated } from 'react-spring';
 
 export default function Records({ ladderNavbar, players }) {
 
@@ -21,12 +22,14 @@ export default function Records({ ladderNavbar, players }) {
     </StyledRecordsChildAll>
   })
 
-  console.log(ladderNavbar)
+  const fade = useSpring({
+    from: { opacity: 0 }, opacity: 1
+  })
 
   return (
     <>
       {ladderNavbar ?
-        <StyledRecordsContPhone>
+        <StyledRecordsContPhone as={animated.div} style={fade}>
           <StyledHeadingRecordsPhone>{t("records.header")}</StyledHeadingRecordsPhone>
           {playersMappedArray}
         </StyledRecordsContPhone>

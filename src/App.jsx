@@ -73,8 +73,6 @@ function App() {
 
   useEffect(() => {
     fetchBestScores(setPlayers)
-
-    console.log('happening first render')
   }, [])
 
 
@@ -88,7 +86,7 @@ function App() {
       console.log('happening bcs updated ')
     }
 
-  }, [triggerscore])
+  }, [triggerscore, setTriggerscore])
 
 
 

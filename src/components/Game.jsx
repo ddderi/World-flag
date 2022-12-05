@@ -88,6 +88,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
           input: data
         },
       })
+      setTriggerscore(true)
       return result
     } else {
       console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')

@@ -10,7 +10,7 @@ export const Nav = styled.nav`
   margin: 0;
   width: 50%;
   @media screen and (max-width: 765px){
-    width: 98%;
+    width: 100%;
     
     // align-items: center;  
   }
@@ -19,10 +19,10 @@ export const Nav = styled.nav`
 export const NavLink = styled(Link)`
 text-decoration: none;
 color: white;
-width: 25%;
+
 text-align: center;
 display: flex;
-height: 100%;
+height: 60px;
 justify-content:center;
 align-items: center;
 transition: 0.5s;
@@ -60,10 +60,11 @@ export const NavMenuPar = styled.div`
 `;
 
 export const NavMenu = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-left: 2%;
   // @media screen and (max-width: 765px){
   //   padding-left: 40%
   // }
@@ -183,8 +184,8 @@ export const NavLinkDropDown = styled(Link)`
 
 export const StyledSelect = styled.div`
 position: relative;
-
-right: 11%;
+margin-right: 2%;
+right: 0%;
 
 // @media screen and (max-width: 765px){
 //   position: absolute;
@@ -195,6 +196,9 @@ right: 11%;
 `;
 
 export const StyledSelectChild = styled(Select)`
+
+
+
 .react-select-container {
   color: white;
 }
@@ -204,7 +208,7 @@ color: white;
 }
 
 .react-select__menu{
-width: 100px;
+width: 80px;
 margin-top: 5px;
 }
 

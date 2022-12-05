@@ -84,18 +84,14 @@ export async function flagCall(country) {
 //             authMode: "API_KEY",
 //         })
 //         console.log(result.data.listPoints.items)
-//         // if(result.data.listPoints.items[0].updatedAt < result.data.listPoints.items[1].updatedAt){
-//         //     console.log('ca veut dire que le 2 decembre est inferieur au 3 decembre ')
+//         if (result.data.listPoints.items[0].updatedAt < result.data.listPoints.items[1].updatedAt) {
+//             console.log('ca veut dire que le 2 decembre est inferieur au 3 decembre ')
 
-//         // }else 
-//         if(0 > result.data.listPoints.items[0].updatedAt){
-//             console.log('ca veut dire que le 3 decembre est superieur a 0 ')
+//         } else
 
-//         }
-//         result.data.listPoints.items.map((data, index) => {
+//             result.data.listPoints.items.map((data, index) => {
 
-//             if (data.score > firstScore || data.score === firstScore) {
-//                 if(data.score === firstScore && data.updatedAt > firstScoreDate){
+//                 if (data.score > firstScore) {
 //                     arrayToDisplay.unshift(data)
 //                     secondScore = firstScore
 //                     thirdScore = secondScore
@@ -103,19 +99,17 @@ export async function flagCall(country) {
 //                     fifthScore = fourthScore
 //                     firstScore = data.score
 //                     firstScoreDate = data.updatedAt
-//                 }else if(data.score > firstScore){
-//                 arrayToDisplay.unshift(data)
-//                 secondScore = firstScore
-//                 thirdScore = secondScore
-//                 fourthScore = thirdScore
-//                 fifthScore = fourthScore
-//                 firstScore = data.score
-//                 firstScoreDate = data.updatedAt
-//                 }
-//             }
-//             else if (data.score > secondScore || data.score === secondScore) {
-//                 if( data.score === secondScore && data.updatedAt > secondScoreDate){
-//                     console.log(data.owner)
+//                     console.log('first pour ROMAIN')
+//                 } else if (data.score === firstScore && data.updatedAt > firstScoreDate) {
+//                     arrayToDisplay.unshift(data)
+//                     secondScore = firstScore
+//                     thirdScore = secondScore
+//                     fourthScore = thirdScore
+//                     fifthScore = fourthScore
+//                     firstScore = data.score
+//                     firstScoreDate = data.updatedAt
+
+//                 } else if (data.score > secondScore) {
 //                     let firstpartnewarray = arrayToDisplay.slice(0, 1)
 //                     let secondpartnewarray = arrayToDisplay.slice(1)
 //                     secondpartnewarray.unshift(data)
@@ -125,19 +119,32 @@ export async function flagCall(country) {
 //                     fifthScore = fourthScore
 //                     secondScore = data.score
 //                     secondScoreDate = data.updatedAt
-//                 }else if(data.score > secondScore){
-//                 let firstpartnewarray = arrayToDisplay.slice(0, 1)
-//                 let secondpartnewarray = arrayToDisplay.slice(1)
-//                 secondpartnewarray.unshift(data)
-//                 arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-//                 thirdScore = secondScore
-//                 fourthScore = thirdScore
-//                 fifthScore = fourthScore
-//                 secondScore = data.score
-//                 secondScoreDate = data.updatedAt
+//                     console.log(' second pour MAXIME')
+//                 } else if (data.score === secondScore && data.updatedAt > secondScoreDate) {
+
+//                     let firstpartnewarray = arrayToDisplay.slice(0, 1)
+//                     let secondpartnewarray = arrayToDisplay.slice(1)
+//                     secondpartnewarray.unshift(data)
+//                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+//                     thirdScore = secondScore
+//                     fourthScore = thirdScore
+//                     fifthScore = fourthScore
+//                     secondScore = data.score
+//                     secondScoreDate = data.updatedAt
 //                 }
-//             } else if (data.score > thirdScore || data.score === thirdScore) {
-//                 if(data.score === thirdScore && data.updatedAt > thirdScoreDate){
+//                 else if (data.score > thirdScore) {
+
+//                     let firstpartnewarray = arrayToDisplay.slice(0, 2)
+//                     let secondpartnewarray = arrayToDisplay.slice(2)
+//                     secondpartnewarray.unshift(data)
+//                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+//                     fourthScore = thirdScore
+//                     fifthScore = fourthScore
+//                     thirdScore = data.score
+//                     thirdScoreDate = data.updatedAt
+//                     console.log('Third pour micaa')
+//                 }
+//                 else if (data.score === thirdScore && data.updatedAt > thirdScoreDate) {
 //                     let firstpartnewarray = arrayToDisplay.slice(0, 2)
 //                     let secondpartnewarray = arrayToDisplay.slice(2)
 //                     secondpartnewarray.unshift(data)
@@ -147,18 +154,8 @@ export async function flagCall(country) {
 //                     thirdScore = data.score
 //                     thirdScoreDate = data.updatedAt
 
-//                 }else if(data.score > thirdScore){
-//                 let firstpartnewarray = arrayToDisplay.slice(0, 2)
-//                 let secondpartnewarray = arrayToDisplay.slice(2)
-//                 secondpartnewarray.unshift(data)
-//                 arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-//                 fourthScore = thirdScore
-//                 fifthScore = fourthScore
-//                 thirdScore = data.score
-//                 thirdScoreDate = data.updatedAt
 //                 }
-//             } else if (data.score > fourthScore || data.score === fourthScore ) {
-//                 if(data.score === fourthScore && data.updatedAt > fourthScoreDate){
+//                 else if (data.score > fourthScore) {
 //                     let firstpartnewarray = arrayToDisplay.slice(0, 3)
 //                     let secondpartnewarray = arrayToDisplay.slice(3)
 //                     secondpartnewarray.unshift(data)
@@ -166,39 +163,35 @@ export async function flagCall(country) {
 //                     fifthScore = fourthScore
 //                     fourthScore = data.score
 //                     fourthScoreDate = data.updatedAt
-//                 }else if(data.score > fourthScore){
-//                 let firstpartnewarray = arrayToDisplay.slice(0, 3)
-//                 let secondpartnewarray = arrayToDisplay.slice(3)
-//                 secondpartnewarray.unshift(data)
-//                 arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-//                 fifthScore = fourthScore
-//                 fourthScore = data.score
-//                 fourthScoreDate = data.updatedAt
 //                 }
-//             }else if(data.score > fifthScore || data.score === fifthScore ){
-//                 if(data.score === fifthScore && data.updatedAt > fifthScoreDate){
+//                 else if (data.score === fourthScore && data.updatedAt > fourthScoreDate) {
+//                     let firstpartnewarray = arrayToDisplay.slice(0, 3)
+//                     let secondpartnewarray = arrayToDisplay.slice(3)
+//                     secondpartnewarray.unshift(data)
+//                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+//                     fifthScore = fourthScore
+//                     fourthScore = data.score
+//                     fourthScoreDate = data.updatedAt
+//                 }
+//                 else if (data.score >= fifthScore) {
+
+//                 }
+//                 else if (data.score === fifthScore && data.updatedAt > fifthScoreDate) {
 //                     let firstpartnewarray = arrayToDisplay.slice(0, 4)
 //                     let secondpartnewarray = arrayToDisplay.slice(4)
 //                     secondpartnewarray.unshift(data)
 //                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
 //                     fifthScore = data.score
 //                     fifthScoreDate = data.updatedAt
-//                 }else if(data.score > fifthScore){
-//                 let firstpartnewarray = arrayToDisplay.slice(0, 4)
-//                 let secondpartnewarray = arrayToDisplay.slice(4)
-//                 secondpartnewarray.unshift(data)
-//                 arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-//                 fifthScore = data.score
-//                 fifthScoreDate = data.updatedAt
 //                 }
-//             }else if(data.score < fifthScore){
-//                 arrayToDisplay.push(data)
-//                 console.log('something wrong')
-//             }
-//             console.log(arrayToDisplay)
-//             return arrayToDisplay
+//                 else if (data.score < fifthScore) {
+//                     arrayToDisplay.push(data)
+//                     console.log('something wrong')
+//                 }
+//                 console.log(arrayToDisplay)
+//                 return arrayToDisplay
 
-//         })
+//             })
 //         setPlayers(arrayToDisplay)
 //         return result
 //     } catch (error) {
@@ -229,77 +222,116 @@ export async function fetchBestScores(setPlayers) {
             query: listPoints,
             authMode: "API_KEY",
         })
+        // console.log(result.data.listPoints.items)
+        // if (result.data.listPoints.items[0].updatedAt < result.data.listPoints.items[1].updatedAt) {
+        //     console.log('ca veut dire que le 2 decembre est inferieur au 3 decembre ')
+
+        // } else
         console.log(result.data.listPoints.items)
-        if (result.data.listPoints.items[0].updatedAt < result.data.listPoints.items[1].updatedAt) {
-            console.log('ca veut dire que le 2 decembre est inferieur au 3 decembre ')
-
-        } else
-
-            result.data.listPoints.items.map((data, index) => {
-
-                if (data.score > firstScore) {
+        result.data.listPoints.items.map((data, index) => {
+            console.log(firstScore)
+            console.log(secondScore)
+            console.log(thirdScore)
+            console.log(fourthScore)
+            console.log(fifthScore)
+            if (data.score > firstScore) {
+                arrayToDisplay.unshift(data)
+                fifthScore = fourthScore
+                fourthScore = thirdScore
+                thirdScore = secondScore
+                secondScore = firstScore
+                
+                
+                
+                firstScore = data.score
+                firstScoreDate = data.updatedAt
+            } else if (data.score === firstScore && data.updatedAt > firstScoreDate) {
+                // if (data.updatedAt > firstScoreDate) {
                     arrayToDisplay.unshift(data)
-                    secondScore = firstScore
-                    thirdScore = secondScore
-                    fourthScore = thirdScore
                     fifthScore = fourthScore
+                    fourthScore = thirdScore
+                    thirdScore = secondScore
+                    secondScore = firstScore
+                    
+                    
+                    
                     firstScore = data.score
                     firstScoreDate = data.updatedAt
-
-                } else if (data.score === firstScore && data.updatedAt > firstScoreDate) {
-                    arrayToDisplay.unshift(data)
-                    secondScore = firstScore
-                    thirdScore = secondScore
-                    fourthScore = thirdScore
-                    fifthScore = fourthScore
-                    firstScore = data.score
-                    firstScoreDate = data.updatedAt
-                } else if (data.score > secondScore) {
+                } 
+                else if (data.score === firstScore && data.updatedAt < firstScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 1)
                     let secondpartnewarray = arrayToDisplay.slice(1)
                     secondpartnewarray.unshift(data)
                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-                    thirdScore = secondScore
-                    fourthScore = thirdScore
                     fifthScore = fourthScore
+                    fourthScore = thirdScore
+                    thirdScore = secondScore
+                    
+                    
                     secondScore = data.score
                     secondScoreDate = data.updatedAt
-
-                } else if (data.score === secondScore && data.updatedAt > secondScoreDate) {
-
+                // }
+            } else if (data.score > secondScore) {
+                let firstpartnewarray = arrayToDisplay.slice(0, 1)
+                let secondpartnewarray = arrayToDisplay.slice(1)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fifthScore = fourthScore
+                fourthScore = thirdScore
+                thirdScore = secondScore
+               
+                
+                secondScore = data.score
+                secondScoreDate = data.updatedAt
+            } else if (data.score === secondScore && data.updatedAt > secondScoreDate) {
+                // if (data.updatedAt > secondScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 1)
                     let secondpartnewarray = arrayToDisplay.slice(1)
                     secondpartnewarray.unshift(data)
                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-                    thirdScore = secondScore
-                    fourthScore = thirdScore
                     fifthScore = fourthScore
+                    fourthScore = thirdScore
+                    thirdScore = secondScore
+                    
+                   
                     secondScore = data.score
                     secondScoreDate = data.updatedAt
-                }
-                else if (data.score > thirdScore) {
-
+                } else if (data.score === secondScore && data.updatedAt < secondScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 2)
                     let secondpartnewarray = arrayToDisplay.slice(2)
                     secondpartnewarray.unshift(data)
                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-                    fourthScore = thirdScore
                     fifthScore = fourthScore
+                    fourthScore = thirdScore
+                    
                     thirdScore = data.score
                     thirdScoreDate = data.updatedAt
-                }
-                else if (data.score === thirdScore && data.updatedAt > thirdScoreDate) {
+                // }
+            }
+            else if (data.score > thirdScore) {
+
+                let firstpartnewarray = arrayToDisplay.slice(0, 2)
+                let secondpartnewarray = arrayToDisplay.slice(2)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fifthScore = fourthScore
+                fourthScore = thirdScore
+                
+                thirdScore = data.score
+                thirdScoreDate = data.updatedAt
+            }
+            else if (data.score === thirdScore && data.updatedAt > thirdScoreDate) {
+                // if (data.updatedAt > thirdScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 2)
                     let secondpartnewarray = arrayToDisplay.slice(2)
                     secondpartnewarray.unshift(data)
                     arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
-                    fourthScore = thirdScore
                     fifthScore = fourthScore
+                    fourthScore = thirdScore
+                    
                     thirdScore = data.score
                     thirdScoreDate = data.updatedAt
-
-                }
-                else if (data.score > fourthScore) {
+                } else if (data.score === thirdScore && data.updatedAt < thirdScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 3)
                     let secondpartnewarray = arrayToDisplay.slice(3)
                     secondpartnewarray.unshift(data)
@@ -307,8 +339,20 @@ export async function fetchBestScores(setPlayers) {
                     fifthScore = fourthScore
                     fourthScore = data.score
                     fourthScoreDate = data.updatedAt
-                }
-                else if (data.score === fourthScore && data.updatedAt > fourthScoreDate) {
+                // }
+
+            }
+            else if (data.score > fourthScore) {
+                let firstpartnewarray = arrayToDisplay.slice(0, 3)
+                let secondpartnewarray = arrayToDisplay.slice(3)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fifthScore = fourthScore
+                fourthScore = data.score
+                fourthScoreDate = data.updatedAt
+            }
+            else if (data.score === fourthScore && data.updatedAt > fourthScoreDate) {
+                // if (data.updatedAt > fourthScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 3)
                     let secondpartnewarray = arrayToDisplay.slice(3)
                     secondpartnewarray.unshift(data)
@@ -316,11 +360,27 @@ export async function fetchBestScores(setPlayers) {
                     fifthScore = fourthScore
                     fourthScore = data.score
                     fourthScoreDate = data.updatedAt
-                }
-                else if (data.score >= fifthScore) {
-
-                }
-                else if (data.score === fifthScore && data.updatedAt > fifthScoreDate) {
+                } else if (data.score === fourthScore && data.updatedAt < fourthScoreDate) {
+                    console.log(data.updatedAt)
+                    console.log(fourthScoreDate)
+                    let firstpartnewarray = arrayToDisplay.slice(0, 4)
+                    let secondpartnewarray = arrayToDisplay.slice(4)
+                    secondpartnewarray.unshift(data)
+                    arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                    fifthScore = data.score
+                    fifthScoreDate = data.updatedAt
+                // }
+            }
+            else if (data.score > fifthScore) {
+                let firstpartnewarray = arrayToDisplay.slice(0, 4)
+                let secondpartnewarray = arrayToDisplay.slice(4)
+                secondpartnewarray.unshift(data)
+                arrayToDisplay = firstpartnewarray.concat(secondpartnewarray)
+                fifthScore = data.score
+                fifthScoreDate = data.updatedAt
+            }
+            else if (data.score === fifthScore && data.updatedAt > fifthScoreDate) {
+                // if (data.updatedAt > fifthScoreDate) {
                     let firstpartnewarray = arrayToDisplay.slice(0, 4)
                     let secondpartnewarray = arrayToDisplay.slice(4)
                     secondpartnewarray.unshift(data)
@@ -328,14 +388,21 @@ export async function fetchBestScores(setPlayers) {
                     fifthScore = data.score
                     fifthScoreDate = data.updatedAt
                 }
-                else if (data.score < fifthScore) {
+                else if (data.score === fifthScore && data.updatedAt < fifthScoreDate) {
                     arrayToDisplay.push(data)
-                    console.log('something wrong')
-                }
-                console.log(arrayToDisplay)
-                return arrayToDisplay
+                    console.log('data will be at the endof array 1')
+                    console.log(data)
+                // }
+            }
+            else if (data.score < fifthScore) {
+                arrayToDisplay.push(data)
+                console.log('data will be at the endof array 2')
+                console.log(data)
+            }
+            console.log(arrayToDisplay)
+            return arrayToDisplay
 
-            })
+        })
         setPlayers(arrayToDisplay)
         return result
     } catch (error) {

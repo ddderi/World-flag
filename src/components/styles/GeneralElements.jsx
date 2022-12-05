@@ -5,6 +5,7 @@ import styled from 'styled-components';
 export const StyledHeading = styled.h1`
 background-color: rgba(0, 0, 0, 0.89);
 color: white;
+width: 100%;
 text-transform: uppercase;
 border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
@@ -12,15 +13,21 @@ border-radius: 10px 10px;
 
 export const StyledCont = styled.div`
   text-align: center;
-  width: 55%;
-  position:absolute;
-	left:50%;
-	top:50%;
-  width: 85%;
-	transform: translate(-50%,-50%);
+  // width: 55%;
+  // position:absolute;
+	// left:50%;
+	// top:50%;
+  // width: 85%;
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+	// transform: translate(-50%,-50%);
   @media screen and (max-width: 905px){
-    
-    width: 85%;
+    width: 95%;
+    // width: 85%;
   }
   @media screen and (max-width: 280px) {
     
@@ -97,6 +104,7 @@ overflow: hidden;
 
 export const StyledFooter = styled.div`
   background-color: rgba(0, 0, 0, 0.89);
+  width: 100%;
   color: white;
   height: 50px;
   border-radius: 10px 10px;
@@ -188,6 +196,7 @@ export const StyledGameChild = styled.div`
   display: grid;
   // padding: 4%;
   height: 100px;
+  
   grid-template-rows: 22% 22% 22% 22%;
   grid-template-columns: 100%;
   grid-row-gap: 3%;
@@ -198,16 +207,10 @@ export const StyledGameChild = styled.div`
   @media screen and (min-width: 1400px){
     width: 55%;
   }
-  // @media screen and (max-width: 1300px){
-    
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //    align-items: center;
-  //   width: 100%;
-  //   height: 105px;
-  //   padding: 0%;
-  // }
+  @media screen and (max-width: 1300px){
+    height: 150px;
+
+  }
 `;
 
 
@@ -219,14 +222,16 @@ export const StyledGameChildAnswer = styled.div`
   //box-shadow: 1px 1px 1px gray;
   cursor: pointer;
   opacity: 0.85;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   // @media screen and (min-width: 570px) and  (max-width: 1300px){
   //   margin-bottom: 1%;
   //   width: 70%;
   // }
-  // @media screen and (max-width: 570px){
-  //   margin-bottom: 1%;
-  //   width: 90%;
-  // }
+  @media screen and (max-width: 765px){
+    // height: 20px;
+  }
   &:hover {
     opacity: 1;
     
