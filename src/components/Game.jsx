@@ -7,24 +7,23 @@ import {
   StyledImgFlag,
   StyledBestScore,
   StyledGameInfo,
-  StyledTimer
 } from './styles/GeneralElements';
 import { BtnlogGame } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
 import { useTranslation } from 'react-i18next';
 import { API } from "aws-amplify";
-
+import Timer from "./Timer"
+import Life from "./Life"
 import {
   createPoint as createPointMutation,
   updatePoint as updatePointMutation,
 
 } from '../graphql/mutations';
 import { Auth } from 'aws-amplify';
-import img from '../images/dummy_300x200_ffffff_cccccc.png'
+import img from '../images/placeholderimg.png'
+import { useEffect } from 'react';
 
-export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
-
-
+export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setColor, navigateTo, setUser, setLogged, setLastscore }) {
 
 
   const [flag, setFlag] = useState(img);
@@ -32,6 +31,13 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const [answer, setAnswer] = useState([]);
   const [coloranswer, setColoranswer] = useState('');
   const { t } = useTranslation();
+  const userbestscore = localStorage.getItem('userscore');
+
+  const [startTimer, setStartTimer] = useState(false)
+  const [over, setOver] = useState('');
+  const [seconds, setSeconds] = useState(5);
+  const [life, setLife] = useState(3);
+  const [gameover, setGameover] = useState(false)
 
   const startNewGame = async () => {
     try {
@@ -42,17 +48,39 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     }
   }
 
-  const userbestscore = localStorage.getItem('userscore')
+  useEffect(() => {
+    if (life < 0) {
+      setGameover(true)
+      setLife(3)
+    }
+
+  }, [life])
 
 
   function startNewGameClick() {
     if (logged) {
+
       startNewGame()
+      setOver(false)
+      setSeconds(5)
+      setStartTimer(true)
+      
     } else {
       setMessage('Please logged-in to start playing')
       navigateTo('login')
     }
   }
+
+
+  useEffect(() => {
+    console.log('shouldnt be trigger')
+    if (gameover) {
+      console.log('you dont have life anymore')
+    }
+
+  }, [gameover])
+
+
 
   async function createPoint() {
     const data = {
@@ -73,7 +101,8 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       console.log(result)
       return result
     } else {
-      console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
+      alert('user not connected, couldnt create score')
+      console.log('user not connected, couldnt create score')
     }
   }
 
@@ -96,12 +125,13 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       })
       return result
     } else {
-      console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
+      alert('user not connected, couldnt update score')
+      console.log('user not connected, couldnt update score')
     }
   }
 
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore)} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
@@ -113,7 +143,8 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
           {logged ?
             <>
               <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
-              <StyledTimer>TIMER</StyledTimer>
+              <Timer gameover={gameover} life={life} setLife={setLife} over={over} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} />
+              <Life life={life} />
             </>
             : <></>}
         </StyledGameInfo>

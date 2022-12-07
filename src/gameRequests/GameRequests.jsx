@@ -1,8 +1,6 @@
 import { flagCall } from '../requests/RequestUser';
 import { countries } from '../data/countries';
-
-
-
+import imglost from '../images/placeholderlost.png'
 
 export const triggerAnswers = async (setAnswer, result) => {
     let optionsAnswer = []
@@ -31,10 +29,9 @@ export const triggerAnswers = async (setAnswer, result) => {
 }
 
 
-export const startGame = async (setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
+export const startGame = async ( setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
     try {
         setMessageFooter('')
-        //setResultFooter('')
         setResult('')
         setAnswer([])
         setDisplayed(false)
@@ -54,11 +51,33 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
 }
 
 
+// export const endOfGame = () => {
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore) => {
+//     if (score > localStorage.getItem('userscore')) {
+//         if (existscore === false) {
+//             createPoint(score, user)
+//             setTriggerscore(true)
+//         } else if (existscore === true) {
+//             updatePoint(score)
+//             setTriggerscore(true)
+//         }
+//         localStorage.setItem('userscore', JSON.stringify(score))
+//     }
+//     if (score > lastscore) {
+//         setLastscore(score)
+//     }
+//     setFlag(imglost)
+//     setScore(0)
+//     setResult('')
+//     setInput('')
+
+
+
+// }
+
+
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver) => {
     e.preventDefault()
-
-
     if (result === input) {
         setMessageFooter('messageFooter.2')
         setScore(score + 1)
@@ -81,26 +100,10 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
             }
         }
         setColor(false)
-        if (score > localStorage.getItem('userscore')) {
-            if (existscore === false) {
-                createPoint(score, user)
-                setTriggerscore(true)
-            } else if (existscore === true) {
-                updatePoint(score)
-                setTriggerscore(true)
-            }
-            // setTriggerscore(true)
-            localStorage.setItem('userscore', JSON.stringify(score))
-        }
-        if (score > lastscore) {
-            setLastscore(score)
-        }
-        setFlag('https://www.placecage.com/300/200')
-        setScore(0)
-        setResult('')
+        setOver(true)
     } else {
         setMessageFooter(`A problem occured. couldn't upload your new score ...`)
-        setFlag('https://www.placecage.com/300/200')
+        setFlag(imglost)
         setScore(0)
         setResult('')
     }

@@ -38,7 +38,6 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
       const user = await Auth.signIn(data.username, data.password);
       setLogged(true)
       registerScores(data.username, setExistscore, setBestscoreuser)
-
       setTimeout(() => {
         navigateTo('')
       }, 1000);
@@ -56,7 +55,7 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
       {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
       <StyledForm onSubmit={handleSubmit((data) => {
         signIn(data)
-        reset()
+        // reset()
       })}>
         <StyledInputContainer>
           <StyledInputForm {...register('username', { required: true })} type="text" autoComplete="off" required />

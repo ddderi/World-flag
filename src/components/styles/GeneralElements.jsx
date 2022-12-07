@@ -198,9 +198,6 @@ export const StyledImgFlag = styled.img`
   height: 200px; 
   pointer-events: none;
   border: 8px solid white;
-  // @media screen and (max-width: 570px){
-  //   width: 76%;
-  // }
   @media screen and (max-width: 400px){
     width: 90%;
   }

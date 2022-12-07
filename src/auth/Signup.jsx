@@ -23,7 +23,7 @@ import { createPoint } from "../graphql/mutations";
 import { API } from "aws-amplify";
 
 
-export default function Signup({  navigateTo, setUser, setLogged }) {
+export default function Signup({ navigateTo, setUser, setLogged }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
@@ -114,29 +114,6 @@ export default function Signup({  navigateTo, setUser, setLogged }) {
         }
     }
 
-    // RESEND AUTH CODE 
-
-    async function resendConfirmationCode(data) {
-        try {
-            await Auth.resendSignUp(data.username);
-            console.log('code resent successfully');
-
-
-            // REDIRECT TO ConfirmationCode component
-
-        } catch (err) {
-            console.log('error resending code: ', err);
-        }
-    }
-
-
-    async function confirmSignUp(data) {
-        try {
-            await Auth.confirmSignUp(data.username, data.code);
-        } catch (error) {
-            console.log('error confirming sign up', error);
-        }
-    }
 
     return (
         <StyledFormCont as={animated.div} style={fade}>
@@ -144,13 +121,8 @@ export default function Signup({  navigateTo, setUser, setLogged }) {
             <StyledFormHeading>{t('signup.heading')}</StyledFormHeading>
             {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
-                // signup({
-                //     username: data.username,
-                //     password: data.password,
-                //     passwordConfirmation: data.passwordConfirmation
-                // })
                 signUp(data)
-                reset()
+                // reset()
             })}>
                 <StyledInputContainer>
                     <StyledInputForm {...register('username')} type="text" required />

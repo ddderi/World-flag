@@ -79,7 +79,7 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
             {message !== undefined ? <StyledSpanMessage>{message}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
                 confirmSignUp(data)
-                console.log(data)
+                // reset()
             })}>
                 <StyledInputContainer>
                     <StyledInputForm {...register('username')} type="text" required />
