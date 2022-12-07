@@ -100,12 +100,25 @@ align-items: center;
 overflow: hidden;
 `;
 
-export const StyledBestScore = styled.div`
+export const StyledGameInfo = styled.div`
 position: absolute;
-right: 35%;
-color: white;
 top: 3px;
+right: 0px;
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+`;
+
+export const StyledBestScore = styled.div`
+
+color: white;
+
 text-decoration: underline;
+`;
+
+export const StyledTimer = styled.div`
+color: white;
 `;
 
 export const StyledFooter = styled.div`

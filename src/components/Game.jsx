@@ -6,7 +6,9 @@ import {
   StyledGameChildAnswer,
   StyledImgFlag,
   StyledUnconnected,
-  StyledBestScore
+  StyledBestScore,
+  StyledGameInfo,
+  StyledTimer
 } from './styles/GeneralElements';
 import { BtnlogGame, BtnLink } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
@@ -134,15 +136,18 @@ export default function Game({setTriggerscore, logged, setExistscore, existscore
 
   return (
     <StyledGameCont>
-      {/* <button onClick={() => { fetchBestScores() }} type="submit" > A ESSAYER </button> */}
-      {/* <button onClick={() => { checkUser() }} type="submit" > A ESSAYER </button> */}
-      {/* {user ? */}
       <>
-        {/* <button onClick={() => { registerScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button> */}
         <BtnlogGame onClick={() =>
           startNewGameClick()
         }>{t("game.button")}</BtnlogGame>
-        {logged ? <StyledBestScore>Your best score : {userbestscore}</StyledBestScore> : <></>}
+        <StyledGameInfo>
+        {logged ?
+        <> 
+        <StyledBestScore>Your best score : {userbestscore}</StyledBestScore> 
+        <StyledTimer>TIMER</StyledTimer>
+        </>
+        : <></>}
+        </StyledGameInfo>
         <StyledGameChildLeft>
           <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
         </StyledGameChildLeft>
@@ -150,11 +155,6 @@ export default function Game({setTriggerscore, logged, setExistscore, existscore
           {possibleAnwsers}
         </StyledGameChild>
       </>
-      {/* :
-        <>
-          <StyledUnconnected>{t('unconnected.1')}<BtnLink onClick={() => navigateTo('login')} >{t('unconnected.2')}</BtnLink>{t('unconnected.3')}</StyledUnconnected>
-        </>
-      } */}
     </StyledGameCont>
   )
 }
