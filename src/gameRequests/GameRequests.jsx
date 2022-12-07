@@ -51,32 +51,32 @@ export const startGame = async ( setMessageFooter, setResult, setResultFooter, s
 }
 
 
-// export const endOfGame = () => {
+export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore) => {
 
-//     if (score > localStorage.getItem('userscore')) {
-//         if (existscore === false) {
-//             createPoint(score, user)
-//             setTriggerscore(true)
-//         } else if (existscore === true) {
-//             updatePoint(score)
-//             setTriggerscore(true)
-//         }
-//         localStorage.setItem('userscore', JSON.stringify(score))
-//     }
-//     if (score > lastscore) {
-//         setLastscore(score)
-//     }
-//     setFlag(imglost)
-//     setScore(0)
-//     setResult('')
-//     setInput('')
-
-
-
-// }
+    if (score > localStorage.getItem('userscore')) {
+        if (existscore === false) {
+            createPoint(score, user)
+            setTriggerscore(true)
+        } else if (existscore === true) {
+            updatePoint(score)
+            setTriggerscore(true)
+        }
+        localStorage.setItem('userscore', JSON.stringify(score))
+    }
+    if (score > lastscore) {
+        setLastscore(score)
+    }
+    setFlag(imglost)
+    setScore(0)
+    setResult('')
+    setInput('')
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver) => {
+
+}
+
+
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver, gameover, goodanswer, setGoodanswer, setSeconds, setStartTimer) => {
     e.preventDefault()
     if (result === input) {
         setMessageFooter('messageFooter.2')
@@ -84,9 +84,12 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         setColor(true)
         console.log(etarget.style.backgroundColor)
         etarget.style.backgroundColor = 'green'
+        setSeconds(5)
+        // setGoodanswer(true)
         setTimeout(() => {
             etarget.style.backgroundColor = ''
             startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+            setStartTimer(true)
         }, 1500);
     } else if (!result || result === '') {
         setDisplayed(true)
@@ -101,6 +104,12 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         }
         setColor(false)
         setOver(true)
+        setStartTimer(false)
+        if(!gameover)setTimeout(() => {
+            etarget.style.backgroundColor = ''
+            startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+            setStartTimer(true)
+        }, 1500);
     } else {
         setMessageFooter(`A problem occured. couldn't upload your new score ...`)
         setFlag(imglost)

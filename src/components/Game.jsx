@@ -9,7 +9,7 @@ import {
   StyledGameInfo,
 } from './styles/GeneralElements';
 import { BtnlogGame } from '../components/styles/ButtonElements';
-import { startGame, handleSubmit } from '../gameRequests/GameRequests';
+import { startGame, handleSubmit, endOfGame } from '../gameRequests/GameRequests';
 import { useTranslation } from 'react-i18next';
 import { API } from "aws-amplify";
 import Timer from "./Timer"
@@ -34,6 +34,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const userbestscore = localStorage.getItem('userscore');
 
   const [startTimer, setStartTimer] = useState(false)
+  const [goodanswer, setGoodanswer] = useState(false)
   const [over, setOver] = useState('');
   const [seconds, setSeconds] = useState(5);
   const [life, setLife] = useState(3);
@@ -51,6 +52,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   useEffect(() => {
     if (life < 0) {
       setGameover(true)
+      endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
       setLife(3)
     }
 
@@ -131,7 +133,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver)} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver, gameover, goodanswer, setGoodanswer, setSeconds, setStartTimer)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
@@ -143,7 +145,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
           {logged ?
             <>
               <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
-              <Timer gameover={gameover} life={life} setLife={setLife} over={over} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} />
+              <Timer goodanswer={goodanswer} setGoodanswer={setGoodanswer} setScore={setScore} gameover={gameover} life={life} setLife={setLife} over={over} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} setInput={setInput} setResult={setResult} setFlag={setFlag} />
               <Life life={life} />
             </>
             : <></>}
