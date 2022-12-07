@@ -33,7 +33,7 @@ export const Btnlog = styled.button`
 
 export const BtnlogGame = styled(Btnlog)`
   width: 45%;
-  padding-botton:
+  margin-top: 8%;
   // position: relative;
   // left: 50%;
   // @media screen and (max-width: 1300px){

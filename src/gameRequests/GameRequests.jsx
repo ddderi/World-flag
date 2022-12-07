@@ -1,5 +1,27 @@
 import { flagCall, updateScoreUser } from '../requests/RequestUser';
 import { countries } from '../data/countries';
+import { fetchBestScores } from '../requests/RequestUser';
+
+// export async function fetchBestScores(setPlayers) {
+//     try {
+//         const result = await API.graphql({
+//             query: sortByScore,
+//             authMode: "API_KEY",
+//             // typedate: "date",
+//             variables: {
+//                 typescore: "score",
+//                 sortDirection: "DESC",
+//                 limit: 5
+//             }
+//         })
+//         setPlayers(result.data.sortByScore.items)
+//         console.log(result)
+//         return result
+//     } catch (error) {
+//         console.log(error)
+//     }
+
+// }
 
 
 export const triggerAnswers = async (setAnswer, result) => {
@@ -55,7 +77,7 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
 
 export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore) => {
     e.preventDefault()
-    //setMessageFooter('')
+   
 
     if (result === input) {
         setMessageFooter('messageFooter.2')
@@ -80,15 +102,14 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         }
         setColor(false)
         if (score > localStorage.getItem('userscore')) {
-            if(existscore === false){
+            if (existscore === false) {
                 createPoint(score, user)
-            }else if(existscore === true){
+                setTriggerscore(true)
+            } else if (existscore === true) {
                 updatePoint(score)
+                setTriggerscore(true)
             }
-            // updateScoreUser(score, setUpdated)
-            // PUT UPDATE FUNCTION HERE
-            console.log('ITS HAPPENING BCS ')
-            setTriggerscore(true)
+            // setTriggerscore(true)
             localStorage.setItem('userscore', JSON.stringify(score))
         }
         if (score > lastscore) {

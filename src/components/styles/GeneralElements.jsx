@@ -100,7 +100,13 @@ align-items: center;
 overflow: hidden;
 `;
 
-
+export const StyledBestScore = styled.div`
+position: absolute;
+right: 35%;
+color: white;
+top: 3px;
+text-decoration: underline;
+`;
 
 export const StyledFooter = styled.div`
   background-color: rgba(0, 0, 0, 0.89);
@@ -140,6 +146,7 @@ export const StyledGameCont = styled.div`
   // grid-template-columns: 65% 35%;
   // column-gap: 10px;
   // row-gap: 10px;
+  position: relative;
   display: flex;
   width: 100%;
   flex-direction: column;

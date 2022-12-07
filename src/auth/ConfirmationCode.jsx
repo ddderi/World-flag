@@ -15,29 +15,69 @@ import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
 import { Auth } from 'aws-amplify';
 import { useSpring, animated } from 'react-spring';
 import { createPointTable } from '../requests/RequestUser';
+import { Hub } from 'aws-amplify';
+import { registerScores, loggingUser } from '../requests/RequestUser';
 
 
 
-export default function ConfirmationCode({ navigateTo }) {
+export default function ConfirmationCode({ setExistscore, setBestscoreuser, setLogged, navigateTo }) {
 
     const { register, handleSubmit, reset } = useForm()
+    const [message, setMessage] = useState('')
 
 
-
+    function listenToAutoSignInEvent() {
+        Hub.listen('auth', ({ payload }) => {
+            const { event } = payload;
+            if (event === 'autoSignIn') {
+                const user = payload.data;
+                registerScores(user.username, setExistscore, setBestscoreuser)
+                setLogged(true)
+                console.log(user)
+                // assign user
+                setTimeout(() => {
+                    navigateTo('')
+                }, 1000);
+            } else if (event === 'autoSignIn_failure') {
+                setMessage('Logging failed')
+                // redirect to sign in page
+            }
+        })
+    }
 
     async function confirmSignUp(data) {
         try {
             const user = await Auth.confirmSignUp(data.username, data.code);
             console.log(user)
-            
-            setTimeout(() => {
-                navigateTo('')
-            }, 2000);
+
+            // setTimeout(() => {
+            //     navigateTo('')
+            // }, 2000);
+            listenToAutoSignInEvent()
             return user
         } catch (error) {
+            setMessage('Error in the code')
             console.log('error confirming sign up', error);
         }
     }
+
+
+
+
+
+
+
+    async function resendConfirmationCode(username) {
+        try {
+            await Auth.resendSignUp(username);
+            setMessage('code resent successfully')
+            console.log('A code has been sent successfully');
+        } catch (err) {
+            setMessage('Please fill your username')
+            console.log('error resending code: ', err);
+        }
+    }
+
 
     const fade = useSpring({
         from: { opacity: 0 }, opacity: 1
@@ -47,6 +87,7 @@ export default function ConfirmationCode({ navigateTo }) {
     return (
         <StyledFormCont as={animated.div} style={fade}>
             <StyledFormHeading>Confirmation code</StyledFormHeading>
+            {message !== undefined ? <StyledSpanMessage>{message}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
                 confirmSignUp(data)
                 console.log(data)
@@ -60,6 +101,12 @@ export default function ConfirmationCode({ navigateTo }) {
                     <label htmlFor='code'>Confirmation code</label>
                 </StyledInputContainer>
                 <Btnlog type="submit">Confirm</Btnlog>
+            </StyledForm>
+            <StyledForm onSubmit={handleSubmit((data) => {
+                resendConfirmationCode(data.username)
+                console.log(data)
+            })}>
+                <StyledSpan>You didn't receive any code ? <BtnLinkLog type='submit'>Click here</BtnLinkLog> to receive a new code</StyledSpan>
             </StyledForm>
 
 

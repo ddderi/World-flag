@@ -23,7 +23,7 @@ import { createPoint } from "../graphql/mutations";
 import { API } from "aws-amplify";
 
 
-export default function Signup({ navigateTo, setUser, setLogged }) {
+export default function Signup({  navigateTo, setUser, setLogged }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
@@ -90,6 +90,9 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
                     // },
                     // autoSignIn: { // optional - enables auto sign in after user is confirmed
                     //     enabled: true,
+                },
+                autoSignIn: {
+                    enabled: true
                 }
             });
             // UserPool.signUp(data.username, data.password, {attributes: {email: data.email}}, [], null, (error, data) => {
@@ -106,6 +109,7 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
             // REDIRECT TO ConfirmationCode component
             // console.log(user);
         } catch (error) {
+            setMessage('error while signing-up')
             console.log('error signing up:', error);
         }
     }

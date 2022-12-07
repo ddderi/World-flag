@@ -39,6 +39,9 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
       setLogged(false)
       setMessage('')
       navigateTo('login')
+      localStorage.removeItem('userscore')
+      localStorage.removeItem('scoreid')
+      localStorage.removeItem('existscore')
     } catch (error) {
       console.log('error signing out: ', error);
     }

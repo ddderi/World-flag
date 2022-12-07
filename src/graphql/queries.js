@@ -7,8 +7,10 @@ export const getPoint = /* GraphQL */ `
       id
       score
       owner
-      createdAt
+      typedate
+      typescore
       updatedAt
+      createdAt
     }
   }
 `;
@@ -23,8 +25,70 @@ export const listPoints = /* GraphQL */ `
         id
         score
         owner
-        createdAt
+        typedate
+        typescore
         updatedAt
+        createdAt
+      }
+      nextToken
+    }
+  }
+`;
+export const sortByDate = /* GraphQL */ `
+  query SortByDate(
+    $typedate: String!
+    $updatedAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPointFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    sortByDate(
+      typedate: $typedate
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        score
+        owner
+        typedate
+        typescore
+        updatedAt
+        createdAt
+      }
+      nextToken
+    }
+  }
+`;
+export const sortByScore = /* GraphQL */ `
+  query SortByScore(
+    $typescore: String!
+    $score: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPointFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    sortByScore(
+      typescore: $typescore
+      score: $score
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        score
+        owner
+        typedate
+        typescore
+        updatedAt
+        createdAt
       }
       nextToken
     }
@@ -51,8 +115,10 @@ export const searchPoints = /* GraphQL */ `
         id
         score
         owner
-        createdAt
+        typedate
+        typescore
         updatedAt
+        createdAt
       }
       nextToken
       total

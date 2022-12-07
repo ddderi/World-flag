@@ -10,8 +10,10 @@ export const onCreatePoint = /* GraphQL */ `
       id
       score
       owner
-      createdAt
+      typedate
+      typescore
       updatedAt
+      createdAt
     }
   }
 `;
@@ -24,8 +26,10 @@ export const onUpdatePoint = /* GraphQL */ `
       id
       score
       owner
-      createdAt
+      typedate
+      typescore
       updatedAt
+      createdAt
     }
   }
 `;
@@ -38,8 +42,10 @@ export const onDeletePoint = /* GraphQL */ `
       id
       score
       owner
-      createdAt
+      typedate
+      typescore
       updatedAt
+      createdAt
     }
   }
 `;

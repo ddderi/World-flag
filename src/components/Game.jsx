@@ -5,7 +5,8 @@ import {
   StyledGameChildLeft,
   StyledGameChildAnswer,
   StyledImgFlag,
-  StyledUnconnected
+  StyledUnconnected,
+  StyledBestScore
 } from './styles/GeneralElements';
 import { BtnlogGame, BtnLink } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
@@ -21,7 +22,7 @@ import { registerScores } from "../requests/RequestUser";
 import { Auth } from 'aws-amplify';
 import img from '../images/dummy_300x200_ffffff_cccccc.png'
 
-export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
+export default function Game({setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
 
 
 
@@ -41,6 +42,9 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     }
   }
 
+  const userbestscore = localStorage.getItem('userscore')
+
+
 
   function startNewGameClick() {
     if (logged) {
@@ -52,10 +56,11 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
   async function createPoint() {
-    console.log(user)
     const data = {
       score: score,
-      owner: user
+      owner: user,
+      typedate: "date",
+      typescore: "score"
     }
     var connected = await Auth.currentUserInfo()
     if (connected !== null) {
@@ -66,11 +71,13 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       localStorage.setItem('existscore', JSON.stringify(true))
       localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
       setExistscore(true)
+      console.log(result)
       return result
     } else {
       console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
     }
   }
+
 
 
   async function updatePoint() {
@@ -88,7 +95,8 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
           input: data
         },
       })
-      setTriggerscore(true)
+      console.log(result)
+      // setTriggerscore(true)
       return result
     } else {
       console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
@@ -108,7 +116,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   //   return apiData 
   // }
 
-  
+
 
 
   const checkUser = async () => {
@@ -129,19 +137,20 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       {/* <button onClick={() => { fetchBestScores() }} type="submit" > A ESSAYER </button> */}
       {/* <button onClick={() => { checkUser() }} type="submit" > A ESSAYER </button> */}
       {/* {user ? */}
-        <>
-          {/* <button onClick={() => { registerScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button> */}
-          <BtnlogGame onClick={() =>
-            startNewGameClick()
-          }>{t("game.button")}</BtnlogGame>
-          <StyledGameChildLeft>
-            <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
-          </StyledGameChildLeft>
-          <StyledGameChild>
-            {possibleAnwsers}
-          </StyledGameChild>
-        </>
-        {/* :
+      <>
+        {/* <button onClick={() => { registerScores(user, setExistscore) }} type="submit" > fetch les 5 best score </button> */}
+        <BtnlogGame onClick={() =>
+          startNewGameClick()
+        }>{t("game.button")}</BtnlogGame>
+        {logged ? <StyledBestScore>Your best score : {userbestscore}</StyledBestScore> : <></>}
+        <StyledGameChildLeft>
+          <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
+        </StyledGameChildLeft>
+        <StyledGameChild>
+          {possibleAnwsers}
+        </StyledGameChild>
+      </>
+      {/* :
         <>
           <StyledUnconnected>{t('unconnected.1')}<BtnLink onClick={() => navigateTo('login')} >{t('unconnected.2')}</BtnLink>{t('unconnected.3')}</StyledUnconnected>
         </>

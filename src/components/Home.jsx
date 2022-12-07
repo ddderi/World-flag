@@ -16,7 +16,7 @@ import { useSpring, animated } from 'react-spring';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-export default function Home({ setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
+export default function Home({ userScore, setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, updated, setUpdated, setUser, setLogged }) {
 
   const [messageFooter, setMessageFooter] = useState('messageFooter.1')
   const [color, setColor] = useState('')

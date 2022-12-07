@@ -22,7 +22,7 @@ import { createPointTable } from "../requests/RequestUser";
 
 
 
-function Login({ navigateTo, setUser, setLogged, message, setMessage, setExistscore }) {
+function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setMessage, setExistscore }) {
 
   const { register, handleSubmit, reset } = useForm();
   const [revealed, setRevealed] = useState(false);
@@ -41,13 +41,14 @@ function Login({ navigateTo, setUser, setLogged, message, setMessage, setExistsc
     try {
       const user = await Auth.signIn(data.username, data.password);
       setLogged(true)
-      registerScores(data.username, setExistscore)
+      registerScores(data.username, setExistscore, setBestscoreuser)
 
       setTimeout(() => {
         navigateTo('')
       }, 1000);
       return user
     } catch (error) {
+      setMessage('Error while signing-in, incorrect username or password.')
       console.log(error);
     }
   }

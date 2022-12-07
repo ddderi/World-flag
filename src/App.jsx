@@ -25,6 +25,7 @@ function App() {
   const [players, setPlayers] = useState([])
   const [triggerscore, setTriggerscore] = useState(false)
   const [ladderNavbar, setLadderNavbar] = useState(false)
+  const [bestscoreuser, setBestscoreuser] = useState(0)
 
   useEffect(() => {
     if (window.innerWidth < 765) {
@@ -49,12 +50,13 @@ function App() {
     if (userlogged) {
       setUser(localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser'))
       setLogged(true)
-
+      setBestscoreuser('')
 
 
     } else {
       setLogged(false)
       setUser('')
+      setBestscoreuser('')
       // navigateTo('login')
     }
 
@@ -62,6 +64,7 @@ function App() {
 
 
   useEffect(() => {
+    fetchBestScores(setPlayers)
     const scoreexist = localStorage.getItem('existscore')
     if (scoreexist === 'false') {
       setExistscore(false)
@@ -71,20 +74,18 @@ function App() {
   }, [])
 
 
-  useEffect(() => {
-    fetchBestScores(setPlayers)
-  }, [])
+
 
 
   useEffect(() => {
-    if (triggerscore) {
-      setTimeout(() => {
-        fetchBestScores(setPlayers)
+      if(triggerscore){
+    setTimeout(() => {
+      fetchBestScores(setPlayers)
 
-      }, 2000)
-
-      console.log('happening bcs updated ')
-    }
+    }, 2000)
+    setBestscoreuser(localStorage.getItem('userscore'))
+    setTriggerscore(false)
+  }
 
   }, [triggerscore, setTriggerscore])
 
@@ -95,13 +96,13 @@ function App() {
       <Navbar ladderNavbar={ladderNavbar} setMessage={setMessage} navigateTo={navigateTo} logged={logged} user={user} setUser={setUser} setLogged={setLogged} />
       <div className="app" >
         <Routes>
-          <Route path="/" element={<Home setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
+          <Route path="/" element={<Home userScore={userScore} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           {/* <Route path="/about" element={<About />} /> */}
           <Route path="/records" element={<Records players={players} ladderNavbar={ladderNavbar} />} />
-          <Route path="/confirmation" element={<ConfirmationCode navigateTo={navigateTo} />} />
-          <Route path="/login" element={<Login setExistscore={setExistscore} setUserScore={setUserScore} setTriggered={setTriggered} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+          <Route path="/confirmation" element={<ConfirmationCode setExistscore={setExistscore} setBestscoreuser={setBestscoreuser} setLogged={setLogged} setMessage={setMessage} navigateTo={navigateTo} />} />
+          <Route path="/login" element={<Login setBestscoreuser={setBestscoreuser} setExistscore={setExistscore} setUserScore={setUserScore} setTriggered={setTriggered} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
           <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
-          <Route path="/signup" element={<Signup navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
+          <Route path="/signup" element={<Signup setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
         </Routes>
       </div>
     </div>
