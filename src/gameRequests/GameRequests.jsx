@@ -1,27 +1,7 @@
-import { flagCall, updateScoreUser } from '../requests/RequestUser';
+import { flagCall } from '../requests/RequestUser';
 import { countries } from '../data/countries';
-import { fetchBestScores } from '../requests/RequestUser';
 
-// export async function fetchBestScores(setPlayers) {
-//     try {
-//         const result = await API.graphql({
-//             query: sortByScore,
-//             authMode: "API_KEY",
-//             // typedate: "date",
-//             variables: {
-//                 typescore: "score",
-//                 sortDirection: "DESC",
-//                 limit: 5
-//             }
-//         })
-//         setPlayers(result.data.sortByScore.items)
-//         console.log(result)
-//         return result
-//     } catch (error) {
-//         console.log(error)
-//     }
 
-// }
 
 
 export const triggerAnswers = async (setAnswer, result) => {
@@ -77,7 +57,7 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
 
 export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setUpdated, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore) => {
     e.preventDefault()
-   
+
 
     if (result === input) {
         setMessageFooter('messageFooter.2')

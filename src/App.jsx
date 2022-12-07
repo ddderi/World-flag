@@ -1,14 +1,11 @@
 import Navbar from "./components/navbar/Navbar";
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 import Login from "./auth/Login";
-import { checkCookie } from './requests/RequestUser';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from "./components/Home";
-import About from "./components/About";
 import Account from "./components/Account";
 import Signup from "./auth/Signup";
 import Records from "./components/Records";
-import { bestPlayers } from './requests/RequestUser';
 import ConfirmationCode from "./auth/ConfirmationCode";
 import { fetchBestScores } from "./requests/RequestUser";
 
@@ -57,7 +54,6 @@ function App() {
       setLogged(false)
       setUser('')
       setBestscoreuser('')
-      // navigateTo('login')
     }
 
   }, [logged])
@@ -78,14 +74,14 @@ function App() {
 
 
   useEffect(() => {
-      if(triggerscore){
-    setTimeout(() => {
-      fetchBestScores(setPlayers)
+    if (triggerscore) {
+      setTimeout(() => {
+        fetchBestScores(setPlayers)
 
-    }, 2000)
-    setBestscoreuser(localStorage.getItem('userscore'))
-    setTriggerscore(false)
-  }
+      }, 2000)
+      setBestscoreuser(localStorage.getItem('userscore'))
+      setTriggerscore(false)
+    }
 
   }, [triggerscore, setTriggerscore])
 
@@ -97,7 +93,6 @@ function App() {
       <div className="app" >
         <Routes>
           <Route path="/" element={<Home userScore={userScore} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUpdated={setUpdated} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
-          {/* <Route path="/about" element={<About />} /> */}
           <Route path="/records" element={<Records players={players} ladderNavbar={ladderNavbar} />} />
           <Route path="/confirmation" element={<ConfirmationCode setExistscore={setExistscore} setBestscoreuser={setBestscoreuser} setLogged={setLogged} setMessage={setMessage} navigateTo={navigateTo} />} />
           <Route path="/login" element={<Login setBestscoreuser={setBestscoreuser} setExistscore={setExistscore} setUserScore={setUserScore} setTriggered={setTriggered} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />

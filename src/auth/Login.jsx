@@ -18,8 +18,6 @@ import eyepasswordclose from '../images/eyepasswordclose.png';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
-import { createPointTable } from "../requests/RequestUser";
-
 
 
 function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setMessage, setExistscore }) {
@@ -34,8 +32,6 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
     from: { opacity: 0 }, opacity: 1
   })
 
-
-  //AWS
 
   async function signIn(data) {
     try {
@@ -52,8 +48,6 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
       console.log(error);
     }
   }
-
-
 
 
   return (

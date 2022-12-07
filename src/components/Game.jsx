@@ -5,26 +5,24 @@ import {
   StyledGameChildLeft,
   StyledGameChildAnswer,
   StyledImgFlag,
-  StyledUnconnected,
   StyledBestScore,
   StyledGameInfo,
   StyledTimer
 } from './styles/GeneralElements';
-import { BtnlogGame, BtnLink } from '../components/styles/ButtonElements';
+import { BtnlogGame } from '../components/styles/ButtonElements';
 import { startGame, handleSubmit } from '../gameRequests/GameRequests';
 import { useTranslation } from 'react-i18next';
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 
 import {
   createPoint as createPointMutation,
   updatePoint as updatePointMutation,
 
 } from '../graphql/mutations';
-import { registerScores } from "../requests/RequestUser";
 import { Auth } from 'aws-amplify';
 import img from '../images/dummy_300x200_ffffff_cccccc.png'
 
-export default function Game({setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
+export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setUpdated, setColor, fontColor, navigateTo, setUser, setLogged, setLastscore }) {
 
 
 
@@ -45,7 +43,6 @@ export default function Game({setTriggerscore, logged, setExistscore, existscore
   }
 
   const userbestscore = localStorage.getItem('userscore')
-
 
 
   function startNewGameClick() {
@@ -97,38 +94,10 @@ export default function Game({setTriggerscore, logged, setExistscore, existscore
           input: data
         },
       })
-      console.log(result)
-      // setTriggerscore(true)
       return result
     } else {
       console.log('USER NOT CONNECTED, COUDLNT CREATEE SCORE')
     }
-  }
-
-
-  // fetch les 5 premiers scores
-
-  // export const fetchScores = async() => {
-  //   const apiData = await API.graphql({ 
-  //     query: listPoints,
-  //     variables: {filter: {username: {eq: user}}}
-  //   })
-
-  //   console.log(apiData.data.listPoints.items)
-  //   return apiData 
-  // }
-
-
-
-
-  const checkUser = async () => {
-    var connected = await Auth.currentUserInfo()
-    if (connected !== null) {
-      console.log('yes connected')
-    } else {
-      console.log('not connected')
-    }
-    return connected
   }
 
 
@@ -141,12 +110,12 @@ export default function Game({setTriggerscore, logged, setExistscore, existscore
           startNewGameClick()
         }>{t("game.button")}</BtnlogGame>
         <StyledGameInfo>
-        {logged ?
-        <> 
-        <StyledBestScore>Your best score : {userbestscore}</StyledBestScore> 
-        <StyledTimer>TIMER</StyledTimer>
-        </>
-        : <></>}
+          {logged ?
+            <>
+              <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
+              <StyledTimer>TIMER</StyledTimer>
+            </>
+            : <></>}
         </StyledGameInfo>
         <StyledGameChildLeft>
           <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>

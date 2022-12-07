@@ -1,22 +1,18 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { changePassword } from '../requests/RequestUser';
 import {
-  StyledFormCont,
   StyledForm,
   StyledInputForm,
   StyledFormHeading,
   LabelAccount,
   StyledSpanMessage,
   StyledFormContAccount,
-  StyledInputContainer
 }
   from '../components/styles/GeneralElements';
 import { Btnlog } from './styles/ButtonElements';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
-import { CognitoAccessToken } from 'amazon-cognito-identity-js';
 import * as AWS from "@aws-sdk/client-cognito-identity-provider";
 
 
@@ -30,20 +26,17 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
   async function changeCred(data) {
     try {
       let token = localStorage.getItem(`CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.${user}.accessToken`)
-
       var connected = await Auth.currentUserInfo()
       if (connected) {
         var params = {
           AccessToken: token,
           PreviousPassword: data.currentpassword,
           ProposedPassword: data.newPassword
-
         }
         client.changePassword(params, (err, data) => {
           if (err) { console.log(err) }
           else {
             setMessage('Your credentials have been successfully updated !')
-
             setTimeout(() => {
               navigateTo('')
             }, 2000);

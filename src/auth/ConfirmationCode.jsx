@@ -14,9 +14,8 @@ import {
 import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
 import { Auth } from 'aws-amplify';
 import { useSpring, animated } from 'react-spring';
-import { createPointTable } from '../requests/RequestUser';
 import { Hub } from 'aws-amplify';
-import { registerScores, loggingUser } from '../requests/RequestUser';
+import { registerScores } from '../requests/RequestUser';
 
 
 
@@ -40,7 +39,6 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
                 }, 1000);
             } else if (event === 'autoSignIn_failure') {
                 setMessage('Logging failed')
-                // redirect to sign in page
             }
         })
     }
@@ -48,11 +46,6 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
     async function confirmSignUp(data) {
         try {
             const user = await Auth.confirmSignUp(data.username, data.code);
-            console.log(user)
-
-            // setTimeout(() => {
-            //     navigateTo('')
-            // }, 2000);
             listenToAutoSignInEvent()
             return user
         } catch (error) {
@@ -60,10 +53,6 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
             console.log('error confirming sign up', error);
         }
     }
-
-
-
-
 
 
 
@@ -108,10 +97,6 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
             })}>
                 <StyledSpan>You didn't receive any code ? <BtnLinkLog type='submit'>Click here</BtnLinkLog> to receive a new code</StyledSpan>
             </StyledForm>
-
-
-
-
         </StyledFormCont>
     )
 }

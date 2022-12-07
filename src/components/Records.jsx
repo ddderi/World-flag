@@ -2,11 +2,24 @@ import React, { useState } from 'react';
 import { StyledHeadingRecordsPhone, StyledRecordsContPhone, StyledRecordsCont, StyledRecordsChild, StyledHeadingRecords, StyledRecordsChildTop, StyledRecordsChildAll, StyledRecordsChildBtm } from './styles/GeneralElements';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, a } from 'react-spring';
 
 export default function Records({ ladderNavbar, players }) {
 
   const { t } = useTranslation();
+
+
+function compareDate(a,b){
+if(a.score === b.score && a.updatedAt > b.updatedAt){
+  return -1;
+}
+if(a.score === b.score && a.updatedAt < b.updatedAt){
+  return 1;
+}
+
+}
+
+const newarray = players.sort(compareDate)
 
 
   const playersMappedArray = players.slice(0, 5).map((data, index) => {
