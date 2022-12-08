@@ -18,12 +18,10 @@ import eyepasswordclose from '../images/eyepasswordclose.png';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
-import UserPool from "../UserPool";
-import { createPoint } from "../graphql/mutations";
-import { API } from "aws-amplify";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
-export default function Signup({ navigateTo, setUser, setLogged }) {
+export default function Signup({ setLoading, loading, color, navigateTo, setUser, setLogged }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
@@ -31,50 +29,9 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
     const [revealedtwo, setRevealedtwo] = useState(false)
     const { t } = useTranslation();
 
-
-    // const signup = async (info) => {
-    //     try {
-    //         const result = await signUpUser(info)
-    //         console.log(result)
-    //         setMessage(result.message)
-    //         localStorage.setItem('score', JSON.stringify(result.user.bestscores))
-    //         localStorage.setItem('user', JSON.stringify(result.user.username))
-    //         setUser(result.user.username)
-    //         setLogged(true)
-    //         setTimeout(() => {
-    //             navigateTo('home')
-    //         }, 1000);
-    //         return result
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-
     const fade = useSpring({
         from: { opacity: 0 }, opacity: 1
     })
-
-
-    // AWS 
-
-
-
-    // async function createPointTable(username) {
-    //     try {
-    //         const data = {
-    //             score: 0,
-    //             username: username,
-    //         }
-    //         const result = await API.graphql({
-    //             query: createPoint,
-    //             variables: { input: data }
-    //         })
-    //         console.log(result)
-    //         return result
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
 
 
 
@@ -84,34 +41,20 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
                 username: data.username,
                 password: data.password,
                 attributes: {
-                    email: data.email,          // optional
-                    //     phone_number,   // optional - E.164 number convention
-                    //     // other custom attributes 
-                    // },
-                    // autoSignIn: { // optional - enables auto sign in after user is confirmed
-                    //     enabled: true,
+                    email: data.email
                 },
                 autoSignIn: {
                     enabled: true
                 }
             });
-            // UserPool.signUp(data.username, data.password, {attributes: {email: data.email}}, [], null, (error, data) => {
-            //     if(error){
-            //         console.log(error)
-            //     }
-            //     console.log(data)
-            // })
-
-
             setTimeout(() => {
                 navigateTo('confirmation')
             }, 1000);
-            // REDIRECT TO ConfirmationCode component
-            console.log(user);
+            return user
         } catch (error) {
-            setMessage(error)
-            //console.log(UsernameExistsException)
-            console.log('error signing up:', error);
+            setMessage(error);
+            console.log(error);
+            setLoading(false);
         }
     }
 
@@ -119,8 +62,9 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
     return (
         <StyledFormCont as={animated.div} style={fade}>
             <StyledFormHeading>{t('signup.heading')}</StyledFormHeading>
-            {message !== undefined ? <StyledSpanMessage style={{marginBottom: "8%"}}>{t(`${message}`)}</StyledSpanMessage> : null}
+            {message !== undefined ? <StyledSpanMessage style={{ marginBottom: "8%" }}>{t(`${message}`)}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
+                setLoading(true)
                 signUp(data)
                 // reset()
             })}>
@@ -143,7 +87,21 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
                     <label htmlFor='email'>Email</label>
                 </StyledInputContainer>
                 <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>
-                <Btnlog type="submit">{t('signup.button')}</Btnlog>
+                <Btnlog type="submit" disabled={loading ? true : false} >{
+                    loading ?
+                        <ClipLoader
+                            color={color}
+                            loading={loading}
+                            // cssOverride={override}
+                            size={15}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                        :
+                        <>
+                            {t('signup.button')}
+                        </>
+                }</Btnlog>
             </StyledForm>
         </StyledFormCont>
     )

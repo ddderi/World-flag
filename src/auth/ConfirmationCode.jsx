@@ -16,10 +16,11 @@ import { Auth } from 'aws-amplify';
 import { useSpring, animated } from 'react-spring';
 import { Hub } from 'aws-amplify';
 import { registerScores } from '../requests/RequestUser';
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 
-export default function ConfirmationCode({ setExistscore, setBestscoreuser, setLogged, navigateTo }) {
+export default function ConfirmationCode({ setLoading, loading, color, setExistscore, setBestscoreuser, setLogged, navigateTo }) {
 
     const { register, handleSubmit, reset } = useForm()
     const [message, setMessage] = useState('')
@@ -38,7 +39,8 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
                     navigateTo('')
                 }, 1000);
             } else if (event === 'autoSignIn_failure') {
-                setMessage('Logging failed')
+                setMessage('Logging failed');
+
             }
         })
     }
@@ -51,6 +53,7 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
         } catch (error) {
             setMessage('Error in the code')
             console.log('error confirming sign up', error);
+            setLoading(false);
         }
     }
 
@@ -78,6 +81,7 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
             <StyledFormHeading>Confirmation code</StyledFormHeading>
             {message !== undefined ? <StyledSpanMessage>{message}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
+                setLoading(true)
                 confirmSignUp(data)
                 // reset()
             })}>
@@ -89,7 +93,21 @@ export default function ConfirmationCode({ setExistscore, setBestscoreuser, setL
                     <StyledInputForm {...register('code')} autoComplete='off' type="text" required />
                     <label htmlFor='code'>Confirmation code</label>
                 </StyledInputContainer>
-                <Btnlog type="submit">Confirm</Btnlog>
+                <Btnlog type="submit" disabled={loading ? true : false} >{
+                    loading ?
+                        <ClipLoader
+                            color={color}
+                            loading={loading}
+                            // cssOverride={override}
+                            size={15}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                        :
+                        <>
+                            Confirm
+                        </>
+                }</Btnlog>
             </StyledForm>
             <StyledForm onSubmit={handleSubmit((data) => {
                 resendConfirmationCode(data.username)

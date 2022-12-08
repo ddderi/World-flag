@@ -10,6 +10,8 @@ import ConfirmationCode from "./auth/ConfirmationCode";
 import { fetchBestScores } from "./requests/RequestUser";
 
 
+
+
 function App() {
 
   const [user, setUser] = useState('')
@@ -23,7 +25,11 @@ function App() {
   const [bestscoreuser, setBestscoreuser] = useState(0)
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false)
+  const [color, setColor] = useState("#ffffff");
+
   const navigateTo = (location) => {
+    setLoading(false);
     navigate(`/${location}`)
   };
 
@@ -34,6 +40,12 @@ function App() {
       setLadderNavbar(false)
     }
   })
+
+  useEffect(() => {
+    if (loading) {
+      setLoading(true)
+    }
+  }, [loading])
 
 
   useEffect(() => {
@@ -88,10 +100,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home userScore={userScore} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           <Route path="/records" element={<Records players={players} ladderNavbar={ladderNavbar} />} />
-          <Route path="/confirmation" element={<ConfirmationCode setExistscore={setExistscore} setBestscoreuser={setBestscoreuser} setLogged={setLogged} setMessage={setMessage} navigateTo={navigateTo} />} />
-          <Route path="/login" element={<Login setBestscoreuser={setBestscoreuser} setExistscore={setExistscore} setUserScore={setUserScore} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
+          <Route path="/confirmation" element={<ConfirmationCode setLoading={setLoading} loading={loading} color={color} setExistscore={setExistscore} setBestscoreuser={setBestscoreuser} setLogged={setLogged} setMessage={setMessage} navigateTo={navigateTo} />} />
+          <Route path="/login" element={<Login setLoading={setLoading} loading={loading} color={color} setBestscoreuser={setBestscoreuser} setExistscore={setExistscore} setUserScore={setUserScore} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
           <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
-          <Route path="/signup" element={<Signup setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
+          <Route path="/signup" element={<Signup setLoading={setLoading} loading={loading} color={color} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
         </Routes>
       </div>
     </div>

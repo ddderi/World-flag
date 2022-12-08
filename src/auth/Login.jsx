@@ -18,13 +18,17 @@ import eyepasswordclose from '../images/eyepasswordclose.png';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
+import { useEffect } from 'react';
+import ClipLoader from "react-spinners/ClipLoader";
 
 
-function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setMessage, setExistscore }) {
+
+function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUser, setLogged, message, setMessage, setExistscore }) {
 
   const { register, handleSubmit, reset } = useForm();
   const [revealed, setRevealed] = useState(false);
   const { t } = useTranslation();
+
 
 
 
@@ -37,14 +41,16 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
     try {
       const user = await Auth.signIn(data.username, data.password);
       setLogged(true)
+
       registerScores(data.username, setExistscore, setBestscoreuser)
       setTimeout(() => {
         navigateTo('')
       }, 1000);
       return user
     } catch (error) {
-      setMessage('Error while signing-in, incorrect username or password.')
+      setMessage('Error while signing-in, incorrect username or password.');
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -54,6 +60,7 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
       <StyledFormHeading>{t('login.heading')}</StyledFormHeading>
       {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
       <StyledForm onSubmit={handleSubmit((data) => {
+        setLoading(true)
         signIn(data)
         // reset()
       })}>
@@ -67,8 +74,27 @@ function Login({ setBestscoreuser, navigateTo, setUser, setLogged, message, setM
           <label htmlFor="password" >{t('login.password')}</label>
         </StyledInputContainer>
         <StyledSpan>{t('login.account')}<BtnLinkLog type='button' onClick={() => navigateTo('signup')} >{t('login.here')}</BtnLinkLog></StyledSpan>
-        <Btnlog type='submit' >{t('login.button')}</Btnlog>
+        {/* <Btnlog type='submit' >{t('login.button')}</Btnlog> */}
+        <Btnlog type='submit' disabled={loading ? true : false} >{
+          loading ?
+            <ClipLoader
+              color={color}
+              loading={loading}
+              // cssOverride={override}
+              size={15}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+            :
+            <>{t('login.button')}</>
+        }
+        </Btnlog>
+
+
+
       </StyledForm>
+
+
     </StyledFormCont>
   )
 }
