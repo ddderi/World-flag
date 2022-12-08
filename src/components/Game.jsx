@@ -21,6 +21,7 @@ import {
 } from '../graphql/mutations';
 import { Auth } from 'aws-amplify';
 import img from '../images/placeholderimg.png'
+import imglost from '../images/placeholderlost.png'
 import { useEffect } from 'react';
 
 export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setColor, navigateTo, setUser, setLogged, setLastscore }) {
@@ -49,24 +50,26 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     }
   }
 
-  useEffect(() => {
-    if (life < 0) {
-      setGameover(true)
-      endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
-      setLife(3)
-    }
+  // useEffect(() => {
+  //   if (life < 0) {
+  //     setGameover(true)
+  //     endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
+  //     setLife(3)
+  //     setStartTimer(false)
+  //     setSeconds(5)
+  //   }
 
-  }, [life])
+  // }, [life])
 
 
   function startNewGameClick() {
     if (logged) {
-
-      startNewGame()
       setOver(false)
       setSeconds(5)
       setStartTimer(true)
-      
+      setGameover(false)
+      startNewGame()
+
     } else {
       setMessage('Please logged-in to start playing')
       navigateTo('login')
@@ -75,12 +78,39 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
 
 
   useEffect(() => {
-    console.log('shouldnt be trigger')
-    if (gameover) {
-      console.log('you dont have life anymore')
+    if (life<0) {
+      console.log('LIFE IS < 0 !!!!!')
+      setGameover(true)
+      setAnswer([])
+      setLife(3)
+      setStartTimer(false)
+      setSeconds(5)
+      // setFlag(imglost)
+      console.log('ca arrive')
+      setOver(false)
+      endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
     }
 
-  }, [gameover])
+
+    if(over){
+      console.log('ca ne doit pas se produire si ca arrive ce produit')
+      setAnswer([])
+      setLife(life - 1)
+      setSeconds(5)
+      setStartTimer(true)
+      setOver(false)
+      startNewGame()
+    }
+
+    if(goodanswer){
+      setSeconds(5)
+      setStartTimer(true)
+      setOver(false)
+
+    }
+    
+
+  }, [life, over, goodanswer])
 
 
 
@@ -145,7 +175,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
           {logged ?
             <>
               <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
-              <Timer goodanswer={goodanswer} setGoodanswer={setGoodanswer} setScore={setScore} gameover={gameover} life={life} setLife={setLife} over={over} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} setInput={setInput} setResult={setResult} setFlag={setFlag} />
+              <Timer setGameover={setGameover} goodanswer={goodanswer} setGoodanswer={setGoodanswer} setScore={setScore} gameover={gameover} life={life} setLife={setLife} over={over} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} setInput={setInput} setResult={setResult} setFlag={setFlag} />
               <Life life={life} />
             </>
             : <></>}

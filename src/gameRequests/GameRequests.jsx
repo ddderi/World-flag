@@ -29,7 +29,7 @@ export const triggerAnswers = async (setAnswer, result) => {
 }
 
 
-export const startGame = async ( setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
+export const startGame = async (setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
     try {
         setMessageFooter('')
         setResult('')
@@ -84,13 +84,15 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         setColor(true)
         console.log(etarget.style.backgroundColor)
         etarget.style.backgroundColor = 'green'
-        setSeconds(5)
-        // setGoodanswer(true)
+
+        setGoodanswer(true)
         setTimeout(() => {
             etarget.style.backgroundColor = ''
             startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
-            setStartTimer(true)
+
         }, 1500);
+        // setSeconds(5)
+        // setStartTimer(true)
     } else if (!result || result === '') {
         setDisplayed(true)
     } else if (result !== input) {
@@ -104,12 +106,30 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         }
         setColor(false)
         setOver(true)
-        setStartTimer(false)
-        if(!gameover)setTimeout(() => {
-            etarget.style.backgroundColor = ''
-            startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
-            setStartTimer(true)
-        }, 1500);
+        // console.log(gameover)
+        if (gameover) {
+
+            setFlag(imglost)
+            setScore(0)
+            setResult('')
+            setInput('')
+            setOver(false)
+            setStartTimer(false)
+            console.log('its GAME OVER')
+        } 
+        //  if (!gameover) {
+        //     console.log('the game is starting again 1 time')
+        //     console.log('its NOT GAME OVER YET')
+        //     setTimeout(() => {
+        //         etarget.style.backgroundColor = ''
+        //         startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+
+        //     }, 1500);
+        // }
+            // setOver(true)
+            // setSeconds(5)
+            // setStartTimer(true)
+        
     } else {
         setMessageFooter(`A problem occured. couldn't upload your new score ...`)
         setFlag(imglost)
