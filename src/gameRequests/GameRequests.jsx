@@ -41,7 +41,6 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
             console.log(countries[index][key])
             setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
-            //console.log(resultFlag)
             setFlag(resultFlag.request.responseURL)
             triggerAnswers(setAnswer, countries[index][key])
         })
@@ -76,7 +75,7 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
 }
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setColoranswer, answer, setLastscore, setDisplayed, lastscore, createPoint, updatePoint, setExistscore, existscore, user, setTriggerscore, setOver, gameover, goodanswer, setGoodanswer, setSeconds, setStartTimer) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife) => {
     e.preventDefault()
     if (result === input) {
         setMessageFooter('messageFooter.2')
@@ -90,10 +89,9 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
             etarget.style.backgroundColor = ''
             startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
 
-        }, 1500);
-        // setSeconds(5)
-        // setStartTimer(true)
-    } else if (!result || result === '') {
+        }, 1000);
+    }
+    else if (!result || result === '') {
         setDisplayed(true)
     } else if (result !== input) {
         setMessageFooter('messageFooter.3')
@@ -106,30 +104,14 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         }
         setColor(false)
         setOver(true)
-        // console.log(gameover)
-        if (gameover) {
+        if (life > 0 && !lastlife) {
+            setTimeout(() => {
+                console.log('ddd')
+                etarget.style.backgroundColor = ''
+                startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
 
-            setFlag(imglost)
-            setScore(0)
-            setResult('')
-            setInput('')
-            setOver(false)
-            setStartTimer(false)
-            console.log('its GAME OVER')
-        } 
-        //  if (!gameover) {
-        //     console.log('the game is starting again 1 time')
-        //     console.log('its NOT GAME OVER YET')
-        //     setTimeout(() => {
-        //         etarget.style.backgroundColor = ''
-        //         startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
-
-        //     }, 1500);
-        // }
-            // setOver(true)
-            // setSeconds(5)
-            // setStartTimer(true)
-        
+            }, 1500);
+        }
     } else {
         setMessageFooter(`A problem occured. couldn't upload your new score ...`)
         setFlag(imglost)
