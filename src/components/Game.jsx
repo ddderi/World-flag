@@ -45,8 +45,20 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
 
   const startNewGame = async () => {
     try {
-      const resultat = await startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
-      return resultat
+
+      var connected = await Auth.currentUserInfo()
+      if (connected) {
+        const resultat = await startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
+        return resultat
+      } else {
+        setUser('')
+        setLogged(false)
+        setMessage('')
+        navigateTo('login')
+        localStorage.removeItem('userscore')
+        localStorage.removeItem('scoreid')
+        localStorage.removeItem('existscore')
+      }
     } catch (error) {
       console.log(error)
     }
