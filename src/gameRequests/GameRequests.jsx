@@ -38,7 +38,7 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
         const index = Math.floor(Math.random() * countries.length)
         Object.keys(countries[index]).forEach(async (key) => {
             setResult(countries[index][key])
-            console.log(countries[index][key])
+            // console.log(countries[index][key])
             setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
             setFlag(resultFlag.request.responseURL)

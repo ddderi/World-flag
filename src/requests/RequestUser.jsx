@@ -57,7 +57,6 @@ export async function fetchBestScores(setPlayers) {
             }
         })
         setPlayers(result.data.sortByScore.items)
-        console.log(result)
         return result
     } catch (error) {
         console.log(error)

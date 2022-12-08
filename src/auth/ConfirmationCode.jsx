@@ -33,7 +33,6 @@ export default function ConfirmationCode({ setLoading, loading, color, setExists
                 const user = payload.data;
                 registerScores(user.username, setExistscore, setBestscoreuser)
                 setLogged(true)
-                console.log(user)
                 // assign user
                 setTimeout(() => {
                     navigateTo('')

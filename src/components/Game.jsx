@@ -46,7 +46,6 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const startNewGame = async () => {
     try {
       const resultat = await startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
-      // if (startTimer) resetGame()
       return resultat
     } catch (error) {
       console.log(error)
@@ -54,7 +53,6 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
   const resetGame = () => {
-    console.log('gme')
     setOver(false)
     setSeconds(5)
     setLife(3)
@@ -83,7 +81,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
 
   useEffect(() => {
     if (life === 0) {
-      console.log('LAST LIFE BE CAREFULL')
+      // console.log('LAST LIFE BE CAREFULL')
       setLastlife(true)
     }
     if (life < 0) {
