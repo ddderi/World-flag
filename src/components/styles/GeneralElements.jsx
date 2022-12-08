@@ -119,7 +119,14 @@ text-decoration: underline;
 
 export const StyledTimer = styled.div`
 color: white;
+
 `;
+
+export const StyledTimerLife = styled.div`
+color: ${props => props.nbrlife};
+
+`;
+
 
 export const StyledFooter = styled.div`
   background-color: rgba(0, 0, 0, 0.89);
@@ -396,7 +403,7 @@ export const StyledFormHeading = styled.h1`
 
 
 export const StyledInputForm = styled.input`
- 
+
 `;
 
 export const StyledFormCont = styled.div`

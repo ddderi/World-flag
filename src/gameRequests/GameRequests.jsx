@@ -65,13 +65,8 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
     if (score > lastscore) {
         setLastscore(score)
     }
-    setFlag(imglost)
-    setScore(0)
     setResult('')
     setInput('')
-
-
-
 }
 
 
@@ -110,13 +105,13 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
                 etarget.style.backgroundColor = ''
                 startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
 
-            }, 1500);
+            }, 1000);
         }
     } else {
-        setMessageFooter(`A problem occured. couldn't upload your new score ...`)
-        setFlag(imglost)
-        setScore(0)
-        setResult('')
+        // setMessageFooter(`A problem occured. couldn't upload your new score ...`)
+        // setFlag(imglost)
+        // setScore(0)
+        // setResult('')
     }
-    setInput('')
+    // setInput('')
 }

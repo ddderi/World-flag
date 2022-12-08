@@ -4,12 +4,12 @@ import {
 } from './styles/GeneralElements';
 
 
-export default function Timer({ life, setOver, seconds, setSeconds, startTimer, setStartTimer }) {
+export default function Timer({setTimeover, life, setOver, seconds, setSeconds, startTimer, setStartTimer }) {
 
 
     const tick = () => {
         if (seconds === 0 && (life >= 0)) {
-            setOver(true)
+            setTimeover(true)
             setStartTimer(true)
             return;
         }

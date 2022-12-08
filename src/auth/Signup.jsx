@@ -107,9 +107,10 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
                 navigateTo('confirmation')
             }, 1000);
             // REDIRECT TO ConfirmationCode component
-            // console.log(user);
+            console.log(user);
         } catch (error) {
-            setMessage('error while signing-up')
+            setMessage(error)
+            //console.log(UsernameExistsException)
             console.log('error signing up:', error);
         }
     }
@@ -117,9 +118,8 @@ export default function Signup({ navigateTo, setUser, setLogged }) {
 
     return (
         <StyledFormCont as={animated.div} style={fade}>
-            {console.log(message)}
             <StyledFormHeading>{t('signup.heading')}</StyledFormHeading>
-            {message !== undefined ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
+            {message !== undefined ? <StyledSpanMessage style={{marginBottom: "8%"}}>{t(`${message}`)}</StyledSpanMessage> : null}
             <StyledForm onSubmit={handleSubmit((data) => {
                 signUp(data)
                 // reset()

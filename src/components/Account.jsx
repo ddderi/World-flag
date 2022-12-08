@@ -7,6 +7,7 @@ import {
   LabelAccount,
   StyledSpanMessage,
   StyledFormContAccount,
+  StyledInputContainer
 }
   from '../components/styles/GeneralElements';
 import { Btnlog } from './styles/ButtonElements';
@@ -62,10 +63,16 @@ export default function Account({ navigateTo, setLogged, setUser, user, message,
         })}>
           <StyledFormHeading>{user}</StyledFormHeading>
           {message ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
-          <LabelAccount htmlFor="currentpassword">{t('account.currentpassword')}</LabelAccount>
-          <StyledInputForm style={{ marginBottom: '4%' }} {...register("currentpassword")} required />
-          <LabelAccount htmlFor="password">{t('account.newpassword')}</LabelAccount>
-          <StyledInputForm {...register("newPassword")} required />
+          <StyledInputContainer>
+            {/* <LabelAccount htmlFor="currentpassword">{t('account.currentpassword')}</LabelAccount> */}
+            <StyledInputForm style={{ marginBottom: '4%' }} {...register("currentpassword")} required />
+            <label htmlFor='currentpassword'>{t('account.currentpassword')}</label>
+          </StyledInputContainer>
+          <StyledInputContainer>
+            {/* <LabelAccount htmlFor="password">{t('account.newpassword')}</LabelAccount> */}
+            <StyledInputForm {...register("newPassword")} required />
+            <label htmlFor='password'>{t('account.newpassword')}</label>
+          </StyledInputContainer>
           <Btnlog type='submit'>{t('account.button')}</Btnlog>
         </StyledForm>
         : <StyledFormHeading>{t('account.errormessage')}</StyledFormHeading>}

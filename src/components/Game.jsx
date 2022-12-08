@@ -41,30 +41,36 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const [life, setLife] = useState(3);
   const [gameover, setGameover] = useState(false)
   const [lastlife, setLastlife] = useState(false)
+  const [timeover, setTimeover] = useState(false)
 
   const startNewGame = async () => {
     try {
       const resultat = await startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
+      // if (startTimer) resetGame()
       return resultat
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => {
-    if (life === 0) {
-      console.log('LAST LIFE BE CAREFULL')
-      setLastlife(true)
-
-    }
-
-  }, [life])
+  const resetGame = () => {
+    console.log('gme')
+    setOver(false)
+    setSeconds(5)
+    setLife(3)
+    setGameover(false)
+    setLastlife(false)
+    setTimeover(false)
+    setGoodanswer(false)
+    setStartTimer(true)
+  }
 
 
   function startNewGameClick() {
     if (logged) {
-      setOver(false)
-      setSeconds(5)
+      resetGame()
+      // setOver(false)
+      // setSeconds(5)
       setStartTimer(true)
       setGameover(false)
       startNewGame()
@@ -76,12 +82,15 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
   useEffect(() => {
+    if (life === 0) {
+      console.log('LAST LIFE BE CAREFULL')
+      setLastlife(true)
+    }
     if (life < 0) {
       setGameover(true)
       setLife(3)
       setStartTimer(false)
       setSeconds(5)
-      setFlag(imglost)
       setOver(false)
       endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
     }
@@ -97,13 +106,33 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       setOver(false)
     }
 
+
+    if (timeover && lastlife) {
+      setTimeover(false)
+      endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
+      const mydiv = document.getElementsByClassName('answer')
+      for (let i = 0; i < mydiv.length; i++) {
+        if (mydiv[i].innerHTML === result) {
+          mydiv[i].style.backgroundColor = 'green'
+        }
+      }
+      setLastlife(false)
+
+    } else if (timeover && life > 0) {
+      setLife(life - 1)
+      setSeconds(5)
+      setStartTimer(true)
+      setTimeover(false)
+      startNewGame()
+    }
+
     if (goodanswer) {
       setSeconds(5)
       setStartTimer(true)
       setOver(false)
       setGoodanswer(false)
     }
-  }, [over, goodanswer])
+  }, [over, goodanswer, lastlife, timeover])
 
 
 
@@ -168,7 +197,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
           {logged ?
             <>
               <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
-              <Timer life={life} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} />
+              <Timer setTimeover={setTimeover} life={life} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} />
               <Life life={life} />
             </>
             : <></>}

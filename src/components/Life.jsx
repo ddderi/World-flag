@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-    StyledTimer
+    StyledTimerLife
 } from './styles/GeneralElements';
 
 export default function Life({ life }) {
 
 
     return (
-        <StyledTimer>{life}/3</StyledTimer>
+        <StyledTimerLife nbrlife={life === 0 ? 'red' : 'white'} >{life}/3</StyledTimerLife>
     )
 }
