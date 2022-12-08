@@ -34,14 +34,25 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
 
   async function signOut() {
     try {
-      await Auth.signOut();
-      setUser('')
-      setLogged(false)
-      setMessage('')
-      navigateTo('login')
-      localStorage.removeItem('userscore')
-      localStorage.removeItem('scoreid')
-      localStorage.removeItem('existscore')
+      var connected = await Auth.currentUserInfo()
+      if (connected) {
+        await Auth.signOut();
+        setUser('')
+        setLogged(false)
+        setMessage('')
+        navigateTo('login')
+        localStorage.removeItem('userscore')
+        localStorage.removeItem('scoreid')
+        localStorage.removeItem('existscore')
+      } else {
+        setUser('')
+        setLogged(false)
+        setMessage('')
+        navigateTo('login')
+        localStorage.removeItem('userscore')
+        localStorage.removeItem('scoreid')
+        localStorage.removeItem('existscore')
+      }
     } catch (error) {
       console.log('error signing out: ', error);
     }
@@ -75,10 +86,10 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
                 {userCapitalize(user)}
               </NavLink>
               {/* {ladderNavbar ? */}
-                <NavLinkLadder display={!ladderNavbar ? 'none' : ''} to='/records' >
-                  Ladder
-                </NavLinkLadder>
-                {/* : 
+              <NavLinkLadder display={!ladderNavbar ? 'none' : ''} to='/records' >
+                Ladder
+              </NavLinkLadder>
+              {/* : 
                   <>
                   </>
                   } */}
