@@ -1,8 +1,10 @@
 import { flagCall } from '../requests/RequestUser';
 import { countries } from '../data/countries';
-import imglost from '../images/placeholderlost.png'
+
 
 export const triggerAnswers = async (setAnswer, result) => {
+    console.log(countries)
+    console.log(result)
     let optionsAnswer = []
     for (let i = 0; i < 3; i++) {
         const index = Math.floor(Math.random() * countries.length)

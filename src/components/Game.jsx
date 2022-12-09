@@ -119,11 +119,20 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       setLastlife(false)
 
     } else if (timeover && life > 0) {
+      const mydiv = document.getElementsByClassName('answer')
+      for (let i = 0; i < mydiv.length; i++) {
+        if (mydiv[i].innerHTML === result) {
+          mydiv[i].style.backgroundColor = 'green'
+        }
+      }
       setLife(life - 1)
       setSeconds(5)
-      setStartTimer(true)
       setTimeover(false)
-      startNewGame()
+      setTimeout(() => {
+        setStartTimer(true)
+        startNewGame()
+      }, 1000);
+
     }
 
     if (goodanswer) {
