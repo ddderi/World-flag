@@ -35,6 +35,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const [coloranswer, setColoranswer] = useState('');
   const { t } = useTranslation();
   const userbestscore = localStorage.getItem('userscore');
+  const [disabled, setDisabled] = useState(false)
 
   const [startTimer, setStartTimer] = useState(false)
   const [goodanswer, setGoodanswer] = useState(false)
@@ -47,7 +48,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
 
   const startNewGame = async () => {
     try {
-      const resultat = await startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
+      const resultat = await startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed, setDisabled)
       return resultat
 
     } catch (error) {
@@ -195,8 +196,15 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     }
   }
 
+//function handlehey(){ handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries)}
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer-disabled' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries,)} key={index}>{data}</StyledGameChildAnswer> })
+
+  
+//handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries)}
+  //const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer' {...(!disabled && { onClick={ console.log() }, key={index} }  )}>{data}</StyledGameChildAnswer> })
+  // const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer' onClick={!disabled ? () => console.log('oui') : undefined } key={index}>{data}</StyledGameChildAnswer> })
+  
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer' onClick={!disabled ?  (e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) : undefined } key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>

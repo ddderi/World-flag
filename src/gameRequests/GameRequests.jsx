@@ -63,8 +63,9 @@ export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycoun
 }
 
 
-export const startGame = async (arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
+export const startGame = async (arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed, setDisabled) => {
     try {
+        setDisabled(false)
         setMessageFooter('')
         setResult('')
         setAnswer([])
@@ -105,8 +106,9 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
 }
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries,) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) => {
     e.preventDefault()
+    setDisabled(true)
     if (result === input) {
         setMessageFooter('messageFooter.2')
         setScore(score + 1)
@@ -117,7 +119,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         setGoodanswer(true)
         setTimeout(() => {
             etarget.style.backgroundColor = ''
-            startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+            startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed, setDisabled)
 
         }, 1000);
     }
@@ -137,7 +139,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         if (life > 0 && !lastlife) {
             setTimeout(() => {
                 etarget.style.backgroundColor = ''
-                startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+                startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed, setDisabled)
 
             }, 1000);
         }
