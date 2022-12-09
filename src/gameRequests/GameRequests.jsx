@@ -2,17 +2,49 @@ import { flagCall } from '../requests/RequestUser';
 import { countries } from '../data/countries';
 
 
-export const triggerAnswers = async (setAnswer, result) => {
-    console.log(countries)
-    console.log(result)
+export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycountries, setArraycountries,  ) => {
+  
+    // let optionsAnswer = []
+    // console.log(result)
+    // for (let i = 0; i < 3; i++) {
+    //     const index = Math.floor(Math.random() * countries.length)
+    //     Object.keys(countries[index]).forEach(async (key) => {
+    //         optionsAnswer.push(countries[index][key])
+    //         return optionsAnswer
+    //     })
+    // }
+      
+
+    ///
+    //   const propName = objects[0];
+    //   console.log(propName)
+      // use filter() to create a new array without objects with the specified property name
+      //const filteredObjects = objects.filter(obj => obj !== propName);
+      
+      // the filtered array should not contain the object with the property "shape"
+      //console.log(filteredObjects);
+    
+    
+    // console.log(countries)
+    // console.log(result)
+    
+    let filteredCountry = countries.filter(country => country !== valueToRemove )
+    // console.log(filteredCountry)
+    let countriestomap = [...countries]
     let optionsAnswer = []
+    //const countriestomap = [...countries]
     for (let i = 0; i < 3; i++) {
-        const index = Math.floor(Math.random() * countries.length)
-        Object.keys(countries[index]).forEach(async (key) => {
-            optionsAnswer.push(countries[index][key])
+        
+        const index = Math.floor(Math.random() * countriestomap.length)
+        Object.keys(countriestomap[index]).forEach(async (key) => {
+            optionsAnswer.push(countriestomap[index][key])
+            countriestomap = [...countriestomap.filter(country => country !== countries[index])]
+            console.log(countriestomap.length)
             return optionsAnswer
         })
     }
+
+////
     const index = Math.floor(Math.random() * 4)
     if (index === 0) {
         optionsAnswer.unshift(result)
@@ -31,7 +63,7 @@ export const triggerAnswers = async (setAnswer, result) => {
 }
 
 
-export const startGame = async (setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
+export const startGame = async (arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed) => {
     try {
         setMessageFooter('')
         setResult('')
@@ -40,11 +72,12 @@ export const startGame = async (setMessageFooter, setResult, setResultFooter, se
         const index = Math.floor(Math.random() * countries.length)
         Object.keys(countries[index]).forEach(async (key) => {
             setResult(countries[index][key])
-            // console.log(countries[index][key])
+            const valueToRemove = countries[index]
+        //    console.log(arraycountries[index][key])
             setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
             setFlag(resultFlag.request.responseURL)
-            triggerAnswers(setAnswer, countries[index][key])
+            triggerAnswers(setAnswer, countries[index][key], valueToRemove, arraycountries, setArraycountries)
         })
     } catch (error) {
         console.log(error)

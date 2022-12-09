@@ -23,10 +23,12 @@ import { Auth } from 'aws-amplify';
 import img from '../images/placeholderimg.png'
 import imglost from '../images/placeholderlost.png'
 import { useEffect } from 'react';
+import { countries } from '../data/countries';
 
 export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setColor, navigateTo, setUser, setLogged, setLastscore }) {
 
 
+  const [arraycountries, setArraycountries] = useState(countries)
   const [flag, setFlag] = useState(img);
   const [input, setInput] = useState('');
   const [answer, setAnswer] = useState([]);
@@ -45,7 +47,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
 
   const startNewGame = async () => {
     try {
-      const resultat = await startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
+      const resultat = await startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed)
       return resultat
 
     } catch (error) {
