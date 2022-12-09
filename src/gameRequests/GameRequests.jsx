@@ -2,7 +2,7 @@ import { flagCall } from '../requests/RequestUser';
 import { countries } from '../data/countries';
 
 
-export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycountries, setArraycountries,  ) => {
+export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycountries, setArraycountries ) => {
   
     // let optionsAnswer = []
     // console.log(result)
@@ -105,7 +105,7 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
 }
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife) => {
+export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries,) => {
     e.preventDefault()
     if (result === input) {
         setMessageFooter('messageFooter.2')
@@ -117,7 +117,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         setGoodanswer(true)
         setTimeout(() => {
             etarget.style.backgroundColor = ''
-            startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+            startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
 
         }, 1000);
     }

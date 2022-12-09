@@ -196,7 +196,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife)} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer-disabled' onClick={(e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries,)} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
