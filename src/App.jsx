@@ -8,6 +8,7 @@ import Signup from "./auth/Signup";
 import Records from "./components/Records";
 import ConfirmationCode from "./auth/ConfirmationCode";
 import { fetchBestScores } from "./requests/RequestUser";
+import ForgotPassword from "./auth/ForgotPassword";
 
 
 
@@ -101,8 +102,9 @@ function App() {
           <Route path="/" element={<Home userScore={userScore} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} players={players} user={user} setUserScore={setUserScore} setUser={setUser} setLogged={setLogged} setMessage={setMessage} />} />
           <Route path="/records" element={<Records players={players} ladderNavbar={ladderNavbar} />} />
           <Route path="/confirmation" element={<ConfirmationCode setLoading={setLoading} loading={loading} color={color} setExistscore={setExistscore} setBestscoreuser={setBestscoreuser} setLogged={setLogged} setMessage={setMessage} navigateTo={navigateTo} />} />
+          <Route path="/forgotpassword" element={<ForgotPassword setMessage={setMessage} message={message} setLoading={setLoading} loading={loading} color={color} navigateTo={navigateTo} />} />
           <Route path="/login" element={<Login setLoading={setLoading} loading={loading} color={color} setBestscoreuser={setBestscoreuser} setExistscore={setExistscore} setUserScore={setUserScore} navigateTo={navigateTo} message={message} setMessage={setMessage} setUser={setUser} setLogged={setLogged} logged={logged} />} />
-          <Route path="/account" element={<Account navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
+          <Route path="/account" element={<Account setLoading={setLoading} loading={loading} color={color} navigateTo={navigateTo} setLogged={setLogged} message={message} setMessage={setMessage} user={user} setUser={setUser} />} />
           <Route path="/signup" element={<Signup setLoading={setLoading} loading={loading} color={color} setMessage={setMessage} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} />} />
         </Routes>
       </div>

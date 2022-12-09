@@ -41,7 +41,7 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
                 username: data.username,
                 password: data.password,
                 attributes: {
-                    email: data.email
+                    email: data.email.toLowerCase()
                 },
                 autoSignIn: {
                     enabled: true
@@ -87,6 +87,7 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
                     <label htmlFor='email'>Email</label>
                 </StyledInputContainer>
                 <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>
+                <StyledSpan>Do you already have a confirmation code ?</StyledSpan>
                 <Btnlog type="submit" disabled={loading ? true : false} >{
                     loading ?
                         <ClipLoader

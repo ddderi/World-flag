@@ -9,7 +9,7 @@ import {
   StyledInputContainer,
   StyledSpan,
   StyledSpanMessage,
-  StyledImgPassword
+  StyledImgPassword,
 }
   from '../components/styles/GeneralElements';
 import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
 import { useEffect } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
+import { NavLinkLogin, StyledDivLogin } from '../components/styles/NavbarElements';
 
 
 
@@ -73,8 +74,12 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
           <StyledImgPassword src={!revealed ? eyepasswordclose : eyepassword} onClick={() => { setRevealed(!revealed) }} />
           <label htmlFor="password" >{t('login.password')}</label>
         </StyledInputContainer>
+        <StyledDivLogin>
+        <NavLinkLogin to='/forgotpassword' >Forgot your password ?</NavLinkLogin>
+        </StyledDivLogin>
         <StyledSpan>{t('login.account')}<BtnLinkLog type='button' onClick={() => navigateTo('signup')} >{t('login.here')}</BtnLinkLog></StyledSpan>
         {/* <Btnlog type='submit' >{t('login.button')}</Btnlog> */}
+        
         <Btnlog type='submit' disabled={loading ? true : false} >{
           loading ?
             <ClipLoader

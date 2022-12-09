@@ -54,6 +54,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
   const resetGame = () => {
+    setScore(0)
     setOver(false)
     setSeconds(5)
     setLife(3)

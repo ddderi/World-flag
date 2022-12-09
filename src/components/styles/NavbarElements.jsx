@@ -33,17 +33,47 @@ padding: 0% 1.5% 0% 1.5%;
       background-color: white;
       color: black;
     }
-    // @media screen and (max-width: 765px){
-    //     display: inline-block;
-    //     height: 100%;
-    //   }
-
     // if drop down enabled, uncommented 
   // @media screen and (max-width: 765px){
   //   display: none;
   // }
 
  
+`;
+
+export const NavLinkLogin = styled(Link)`
+text-decoration: none;
+color: white;
+margin-bottom: 3%;
+font-size: 16px;
+text-transform: none;
+display: inline-block;
+position: absolute;
+left: 0px;
+&:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+&:hover::after {
+transform: scaleX(1);
+transform-origin: bottom left;
+}
+
+`;
+
+export const StyledDivLogin = styled.div`
+position: relative;
+height: 30px;
+
 `;
 
 export const NavLinkLadder = styled(NavLink)`

@@ -464,7 +464,7 @@ position: absolute;
 export const StyledInputContainer = styled.div`
   position:relative;
   width: 100%;
-  margin-bottom:25px;
+  margin-bottom:15px;
 & label {
   position:absolute;
 	top:0px;
