@@ -137,7 +137,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         if (life > 0 && !lastlife) {
             setTimeout(() => {
                 etarget.style.backgroundColor = ''
-                startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
+                startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
 
             }, 1000);
         }
