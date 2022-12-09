@@ -35,11 +35,11 @@ export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycoun
     //const countriestomap = [...countries]
     for (let i = 0; i < 3; i++) {
         
-        const index = Math.floor(Math.random() * countriestomap.length)
-        Object.keys(countriestomap[index]).forEach(async (key) => {
-            optionsAnswer.push(countriestomap[index][key])
-            countriestomap = [...countriestomap.filter(country => country !== countries[index])]
-            console.log(countriestomap.length)
+        const index = Math.floor(Math.random() * filteredCountry.length)
+        Object.keys(filteredCountry[index]).forEach(async (key) => {
+            optionsAnswer.push(filteredCountry[index][key])
+            filteredCountry = [...filteredCountry.filter(country => country !== countries[index])]
+            console.log(filteredCountry.length)
             return optionsAnswer
         })
     }
