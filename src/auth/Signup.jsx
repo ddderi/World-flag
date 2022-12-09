@@ -87,7 +87,7 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
                     <label htmlFor='email'>Email</label>
                 </StyledInputContainer>
                 <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>
-                <StyledSpan>Do you already have a confirmation code ?</StyledSpan>
+                <StyledSpan>Do you have a confirmation <BtnLinkLog type='button' onClick={() => navigateTo('confirmation')} >code</BtnLinkLog> ?</StyledSpan>
                 <Btnlog type="submit" disabled={loading ? true : false} >{
                     loading ?
                         <ClipLoader

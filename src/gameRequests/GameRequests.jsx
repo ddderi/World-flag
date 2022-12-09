@@ -101,7 +101,6 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         setOver(true)
         if (life > 0 && !lastlife) {
             setTimeout(() => {
-                console.log('ddd')
                 etarget.style.backgroundColor = ''
                 startGame(setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed)
 

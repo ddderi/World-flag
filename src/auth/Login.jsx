@@ -75,11 +75,11 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
           <label htmlFor="password" >{t('login.password')}</label>
         </StyledInputContainer>
         <StyledDivLogin>
-        <NavLinkLogin to='/forgotpassword' >Forgot your password ?</NavLinkLogin>
+          <NavLinkLogin to='/forgotpassword' >Forgot your password ?</NavLinkLogin>
         </StyledDivLogin>
         <StyledSpan>{t('login.account')}<BtnLinkLog type='button' onClick={() => navigateTo('signup')} >{t('login.here')}</BtnLinkLog></StyledSpan>
         {/* <Btnlog type='submit' >{t('login.button')}</Btnlog> */}
-        
+
         <Btnlog type='submit' disabled={loading ? true : false} >{
           loading ?
             <ClipLoader
