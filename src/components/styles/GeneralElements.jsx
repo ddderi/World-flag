@@ -113,8 +113,6 @@ justify-content: space-around;
 export const StyledBestScore = styled.div`
 
 color: white;
-
-text-decoration: underline;
 `;
 
 export const StyledTimer = styled.div`
@@ -126,6 +124,12 @@ export const StyledTimerLife = styled.div`
 color: ${props => props.nbrlife};
 
 `;
+
+export const StyledHeartMapped = styled.div`
+
+
+`;
+
 
 
 export const StyledFooter = styled.div`

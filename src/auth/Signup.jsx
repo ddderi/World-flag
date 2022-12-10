@@ -19,6 +19,12 @@ import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
 import ClipLoader from "react-spinners/ClipLoader";
+// import {
+//     createPoint as createPointMutation,
+//     updatePoint as updatePointMutation,
+
+// } from '../graphql/mutations';
+// import { API } from "aws-amplify";
 
 
 export default function Signup({ setLoading, loading, color, navigateTo, setUser, setLogged }) {
@@ -35,10 +41,15 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
 
 
 
+
+
+
+
+
     async function signUp(data) {
         try {
             const { user } = await Auth.signUp({
-                username: data.username,
+                username: data.username.toLowerCase(),
                 password: data.password,
                 attributes: {
                     email: data.email.toLowerCase()
@@ -48,8 +59,10 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
                 }
             });
             setTimeout(() => {
+                // createPoint(data.username)
                 navigateTo('confirmation')
             }, 1000);
+            // createPoint(newuser)
             return user
         } catch (error) {
             setMessage(error);
@@ -57,6 +70,27 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
             setLoading(false);
         }
     }
+
+
+    // const firstcon = async(data) => {
+    //     try{
+    //         const firstconnection = await signUp(data)
+    //         // const createfirsttable = await createPoint(data.username)
+    //         if(firstconnection){
+    //             const createfirsttable = await createPoint(data.username)
+    //             console.log(createfirsttable)
+    //             return createfirsttable
+    //         }else{
+    //             console.log('not created yet')
+    //         }
+    //         console.log(firstconnection)
+    //         //console.log(createfirsttable)
+    //         return firstconnection
+    //     }catch(error){
+    //         console.log(error)
+    //     }
+    // }
+
 
 
     return (

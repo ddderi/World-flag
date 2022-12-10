@@ -24,10 +24,13 @@ import img from '../images/placeholderimg.png'
 import imglost from '../images/placeholderlost.png'
 import { useEffect } from 'react';
 import { countries } from '../data/countries';
+import Heart from './Heart';
+
+
 
 export default function Game({ setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessageFooter, setResultFooter, setMessage, setScore, score, setColor, navigateTo, setUser, setLogged, setLastscore }) {
 
-
+  const [heart, setHeart] = useState(['red', 'red', 'red'])
   const [arraycountries, setArraycountries] = useState(countries)
   const [flag, setFlag] = useState(img);
   const [input, setInput] = useState('');
@@ -46,6 +49,8 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const [lastlife, setLastlife] = useState(false)
   const [timeover, setTimeover] = useState(false)
 
+
+  console.log(score)
   const startNewGame = async () => {
     try {
       const resultat = await startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed, setDisabled)
@@ -69,6 +74,18 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
 
+  useEffect(() => {
+
+    if (life === 2) setHeart([heart[0], heart[1], heart[2] = 'white'])
+    if (life === 1) setHeart([heart[0], heart[2] = 'white', heart[2] = 'white'])
+    if (life === 0) setHeart([heart[0] = 'white', heart[1] = 'white', heart[2] = 'white'])
+
+  }, [life])
+
+  const changeColor = () => {
+    setHeart([heart[0], heart[1], heart[2] = 'white'])
+  }
+
   function startNewGameClick() {
     if (logged) {
       resetGame()
@@ -85,9 +102,13 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
   useEffect(() => {
+    if (life === 2) setHeart([heart[0], heart[1], heart[2] = 'white'])
+    if (life === 1) setHeart([heart[0], heart[2] = 'white', heart[2] = 'white'])
+
     if (life === 0) {
       // console.log('LAST LIFE BE CAREFULL')
       setLastlife(true)
+      setHeart([heart[0] = 'white', heart[1] = 'white', heart[2] = 'white'])
     }
     if (life < 0) {
       setGameover(true)
@@ -196,15 +217,15 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     }
   }
 
-//function handlehey(){ handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries)}
+  //function handlehey(){ handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries)}
 
 
-  
-//handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries)}
+
+  //handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries)}
   //const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer' {...(!disabled && { onClick={ console.log() }, key={index} }  )}>{data}</StyledGameChildAnswer> })
   // const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer' onClick={!disabled ? () => console.log('oui') : undefined } key={index}>{data}</StyledGameChildAnswer> })
-  
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer  className='answer' onClick={!disabled ?  (e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) : undefined } key={index}>{data}</StyledGameChildAnswer> })
+
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={!disabled ? (e) => handleSubmit(e, result, e.target.innerHTML, e.target, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) : undefined} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
@@ -217,7 +238,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
             <>
               <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
               <Timer setTimeover={setTimeover} life={life} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} />
-              <Life life={life} />
+              <Life heart={heart} life={life} />
             </>
             : <></>}
         </StyledGameInfo>

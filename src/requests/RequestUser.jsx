@@ -11,17 +11,17 @@ export const registerScores = async (user, setExistscore, setBestscoreuser) => {
             variables: { filter: { owner: { eq: user } } }
         })
         console.log(apiData.data.listPoints.items)
-        if (apiData.data.listPoints.items.length > 0) {
-            localStorage.setItem('scoreid', JSON.stringify(apiData.data.listPoints.items[0].id))
-            localStorage.setItem('userscore', JSON.stringify(apiData.data.listPoints.items[0].score))
-            localStorage.setItem('existscore', JSON.stringify(true))
-            setBestscoreuser(apiData.data.listPoints.items[0].score || 0)
-        } else {
+        // if (apiData.data.listPoints.items.length > 0) {
+        localStorage.setItem('scoreid', JSON.stringify(apiData.data.listPoints.items[0].id))
+        localStorage.setItem('userscore', JSON.stringify(apiData.data.listPoints.items[0].score))
+        localStorage.setItem('existscore', JSON.stringify(true))
+        setBestscoreuser(apiData.data.listPoints.items[0].score || 0)
+        // } else {
 
-            localStorage.setItem('userscore', JSON.stringify(0))
-            localStorage.setItem('existscore', JSON.stringify(false))
-            setExistscore(false)
-        }
+        //     localStorage.setItem('userscore', JSON.stringify(0))
+        //     localStorage.setItem('existscore', JSON.stringify(false))
+        //     setExistscore(false)
+        // }
         return apiData
     } catch (error) {
         console.log(error)

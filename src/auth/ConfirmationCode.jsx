@@ -17,6 +17,12 @@ import { useSpring, animated } from 'react-spring';
 import { Hub } from 'aws-amplify';
 import { registerScores } from '../requests/RequestUser';
 import ClipLoader from "react-spinners/ClipLoader";
+import {
+    createPoint as createPointMutation,
+    updatePoint as updatePointMutation,
+
+} from '../graphql/mutations';
+import { API } from "aws-amplify";
 
 
 
@@ -26,15 +32,43 @@ export default function ConfirmationCode({ setLoading, loading, color, setExists
     const [message, setMessage] = useState('')
 
 
+    async function createPoint(newuser) {
+        const data = {
+            score: 0,
+            owner: newuser,
+            typedate: "date",
+            typescore: "score"
+        }
+        try {
+            // var connected = await Auth.currentUserInfo()
+            // if (connected !== null) {
+            const result = await API.graphql({
+                query: createPointMutation,
+                variables: { input: data }
+            })
+            localStorage.setItem('userscore', JSON.stringify(0))
+            localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
+            //   setExistscore(true)
+            setBestscoreuser(0)
+            console.log(result)
+            return result
+        } catch (error) {
+            alert('user not connected, couldnt create score')
+            console.log('user not connected, couldnt create score')
+        }
+    }
+
     function listenToAutoSignInEvent() {
         Hub.listen('auth', ({ payload }) => {
             const { event } = payload;
             if (event === 'autoSignIn') {
                 const user = payload.data;
-                registerScores(user.username, setExistscore, setBestscoreuser)
+                //registerScores(user.username, setExistscore, setBestscoreuser)
                 setLogged(true)
+
                 // assign user
                 setTimeout(() => {
+                    createPoint(user.username)
                     navigateTo('')
                 }, 1000);
             } else if (event === 'autoSignIn_failure') {

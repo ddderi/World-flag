@@ -27,8 +27,9 @@ export default function Home({ userScore, setTriggerscore, logged, setExistscore
   const { t } = useTranslation();
   const [result, setResult] = useState('');
   const [resultFooter, setResultFooter] = useState('')
-  
 
+  
+console.log(score)
   const navigateTo = (location) => {
     navigate(`/${location}`)
   };

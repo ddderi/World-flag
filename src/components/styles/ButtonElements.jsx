@@ -25,6 +25,7 @@ export const Btnlog = styled.button`
 	border-radius:2px;
 	cursor:pointer;
 	position:relative;
+  font-weight: bold;
   transition: 0.5s;
   &:hover {
     background-color: #d62c1a;

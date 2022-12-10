@@ -9,6 +9,7 @@ import Records from "./components/Records";
 import ConfirmationCode from "./auth/ConfirmationCode";
 import { fetchBestScores } from "./requests/RequestUser";
 import ForgotPassword from "./auth/ForgotPassword";
+import { Auth } from 'aws-amplify';
 
 
 
@@ -68,6 +69,8 @@ function App() {
 
   useEffect(() => {
     fetchBestScores(setPlayers)
+    // var connected = Auth.currentUserInfo()
+    // if(!connected){console.log('NOTCONNECTED YOUR WILLBE DISCONNECT')}
     const scoreexist = localStorage.getItem('existscore')
     if (scoreexist === 'false') {
       setExistscore(false)

@@ -1,9 +1,27 @@
-body, html {
+@font-face {
+  font-family: 'my font';
+  src: url('../src/components/styles/fonts/Syne-VariableFont_wght.ttf');
+  font-weight: 100;
+  /* font-style: normal; */
+}
+
+/* @font-face {
+  font-family: 'my font';
+  src: url('../src/components/styles/fonts/Syne-Bold.ttf');
+  font-style: bold;
+} */
+
+
+
+body,
+html {
   margin: 0;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, 'my font', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: url(./images//backgroundimg.jpg) no-repeat center center fixed;
@@ -14,7 +32,7 @@ body, html {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas,
     monospace;
 }
 
@@ -28,12 +46,12 @@ code {
   padding-top: 2%;
 }
 
-.answerClean{
+.answerClean {
   background-color: #fafafa;
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -48,12 +66,12 @@ select:-webkit-autofill:focus {
   background: transparent;
 }
 
-input:-webkit-internal-autofill-selected{
+input:-webkit-internal-autofill-selected {
   background-color: transparent;
 
 }
 
 input:-webkit-autofill,
-  input:-webkit-autofill:focus {
-    transition: background-color 600000s 0s, color 600000s 0s;
-  }
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}

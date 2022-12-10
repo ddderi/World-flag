@@ -40,10 +40,11 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
 
   async function signIn(data) {
     try {
-      const user = await Auth.signIn(data.username, data.password);
+      const usernickname = data.username.toLowerCase()
+      const user = await Auth.signIn(usernickname, data.password);
       setLogged(true)
 
-      registerScores(data.username, setExistscore, setBestscoreuser)
+      registerScores(usernickname, setExistscore, setBestscoreuser)
       setTimeout(() => {
         navigateTo('')
       }, 1000);
