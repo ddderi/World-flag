@@ -49,8 +49,6 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const [lastlife, setLastlife] = useState(false)
   const [timeover, setTimeover] = useState(false)
 
-
-  console.log(score)
   const startNewGame = async () => {
     try {
       const resultat = await startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed, setDisabled)

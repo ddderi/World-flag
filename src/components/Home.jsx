@@ -29,7 +29,6 @@ export default function Home({ userScore, setTriggerscore, logged, setExistscore
   const [resultFooter, setResultFooter] = useState('')
 
   
-console.log(score)
   const navigateTo = (location) => {
     navigate(`/${location}`)
   };

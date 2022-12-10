@@ -69,8 +69,6 @@ function App() {
 
   useEffect(() => {
     fetchBestScores(setPlayers)
-    // var connected = Auth.currentUserInfo()
-    // if(!connected){console.log('NOTCONNECTED YOUR WILLBE DISCONNECT')}
     const scoreexist = localStorage.getItem('existscore')
     if (scoreexist === 'false') {
       setExistscore(false)
