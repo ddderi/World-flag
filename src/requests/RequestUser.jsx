@@ -1,6 +1,9 @@
 import axios from "axios";
 import { API } from "aws-amplify";
 import { listPoints, sortByScore } from '../graphql/queries';
+import {
+    createPoint as createPointMutation,
+} from '../graphql/mutations';
 
 
 
@@ -10,14 +13,30 @@ export const registerScores = async (user, setExistscore, setBestscoreuser) => {
             query: listPoints,
             variables: { filter: { owner: { eq: user } } }
         })
+        console.log(apiData)
         console.log(apiData.data.listPoints.items)
-        // if (apiData.data.listPoints.items.length > 0) {
-        localStorage.setItem('scoreid', JSON.stringify(apiData.data.listPoints.items[0].id))
-        localStorage.setItem('userscore', JSON.stringify(apiData.data.listPoints.items[0].score))
-        localStorage.setItem('existscore', JSON.stringify(true))
-        setBestscoreuser(apiData.data.listPoints.items[0].score || 0)
-        // } else {
-
+        if (apiData.data.listPoints.items.length > 0) {
+            localStorage.setItem('scoreid', JSON.stringify(apiData.data.listPoints.items[0].id))
+            localStorage.setItem('userscore', JSON.stringify(apiData.data.listPoints.items[0].score))
+            localStorage.setItem('existscore', JSON.stringify(true))
+            setBestscoreuser(apiData.data.listPoints.items[0].score || 0)
+        } else {
+            console.log('this user doesnt have any records')
+            const data = {
+                score: 0,
+                owner: user,
+                typedate: "date",
+                typescore: "score"
+            }
+            const result = await API.graphql({
+                query: createPointMutation,
+                variables: { input: data }
+            })
+            localStorage.setItem('userscore', JSON.stringify(0))
+            localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
+            setBestscoreuser(0)
+            console.log('now user has records ')
+        }
         //     localStorage.setItem('userscore', JSON.stringify(0))
         //     localStorage.setItem('existscore', JSON.stringify(false))
         //     setExistscore(false)

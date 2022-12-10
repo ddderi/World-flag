@@ -62,9 +62,11 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   }
 
   const resetGame = () => {
+
     setScore(0)
     setOver(false)
     setSeconds(5)
+    setHeart(['red', 'red', 'red'])
     setLife(3)
     setGameover(false)
     setLastlife(false)
@@ -204,12 +206,17 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     }
     var connected = await Auth.currentUserInfo()
     if (connected !== null) {
-      const result = await API.graphql({
-        query: updatePointMutation,
-        variables: {
-          input: data
-        },
-      })
+      try {
+        const result = await API.graphql({
+          query: updatePointMutation,
+          variables: {
+            input: data
+          },
+        })
+      } catch (error) {
+        createPoint()
+        console.log('put createpoint here ', error)
+      }
       return result
     } else {
       alert('user not connected, couldnt update score')
