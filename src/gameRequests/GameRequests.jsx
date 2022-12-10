@@ -36,6 +36,7 @@ export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycoun
     for (let i = 0; i < 3; i++) {
 
         const index = Math.floor(Math.random() * filteredCountry.length)
+        console.log(index)
         Object.keys(filteredCountry[index]).forEach(async (key) => {
             optionsAnswer.push(filteredCountry[index][key])
             filteredCountry = [...filteredCountry.filter(country => country !== countries[index])]

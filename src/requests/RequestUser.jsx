@@ -21,7 +21,6 @@ export const registerScores = async (user, setExistscore, setBestscoreuser) => {
             localStorage.setItem('existscore', JSON.stringify(true))
             setBestscoreuser(apiData.data.listPoints.items[0].score || 0)
         } else {
-            console.log('this user doesnt have any records')
             const data = {
                 score: 0,
                 owner: user,
@@ -35,12 +34,7 @@ export const registerScores = async (user, setExistscore, setBestscoreuser) => {
             localStorage.setItem('userscore', JSON.stringify(0))
             localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
             setBestscoreuser(0)
-            console.log('now user has records ')
         }
-        //     localStorage.setItem('userscore', JSON.stringify(0))
-        //     localStorage.setItem('existscore', JSON.stringify(false))
-        //     setExistscore(false)
-        // }
         return apiData
     } catch (error) {
         console.log(error)

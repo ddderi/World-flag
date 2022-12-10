@@ -7,7 +7,7 @@ import Account from "./components/Account";
 import Signup from "./auth/Signup";
 import Records from "./components/Records";
 import ConfirmationCode from "./auth/ConfirmationCode";
-import { fetchBestScores } from "./requests/RequestUser";
+import { fetchBestScores, registerScores } from "./requests/RequestUser";
 import ForgotPassword from "./auth/ForgotPassword";
 import { Auth } from 'aws-amplify';
 
@@ -55,8 +55,8 @@ function App() {
     if (userlogged) {
       setUser(localStorage.getItem('CognitoIdentityServiceProvider.36jsc3nbg2jfv9stpn91gb9ks0.LastAuthUser'))
       setLogged(true)
-      setBestscoreuser('')
-
+      // setBestscoreuser('')
+      registerScores(user, setExistscore, setBestscoreuser)
 
     } else {
       setLogged(false)
