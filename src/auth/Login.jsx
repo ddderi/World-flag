@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { registerScores, loggingUser } from '../requests/RequestUser';
+import { registerScores } from '../requests/RequestUser';
 import {
   StyledFormCont,
   StyledForm,
@@ -18,7 +18,6 @@ import eyepasswordclose from '../images/eyepasswordclose.png';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
-import { useEffect } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
 import { NavLinkLogin, StyledDivLogin } from '../components/styles/NavbarElements';
 
@@ -26,11 +25,9 @@ import { NavLinkLogin, StyledDivLogin } from '../components/styles/NavbarElement
 
 function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUser, setLogged, message, setMessage, setExistscore }) {
 
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const [revealed, setRevealed] = useState(false);
   const { t } = useTranslation();
-
-
 
 
   const fade = useSpring({
@@ -64,7 +61,6 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
       <StyledForm onSubmit={handleSubmit((data) => {
         setLoading(true)
         signIn(data)
-        // reset()
       })}>
         <StyledInputContainer>
           <StyledInputForm {...register('username', { required: true })} type="text" autoComplete="off" required />

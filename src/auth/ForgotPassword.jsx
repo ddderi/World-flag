@@ -5,7 +5,6 @@ import {
     StyledForm,
     StyledInputForm,
     StyledFormHeading,
-    LabelAccount,
     StyledSpanMessage,
     StyledFormContAccount,
     StyledInputContainer
@@ -13,31 +12,26 @@ import {
     from '../components/styles/GeneralElements';
 import { Btnlog } from '../components/styles/ButtonElements';
 import { useTranslation } from 'react-i18next';
-import poolData from "../UserPool";
-import { CognitoUser } from "amazon-cognito-identity-js";
 import { Auth } from 'aws-amplify';
 import ClipLoader from "react-spinners/ClipLoader";
-// import * as AWS from "@aws-sdk/client-cognito-identity-provider";
 
-export default function ForgotPassword({ message, setMessage, setLoading, loading, color, navigateTo }) {
+
+export default function ForgotPassword({ setMessage, setLoading, loading, color, navigateTo }) {
 
     const [stage, setStage] = useState(1)
     const { register, handleSubmit, reset } = useForm();
     const { t } = useTranslation();
-
+    const [messageForgot, setMessageForgot] = useState('')
 
     const sendCode = async (username) => {
         try {
             const code = await Auth.forgotPassword(username)
-            console.log(code)
-            if (code === 'SUCCESS') {
-                setStage(2)
-            }
+            setStage(2)
+            setMessageForgot(`Email sent to ${code.CodeDeliveryDetails.Destination}`)
         } catch (error) {
             setLoading(false)
-            setMessage('Username incorrect')
+            setMessageForgot('Username incorrect')
             console.log(error)
-            
         }
     };
 
@@ -45,22 +39,18 @@ export default function ForgotPassword({ message, setMessage, setLoading, loadin
     const confirmCode = async (data) => {
         try {
             const change = await Auth.forgotPasswordSubmit(data.username, data.code, data.new_password)
-            // console.log(change)
             if (change === 'SUCCESS') {
                 navigateTo('login')
+                setMessage('Succes, you can now login with your new credentials')
             }
             return change
         } catch (error) {
             setLoading(false)
-            setMessage(error)
+            setMessageForgot(error)
             console.log(error)
         }
     }
 
-
-    // setTimeout(() => {
-    //     navigateTo('login')
-    // })
 
     const fade = useSpring({
         from: { opacity: 0 }, opacity: 1
@@ -76,7 +66,7 @@ export default function ForgotPassword({ message, setMessage, setLoading, loadin
                     reset()
                 })}>
                     <StyledFormHeading>Forget password</StyledFormHeading>
-                    {message ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
+                    {messageForgot ? <StyledSpanMessage>{t(`${messageForgot}`)}</StyledSpanMessage> : null}
                     <StyledInputContainer>
                         {/* <LabelAccount htmlFor="currentpassword">{t('account.currentpassword')}</LabelAccount> */}
                         <StyledInputForm style={{ marginBottom: '4%' }} {...register("username")} required />
@@ -105,7 +95,7 @@ export default function ForgotPassword({ message, setMessage, setLoading, loadin
 
                 })}>
                     <StyledFormHeading>Forget password</StyledFormHeading>
-                    {message ? <StyledSpanMessage>{t(`${message}`)}</StyledSpanMessage> : null}
+                    {messageForgot ? <StyledSpanMessage>{t(`${messageForgot}`)}</StyledSpanMessage> : null}
                     <StyledInputContainer>
                         <StyledInputForm {...register("username")} required />
                         <label htmlFor='username'>Username</label>

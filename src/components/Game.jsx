@@ -21,10 +21,9 @@ import {
 } from '../graphql/mutations';
 import { Auth } from 'aws-amplify';
 import img from '../images/placeholderimg.png'
-import imglost from '../images/placeholderlost.png'
 import { useEffect } from 'react';
 import { countries } from '../data/countries';
-import Heart from './Heart';
+
 
 
 
@@ -35,7 +34,6 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
   const [flag, setFlag] = useState(img);
   const [input, setInput] = useState('');
   const [answer, setAnswer] = useState([]);
-  const [coloranswer, setColoranswer] = useState('');
   const { t } = useTranslation();
   const userbestscore = localStorage.getItem('userscore');
   const [disabled, setDisabled] = useState(false)
@@ -79,7 +77,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
     if (life === 2) setHeart([heart[0], heart[1], heart[2] = 'white'])
     if (life === 1) setHeart([heart[0], heart[2] = 'white', heart[2] = 'white'])
     if (life === 0) setHeart([heart[0] = 'white', heart[1] = 'white', heart[2] = 'white'])
-
+  // eslint-disable-next-line
   }, [life])
 
   const changeColor = () => {
@@ -118,6 +116,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       setOver(false)
       endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
     }
+    // eslint-disable-next-line
   }, [life])
 
 
@@ -165,6 +164,7 @@ export default function Game({ setTriggerscore, logged, setExistscore, existscor
       setOver(false)
       setGoodanswer(false)
     }
+    // eslint-disable-next-line
   }, [over, goodanswer, lastlife, timeover])
 
 

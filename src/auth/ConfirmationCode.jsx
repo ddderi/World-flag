@@ -7,7 +7,6 @@ import {
     StyledFormHeading,
     StyledInputContainer,
     StyledSpan,
-    StyledImgPassword,
     StyledSpanMessage
 }
     from '../components/styles/GeneralElements';
@@ -15,12 +14,9 @@ import { Btnlog, BtnLinkLog } from '../components/styles/ButtonElements';
 import { Auth } from 'aws-amplify';
 import { useSpring, animated } from 'react-spring';
 import { Hub } from 'aws-amplify';
-import { registerScores } from '../requests/RequestUser';
 import ClipLoader from "react-spinners/ClipLoader";
 import {
-    createPoint as createPointMutation,
-    updatePoint as updatePointMutation,
-
+    createPoint as createPointMutation
 } from '../graphql/mutations';
 import { API } from "aws-amplify";
 
@@ -28,7 +24,7 @@ import { API } from "aws-amplify";
 
 export default function ConfirmationCode({ setLoading, loading, color, setExistscore, setBestscoreuser, setLogged, navigateTo }) {
 
-    const { register, handleSubmit, reset } = useForm()
+    const { register, handleSubmit } = useForm()
     const [message, setMessage] = useState('')
 
 
@@ -40,15 +36,12 @@ export default function ConfirmationCode({ setLoading, loading, color, setExists
             typescore: "score"
         }
         try {
-            // var connected = await Auth.currentUserInfo()
-            // if (connected !== null) {
             const result = await API.graphql({
                 query: createPointMutation,
                 variables: { input: data }
             })
             localStorage.setItem('userscore', JSON.stringify(0))
             localStorage.setItem('scoreid', JSON.stringify(result.data.createPoint.id))
-            //   setExistscore(true)
             setBestscoreuser(0)
             console.log(result)
             return result
@@ -63,10 +56,7 @@ export default function ConfirmationCode({ setLoading, loading, color, setExists
             const { event } = payload;
             if (event === 'autoSignIn') {
                 const user = payload.data;
-                //registerScores(user.username, setExistscore, setBestscoreuser)
                 setLogged(true)
-
-                // assign user
                 setTimeout(() => {
                     createPoint(user.username)
                     navigateTo('')
@@ -84,7 +74,7 @@ export default function ConfirmationCode({ setLoading, loading, color, setExists
             listenToAutoSignInEvent()
             return user
         } catch (error) {
-            setMessage('Error in the code')
+            setMessage('Error : username/code is wrong')
             console.log('error confirming sign up', error);
             setLoading(false);
         }
@@ -116,7 +106,6 @@ export default function ConfirmationCode({ setLoading, loading, color, setExists
             <StyledForm onSubmit={handleSubmit((data) => {
                 setLoading(true)
                 confirmSignUp(data)
-                // reset()
             })}>
                 <StyledInputContainer>
                     <StyledInputForm {...register('username')} type="text" required />
