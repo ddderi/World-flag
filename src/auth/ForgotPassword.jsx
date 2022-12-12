@@ -7,13 +7,14 @@ import {
     StyledFormHeading,
     StyledSpanMessage,
     StyledFormContAccount,
-    StyledInputContainer
+    StyledInputContainer,
 }
     from '../components/styles/GeneralElements';
 import { Btnlog } from '../components/styles/ButtonElements';
 import { useTranslation } from 'react-i18next';
 import { Auth } from 'aws-amplify';
 import ClipLoader from "react-spinners/ClipLoader";
+import { NavLinkLogin, StyledDivLogin } from '../components/styles/NavbarElements';
 
 
 export default function ForgotPassword({ setMessage, setLoading, loading, color, navigateTo }) {
@@ -72,6 +73,9 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
                         <StyledInputForm style={{ marginBottom: '4%' }} {...register("username")} required />
                         <label htmlFor='username'>Your username</label>
                     </StyledInputContainer>
+                    <StyledDivLogin>
+                        <NavLinkLogin onClick={() => setStage(2)} >Already have a code ?</NavLinkLogin>
+                    </StyledDivLogin>
                     <Btnlog type='submit' disabled={loading ? true : false} >{
                         loading ?
                             <ClipLoader
@@ -97,11 +101,10 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
                     <StyledFormHeading>Forget password</StyledFormHeading>
                     {messageForgot ? <StyledSpanMessage>{t(`${messageForgot}`)}</StyledSpanMessage> : null}
                     <StyledInputContainer>
-                        <StyledInputForm {...register("username")} required />
+                        <StyledInputForm style={{ marginBottom: '4%' }} {...register("username")} required />
                         <label htmlFor='username'>Username</label>
-                        {setLoading(false)}
+                        {/* {setLoading(false)} */}
                     </StyledInputContainer>
-
                     <StyledInputContainer>
                         <StyledInputForm style={{ marginBottom: '4%' }} {...register("code")} required />
                         <label htmlFor='code'>Code</label>
