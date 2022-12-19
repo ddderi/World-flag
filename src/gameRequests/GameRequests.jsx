@@ -4,43 +4,19 @@ import { countries } from '../data/countries';
 
 export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycountries, setArraycountries) => {
 
-    // let optionsAnswer = []
-    // console.log(result)
-    // for (let i = 0; i < 3; i++) {
-    //     const index = Math.floor(Math.random() * countries.length)
-    //     Object.keys(countries[index]).forEach(async (key) => {
-    //         optionsAnswer.push(countries[index][key])
-    //         return optionsAnswer
-    //     })
-    // }
-
-
-    ///
-    //   const propName = objects[0];
-    //   console.log(propName)
-    // use filter() to create a new array without objects with the specified property name
-    //const filteredObjects = objects.filter(obj => obj !== propName);
-
-    // the filtered array should not contain the object with the property "shape"
-    //console.log(filteredObjects);
-
-
-    // console.log(countries)
-    // console.log(result)
 
     let filteredCountry = countries.filter(country => country !== valueToRemove)
-    // console.log(filteredCountry)
-    let countriestomap = [...countries]
-    let optionsAnswer = []
-    //const countriestomap = [...countries]
-    for (let i = 0; i < 3; i++) {
 
+    // let countriestomap = [...countries]
+    let optionsAnswer = []
+
+    for (let i = 0; i < 3; i++) {
+        
         const index = Math.floor(Math.random() * filteredCountry.length)
         console.log(index)
         Object.keys(filteredCountry[index]).forEach(async (key) => {
             optionsAnswer.push(filteredCountry[index][key])
-            filteredCountry = [...filteredCountry.filter(country => country !== countries[index])]
-            console.log(filteredCountry.length)
+            filteredCountry.filter(country => country !== countries[index])
             return optionsAnswer
         })
     }
@@ -64,10 +40,9 @@ export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycoun
 }
 
 
-export const startGame = async (arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, setScore, setDisplayed, setDisabled) => {
+export const startGame = async (arraycountries, setArraycountries, setResult, setAnswer, setFlag, setScore, setDisplayed, setDisabled) => {
     try {
         setDisabled(false)
-        setMessageFooter('')
         setResult('')
         setAnswer([])
         setDisplayed(false)
@@ -76,7 +51,7 @@ export const startGame = async (arraycountries, setArraycountries, setMessageFoo
             setResult(countries[index][key])
             const valueToRemove = countries[index]
             //    console.log(arraycountries[index][key])
-            setResultFooter(countries[index][key])
+            //setResultFooter(countries[index][key])
             const resultFlag = await flagCall(`${key}`)
             setFlag(resultFlag.request.responseURL)
             triggerAnswers(setAnswer, countries[index][key], valueToRemove, arraycountries, setArraycountries)
@@ -103,27 +78,25 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
 }
 
 
-export const handleSubmit = (e, result, input, etarget, setMessageFooter, setResultFooter, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) => {
+export const handleSubmit = (e, result, input, etarget, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) => {
     e.preventDefault()
     setDisabled(true)
     if (result === input) {
-        setMessageFooter('messageFooter.2')
         setScore(score + 1)
         setColor(true)
-        console.log(etarget.style.backgroundColor)
+        // console.log(etarget.style.backgroundColor)
         etarget.style.backgroundColor = 'green'
 
         setGoodanswer(true)
         setTimeout(() => {
             etarget.style.backgroundColor = ''
-            startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed, setDisabled)
+            startGame(arraycountries, setArraycountries, setResult, setAnswer, setFlag, result, setDisplayed, setDisabled)
 
         }, 1000);
     }
     else if (!result || result === '') {
         setDisplayed(true)
     } else if (result !== input) {
-        setMessageFooter('messageFooter.3')
         etarget.style.backgroundColor = 'red'
         const mydiv = document.getElementsByClassName('answer')
         for (let i = 0; i < mydiv.length; i++) {
@@ -136,7 +109,7 @@ export const handleSubmit = (e, result, input, etarget, setMessageFooter, setRes
         if (life > 0 && !lastlife) {
             setTimeout(() => {
                 etarget.style.backgroundColor = ''
-                startGame(arraycountries, setArraycountries, setMessageFooter, setResult, setResultFooter, setAnswer, setFlag, result, setDisplayed, setDisabled)
+                startGame(arraycountries, setArraycountries, setResult, setAnswer, setFlag, result, setDisplayed, setDisabled)
 
             }, 1000);
         }

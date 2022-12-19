@@ -9,6 +9,7 @@ export const Nav = styled.nav`
   justify-content: space-around;
   margin: 0;
   width: 50%;
+  // aligm-items: flex-start;
   @media screen and (max-width: 765px){
     width: 100%;
     
@@ -18,7 +19,7 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(Link)`
 text-decoration: none;
-color: white;
+color: black;
 
 text-align: center;
 display: flex;
@@ -85,15 +86,20 @@ export const NavLinkLadder = styled(NavLink)`
 
 export const NavMenuPar = styled.div`
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.89);
+  background-color: rgba(255,255,255, 0.8);
+  // background-color: rgba(0, 0, 0, 0.89);
+   //background: linear-gradient(68.9deg, #FFFFFF 14.96%, #3BADD1 22.14%, #ED53F0 70.52%, #CF58DC 75.06%, #DA36F4 89.61%);
+  //background: linear-gradient(225.82deg, rgba(172, 78, 217, 0.49) 6.47%, rgba(217, 78, 144, 0.76) 21.35%, rgba(78, 175, 217, 0.83) 85.9%, rgba(78, 175, 217, 0) 100%);
   color: white;
+  
 `;
 
 export const NavMenu = styled.div`
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  
   padding-left: 2%;
   // @media screen and (max-width: 765px){
   //   padding-left: 40%
@@ -214,7 +220,7 @@ export const NavLinkDropDown = styled(Link)`
 
 export const StyledSelect = styled.div`
 position: relative;
-margin-right: 2%;
+//margin-right: 2%;
 right: 0%;
 
 // @media screen and (max-width: 765px){

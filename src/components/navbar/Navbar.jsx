@@ -79,9 +79,9 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
           {logged ?
             <>
               {/* <NavLink to='/login' onClick={() => logout(setUser, setLogged)} > */}
-              <NavLink to='/login' onClick={() => signOut()} >
+              {/* <NavLink to='/login' onClick={() => signOut()} >
                 {t('logoutnavbar')}
-              </NavLink>
+              </NavLink> */}
               <NavLink to='/account' >
                 {userCapitalize(user)}
               </NavLink>
@@ -89,6 +89,9 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
               <NavLinkLadder display={!ladderNavbar ? 'none' : ''} to='/records' >
                 Ladder
               </NavLinkLadder>
+              <NavLink to='/login' onClick={() => signOut()} >
+                {t('logoutnavbar')}
+              </NavLink>
               {/* : 
                   <>
                   </>

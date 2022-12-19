@@ -24,7 +24,9 @@ html {
     sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(./images//backgroundimg.jpg) no-repeat center center fixed;
+  background: linear-gradient(225.82deg, rgba(172, 78, 217, 1) 6.47%, rgba(217, 78, 144, 1) 21.35%, rgba(78, 175, 217, 1) 85.9%, rgba(78, 175, 217, 1) 100%) no-repeat center center fixed;;
+  /* background-color: white; */
+  /* background: url(./images//backgroundimg.jpg) no-repeat center center fixed; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -60,7 +62,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   /* border: 1px solid green; */
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: black;
   /* -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.89) inset; */
   /* transition: background-color 5000s ease-in-out 0s; */
   background: transparent;

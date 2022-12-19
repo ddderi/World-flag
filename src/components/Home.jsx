@@ -7,18 +7,18 @@ import {
   StyledCore,
   StyledFooter,
   StyledFooterDiv,
-  StyledSpanResult,
   StyledErrorBox,
-  StyledErrorBoxChild
+  StyledErrorBoxChild,
 } from './styles/GeneralElements';
 import { ButtonError } from '../components/styles/ButtonElements';
 import { useSpring, animated } from 'react-spring';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Gameover from './Gameover';
 
-export default function Home({ userScore, setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, setUser, setLogged }) {
+export default function Home({ userScore, triggerscore, setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, setUser, setLogged }) {
 
-  const [messageFooter, setMessageFooter] = useState('messageFooter.1')
+
   const [color, setColor] = useState('')
   const [score, setScore] = useState(0)
   const [lastscore, setLastscore] = useState('')
@@ -26,59 +26,86 @@ export default function Home({ userScore, setTriggerscore, logged, setExistscore
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [result, setResult] = useState('');
-  const [resultFooter, setResultFooter] = useState('')
+  const [gameover, setGameover] = useState(false)
 
-  
   const navigateTo = (location) => {
     navigate(`/${location}`)
   };
-
-  function fontColor(basicfont) {
-    if (color === true) {
-      return 'green'
-    } else if (color === false) {
-      return 'red'
-    } else {
-      return basicfont
-    }
-  }
 
   const fade = useSpring({
     from: { opacity: 0 }, opacity: 1
   })
 
+  // function fontColor(basicfont) {
+  //   if (color === true) {
+  //     return 'green'
+  //   } else if (color === false) {
+  //     return 'red'
+  //   } else {
+  //     return basicfont
+  //   }
+  // }
+
+  // const transition = useTransition(gameover, {
+  //   from: { x: -500, y: 0},
+  //   enter: { x: 0, y: 0},
+  //   leave: { x: -500, y: 0}
+  // })
+
+
 
   return (
-    <StyledCont as={animated.div} style={fade} >
-      <StyledHeading>{t('headerhome')}</StyledHeading>
-      <StyledCore>
-        <Game setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessageFooter={setMessageFooter} setResultFooter={setResultFooter} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
-        <Records setPlayers={setPlayers} players={players} />
-      </StyledCore>
-      <StyledErrorBox display={!displayed ? 'none' : 'block'} >
-        <StyledErrorBoxChild>
-          <span>{t("errorspanstart")}</span>
-          <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
-        </StyledErrorBoxChild>
-      </StyledErrorBox>
-      <StyledFooter>
-        {!lastscore ?
-          <StyledFooterDiv>
-            <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-          </StyledFooterDiv>
-          :
-          <>
-            <StyledFooterDiv>
-              <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-              <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
-            </StyledFooterDiv>
-          </>
-        }
-      </StyledFooter>
-      <StyledFooter>
-        <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, { result: resultFooter })}</StyledSpanResult>
-      </StyledFooter>
-    </StyledCont>
+    <>
+        <StyledCont as={animated.div} style={fade} >
+          <StyledHeading>{t('headerhome')}</StyledHeading>
+          <StyledCore>
+            <Game setGameover={setGameover} gameover={gameover} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+            <Records setPlayers={setPlayers} players={players} />
+          </StyledCore>
+          <StyledErrorBox display={!displayed ? 'none' : 'block'} >
+            <StyledErrorBoxChild>
+              <span>{t("errorspanstart")}</span>
+              <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
+            </StyledErrorBoxChild>
+          </StyledErrorBox>
+          <StyledFooter>
+            {!lastscore ?
+              <StyledFooterDiv>
+                <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
+              </StyledFooterDiv>
+              :
+              <>
+                <StyledFooterDiv>
+                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
+                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
+                </StyledFooterDiv>
+              </>
+            }
+          </StyledFooter>
+          {/* <StyledFooter>
+            <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, { result: resultFooter })}</StyledSpanResult>
+          </StyledFooter> */}
+        </StyledCont>
+      {/* )} */}
+      <>
+        {/* {transition((style, item) => 
+          item ? */}
+          {/* // <animated.div style={style}> */}
+            <Gameover triggerscore={triggerscore} setTriggerscore={setTriggerscore} gameover={gameover} navigateTo={navigateTo} setGameover={setGameover} score={score} />
+            {/* // </animated.div> */}
+            {/* : */}
+          {/* null
+        )} */}
+
+        {/* <Gameover navigateTo={navigateTo} setGameover={setGameover} score={score} /> */}
+
+
+
+        {/* {gameover && (
+          <Gameover navigateTo={navigateTo} setGameover={setGameover} score={score} />
+        )} */}
+      </>
+    </>
   )
 }
 

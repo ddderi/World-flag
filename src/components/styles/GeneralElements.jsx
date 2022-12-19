@@ -3,8 +3,13 @@ import styled from 'styled-components';
 
 
 export const StyledHeading = styled.h1`
-background-color: rgba(0, 0, 0, 0.89);
-color: white;
+//background-color: rgba(0, 0, 0, 0.89);
+
+background-color: rgba(255,255,255, 0.8);
+
+color: black;
+
+
 width: 100%;
 text-transform: uppercase;
 border-radius: 10px 10px;
@@ -34,8 +39,8 @@ align-items: center;
     top:55%;
     
     }
-  @media screen and (min-width: 906px) {
-    width: 65%;
+  @media screen and (min-width: 905px) {
+    width: 85%;
     
   } 
 
@@ -45,7 +50,14 @@ align-items: center;
 
 
 export const StyledHome = styled(StyledHeading)`
+
+
+
+
 background-color: rgba(0, 0, 0, 0.89);
+
+//background-color: rgba(255,255,255, 0.8);
+
 color: white;
 text-transform: uppercase;
 border-radius: 10px 10px;
@@ -112,11 +124,11 @@ justify-content: space-around;
 
 export const StyledBestScore = styled.div`
 
-color: white;
+color: black;
 `;
 
 export const StyledTimer = styled.div`
-color: white;
+color: black;
 
 `;
 
@@ -133,9 +145,13 @@ export const StyledHeartMapped = styled.div`
 
 
 export const StyledFooter = styled.div`
-  background-color: rgba(0, 0, 0, 0.89);
+  //background-color: rgba(0, 0, 0, 0.89);
+ // color: white;
+  background-color: rgba(255,255,255, 0.8);
+  color: black;
+
+
   width: 100%;
-  color: white;
   height: 50px;
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
@@ -163,20 +179,20 @@ export const StyledFooterDiv = styled.div`
 
 
 export const StyledGameCont = styled.div`
-  // padding: 1%;
-  // grid-column-start: 1;
-  // grid-column-end: 3;
-  // display: grid;
-  // grid-template-columns: 65% 35%;
-  // column-gap: 10px;
-  // row-gap: 10px;
+
   position: relative;
   display: flex;
   width: 100%;
   flex-direction: column;
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
-  background-color: rgba(0, 0, 0, 0.89);
+
+
+  //background-color: rgba(0, 0, 0, 0.89);
+
+  background-color: rgba(255,255,255, 0.8);
+
+
   justify-content: center;
   align-items: center;
   padding: 2% 0%;
@@ -200,7 +216,7 @@ export const StyledGameCont = styled.div`
 export const StyledGameChildLeft = styled.div`
   // grid-column-start: 1;
   // grid-column-end: 1;
-  
+  width: 95%;
 `;
 
 
@@ -210,7 +226,7 @@ export const StyledImgFlag = styled.img`
   pointer-events: none;
   border: 8px solid white;
   @media screen and (max-width: 400px){
-    width: 90%;
+    width: 95%;
   }
 `;
 
@@ -271,23 +287,25 @@ export const StyledRecordsCont = styled.div`
   display: none;
   grid-column-start: 3;
   grid-column-end: 3;
-  color: white;
+  
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
-  background-color: rgba(0, 0, 0, 0.89);
- 
-  // margin-left: 2%;
-  // flex-direction: column;
-  // justify-content: space-evenly;
-  // align-items: center;
-  // padding-bottom: 2%;
+  
+  //color: white;
+  //background-color: rgba(0, 0, 0, 0.89);
+
+  background-color: rgba(255,255,255, 0.8);
+  color: black;
+
   @media screen and (min-width: 765px) {
     display: block;
+    width: 400px;
     height: 100%;
   }
-  // @media screen and (max-width: 450px){
-  //   display: none;
-  // }
+  @media screen and (min-width: 1000px) {
+
+  }
+ 
 `;
 
 export const LabelAccount = styled.label`
@@ -322,7 +340,11 @@ border-bottom: 1px solid white;
 border-top-left-radius: 10px;
 border-bottom-right-radius: 5px;
 padding: 1% 5% 1% 5%;
-color: white;
+
+
+//color: white;
+color: black;
+
 margin: 2% auto 2% auto;
 `;
 
@@ -360,7 +382,7 @@ display: none;
 `;
 
 export const StyledHeadingRecordsPhone = styled(StyledHeadingFooter)`
-
+color: black;
 display: flex;
 justify-content: center;
 align-items: items;
@@ -376,7 +398,9 @@ width: 80%;
 color: white;
 border-radius: 10px 10px;
 box-shadow: 1px 1px 3px gray;
-background-color: rgba(0, 0, 0, 0.89);
+
+background-color: rgba(255,255,255, 0.8);
+//background-color: rgba(0, 0, 0, 0.89);
 
 // margin-left: 2%;
 // flex-direction: column;
@@ -397,7 +421,9 @@ background-color: rgba(0, 0, 0, 0.89);
 
 
 export const StyledFormHeading = styled.h1`
-  color:#fff;	
+  
+color: black;
+//color:#fff;	
   text-transform:uppercase;
   font-size: 23px;
   margin: 2% 0 15% 0;
@@ -411,13 +437,17 @@ export const StyledInputForm = styled.input`
 `;
 
 export const StyledFormCont = styled.div`
+
   position:absolute;
 	left:50%;
 	top:50%;
   width: 70%;
       padding: 6% 6%;
 	transform: translate(-50%,-50%);
-  background-color: rgba(0, 0, 0, 0.89);
+  background-color: rgba(255,255,255, 0.8);
+  // background-color: rgba(0, 0, 0, 0.89);
+ //background: linear-gradient(68.9deg, #FFFFFF 14.96%, #3BADD1 22.14%, #ED53F0 70.52%, #CF58DC 75.06%, #DA36F4 89.61%);
+   //background: linear-gradient(225.82deg, rgba(172, 78, 217, 1) 6.47%, rgba(217, 78, 144, 1) 21.35%, rgba(78, 175, 217, 1) 85.9%, rgba(78, 175, 217, 1) 100%);
 	border-radius:3px;
   @media screen and (max-width: 550px) {
     width: 80%;
@@ -428,11 +458,11 @@ export const StyledFormCont = styled.div`
     padding: 8% 8%;
   }
     @media screen and (min-width: 792px){
-      width: 28%;
+      width: 40%;
       padding: 8% 8%;
     }
     @media screen and (min-width: 1005px) and (max-width: 1320px){
-      width: 30%;
+      width: 35%;
       padding: 4% 4%;
     }
     @media screen  and (min-width: 1320px){
@@ -444,10 +474,8 @@ export const StyledFormCont = styled.div`
 
 export const StyledFormContAccount = styled(StyledFormCont)`
 
-// @media screen and (min-width: 700px) {
-//   max-width: 20%;
-//   padding: 8% 8%;
-// } 
+
+
 `;
 
 
@@ -474,7 +502,8 @@ export const StyledInputContainer = styled.div`
 	top:0px;
 	left:0px;
 	font-size:16px;
-	color:#fff;	
+	// color:#fff;	
+  color: black;
     pointer-event:none;
 	transition: all 0.5s ease-in-out;
 }
@@ -485,7 +514,8 @@ export const StyledInputContainer = styled.div`
   width:100%;
   padding:8px 0 5px 0;
   font-size:16px;
-  color:#fff;
+  // color:#fff;
+  color: black;
 }
 & ${StyledInputForm}:focus{
   border:none;	
@@ -582,7 +612,38 @@ height: 300px;
 display: flex;
 justify-content: center;
 align-items: center;
+`;
 
+export const StyledGameOver = styled.div`
+color: white;
+display: flex;
+padding: 10%;
+margin: auto;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 65%;
+width: 75%;
+background-color: rgba(0, 0, 0, 1);
+border-radius: 10px 10px;
+@media screen and (min-width: 550px){
+  width: 70%;
+}
+@media screen and (min-width: 1000px){
+  width: 50%;
+}
+
+position: absolute;
+// left: 55px;
+
+
+// Gameover enfant div avec du margin a modifie !!!
+`;
+
+export const StyledParticles = styled.div`
+
+// z-index: 5;
+// position: absolute;
 
 
 `;
