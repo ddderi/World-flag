@@ -213,6 +213,18 @@ export const StyledGameCont = styled.div`
 
 `;
 
+export const StyledGameContTwo = styled(StyledGameCont)`
+
+`;
+
+
+export const StyledCard = styled.div`
+width: 30px;
+height: 30px;
+background-color: red;
+margin: 8%;
+`;
+
 export const StyledGameChildLeft = styled.div`
   // grid-column-start: 1;
   // grid-column-end: 1;
@@ -227,6 +239,9 @@ export const StyledImgFlag = styled.img`
   border: 8px solid white;
   @media screen and (max-width: 400px){
     width: 95%;
+  }
+  @media screen and (min-width: 400px){
+    width: 280px; 
   }
 `;
 
@@ -626,11 +641,13 @@ height: 65%;
 width: 75%;
 background-color: rgba(0, 0, 0, 1);
 border-radius: 10px 10px;
-@media screen and (min-width: 550px){
-  width: 70%;
+@media screen and (min-width: 750px){
+  width: 75%;
+  height: 55%;
 }
 @media screen and (min-width: 1000px){
   width: 50%;
+  height: 45%;
 }
 
 position: absolute;
@@ -647,3 +664,12 @@ export const StyledParticles = styled.div`
 
 
 `;
+
+export const StyledSpanEmoji = styled.span`
+font-size: 60px;
+position: relative;
+top: 10%;
+left: 0%;
+`;
+
+

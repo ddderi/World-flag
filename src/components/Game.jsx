@@ -20,7 +20,7 @@ import {
 
 } from '../graphql/mutations';
 import { Auth } from 'aws-amplify';
-import img from '../images/placeholderimg.png'
+import img from '../images/backgroundimg.jpg';
 import { useEffect } from 'react';
 import { countries } from '../data/countries';
 

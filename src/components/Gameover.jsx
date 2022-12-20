@@ -9,6 +9,8 @@ import {  animated, useTransition } from 'react-spring';
 import {
   StyledParticles
 } from './styles/GeneralElements';
+import Emoji from './Emoji';
+import Curvedtext from './Curvedtext';
 
 export default function Gameover({ triggerscore, setTriggerscore, updated, setUpdated, gameover, navigateTo, setGameover, score }) {
 
@@ -32,8 +34,8 @@ export default function Gameover({ triggerscore, setTriggerscore, updated, setUp
       {transition((style, item) =>
         item ?
           <StyledGameOver as={animated.div} style={style}  >
-
-            <div>Game Over</div>
+            <Emoji label="sheep" symbol="😢" />
+            <Curvedtext />
             {triggerscore && (
               <div style={{textAlign: 'center', margin: '10%'}}>Congratulation, you have beaten your last best score</div>
             )}
