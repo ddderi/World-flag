@@ -78,7 +78,7 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
 }
 
 
-export const handleSubmit = (e, result, input, etarget, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) => {
+export const handleSubmit = (e, result, input, etarget, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled, setRightanswer, setWronganswer) => {
     e.preventDefault()
     setDisabled(true)
     if (result === input) {

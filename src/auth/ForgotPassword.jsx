@@ -76,8 +76,8 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
                     <StyledDivLogin>
                         <NavLinkLogin onClick={() => setStage(2)} >Already have a code ?</NavLinkLogin>
                     </StyledDivLogin>
-                    <Btnlog type='submit' disabled={loading ? true : false} >{
-                        loading ?
+                    {loading && (
+                        <Btnlog type='submit' disabled={loading ? true : false} >
                             <ClipLoader
                                 color={color}
                                 loading={loading}
@@ -86,9 +86,12 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
                                 aria-label="Loading Spinner"
                                 data-testid="loader"
                             />
-                            : <>Send code</>
-                    }
-                    </Btnlog>
+                        </Btnlog>
+                    )}
+                    {!loading && (
+                        <Btnlog type='submit' disabled={loading ? true : false} >Send code</Btnlog>
+
+                    )}
                 </StyledForm>
             )}
             {stage === 2 && (
@@ -113,9 +116,8 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
                         <StyledInputForm style={{ marginBottom: '4%' }} {...register("new_password")} required />
                         <label htmlFor='new_password'>New password</label>
                     </StyledInputContainer>
-
-                    <Btnlog type='submit' disabled={loading ? true : false} >{
-                        loading ?
+                    {loading && (
+                        <Btnlog type='submit' disabled={loading ? true : false} >
                             <ClipLoader
                                 color={color}
                                 loading={loading}
@@ -124,9 +126,11 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
                                 aria-label="Loading Spinner"
                                 data-testid="loader"
                             />
-                            : <>Change password</>
-                    }
-                    </Btnlog>
+                        </Btnlog>
+                    )}
+                    {!loading && (
+                        <Btnlog type='submit' disabled={loading ? true : false} >Change password</Btnlog>
+                    )}
                 </StyledForm>
             )}
         </StyledFormContAccount >

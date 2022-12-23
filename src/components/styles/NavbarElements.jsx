@@ -44,7 +44,7 @@ padding: 0% 1.5% 0% 1.5%;
 
 export const NavLinkLogin = styled(Link)`
 text-decoration: none;
-color: white;
+color: black;
 margin-bottom: 3%;
 font-size: 16px;
 text-transform: none;

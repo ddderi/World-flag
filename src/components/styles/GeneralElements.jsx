@@ -151,31 +151,163 @@ export const StyledFooter = styled.div`
   color: black;
 
 
-  width: 100%;
-  height: 50px;
   border-radius: 10px 10px;
-  box-shadow: 1px 1px 3px gray;
+   box-shadow: 1px 1px 3px gray;
+  
+  width: 100%;
   margin-top: 1%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 280px) {
     height: 90px;
-  
-    
     }
+`;
+
+
+export const StyledFooterAnswer = styled.div`
+//background-color: rgba(255,255,255, 0.8);
+  color: black;
+  width: 100%;
+  // min-height: 80%;
+  // border-radius: 10px 10px;
+  // box-shadow: 1px 1px 3px gray;
+  margin-top: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // @media screen and (max-width: 280px) {
+  //   height: 90px;
+  //   }
 
 
 `;
 
+
+
 export const StyledFooterDiv = styled.div`
  display: flex;
+ flex-direction: column;
  margin: 2%;
  width: 100%;
  justify-content: space-between;
   align-items: center;
 `;
 
+
+export const StyledFooterDivAnswer = styled(StyledFooterDiv)`
+display: inline-block;
+flex-direction: column;
+// border: solid 1px black;
+position: relative;
+min-height: 70px;
+padding-bottom: 5%;
+`;
+
+export const StyledFooterDivFlagAnswer = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+
+`;
+
+export const StyledAnswer = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+padding: 2%;
+margin: auto;
+// position: relative;
+`;
+
+// export const StyledFlagAnswer = styled.div`
+// padding: 1%;
+// margin: auto;
+// `;
+
+
+export const StyledImg = styled.img`
+width: 40px;
+height: 40px;
+border-radius: 50%;
+`;
+
+export const StyledImgFlagAnswer = styled.div`
+width: 35px;
+height: 35px;
+border-radius: 50%;
+//border: 2px solid red;
+
+display: flex;
+justify-content: center;
+align-items: center;
+border: 4px solid ${props => props.colorborder};
+
+`;
+
+
+export const StyledFlagName = styled.span`
+
+display: none;
+
+${StyledAnswer}:hover &{
+  display: inline;
+  background-color: red;
+  position: absolute;
+  // top: 50%;
+  // left: 50%
+  // float: left;
+  // text-align: left;
+  // height: 15px;
+width: 300px;
+z-index: 1;
+
+}
+
+`;
+
+
+
+export const StyledCornerTopLeft = styled.div`
+position: absolute;
+height: 11px;
+width: 11px;
+top: 0px;
+left: 0px;
+border-left: 1px solid black;
+border-top: 1px solid black;
+`;
+
+export const StyledCornerTopRight = styled.div`
+position: absolute;
+height: 11px;
+width: 11px;
+top: 0px;
+right: 0px;
+border-right: 1px solid black;
+border-top: 1px solid black;
+`;
+
+export const StyledCornerBottomLeft = styled.div`
+position: absolute;
+height: 11px;
+width: 11px;
+bottom: 0px;
+left: 0px;
+border-left: 1px solid black;
+border-bottom: 1px solid black;
+`;
+
+export const StyledCornerBottomRight = styled.div`
+position: absolute;
+height: 11px;
+width: 11px;
+right: 0px;
+bottom: 0px;
+border-right: 1px solid black;
+border-bottom: 1px solid black;
+`;
 
 
 export const StyledGameCont = styled.div`
@@ -195,7 +327,7 @@ export const StyledGameCont = styled.div`
 
   justify-content: center;
   align-items: center;
-  padding: 2% 0%;
+  //padding: 2% 0%;
   // @media screen and (min-width: 765px) and (max-width: 1150px){
     
   //   display: flex;
@@ -214,15 +346,42 @@ export const StyledGameCont = styled.div`
 `;
 
 export const StyledGameContTwo = styled(StyledGameCont)`
-
+display: flex;
+flex-direction: column;
+// border-radius: 10px 10px;
+//   box-shadow: 1px 1px 3px gray;
 `;
 
 
+export const StyledGameContChild = styled(StyledGameCont)`
+ height: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+border-radius-top: 0px 0px;
+  box-shadow: 0px 0px 0px;
+  background-color: rgba(255,255,255, 0.0);
+`;
+
+
+export const StyledCardAnswer = styled.div`
+width: 150px;
+height: 70px;
+background-color: grey;
+margin: 4%;
+touch-action: none;
+// cursor: grab;
+
+`;
+
 export const StyledCard = styled.div`
-width: 30px;
-height: 30px;
+
+width: 150px;
+height: 70px;
 background-color: red;
-margin: 8%;
+margin: 4%;
+touch-action: none;
+cursor: grab;
 `;
 
 export const StyledGameChildLeft = styled.div`
@@ -245,6 +404,8 @@ export const StyledImgFlag = styled.img`
   }
 `;
 
+export const StyledImgFlagAnwserDone = styled.div`
+`;
 
 
 export const StyledGameChild = styled.div`
@@ -560,7 +721,7 @@ ${StyledInputForm}:valid ~ label {
 
 
 export const StyledSpan = styled.span`
-color: white;
+color: black;
 font-size: 16px;
 `;
 

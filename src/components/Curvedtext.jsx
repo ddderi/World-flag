@@ -11,7 +11,7 @@ export default function Curvedtext() {
     cy={0}
     rx={150}
     ry={100}
-    startOffset={78}
+    startOffset={82}
     reversed={false}
     text="Game over"
     textProps={{ style: { fontSize: 48} }}

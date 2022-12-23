@@ -9,6 +9,7 @@ import {
   StyledFooterDiv,
   StyledErrorBox,
   StyledErrorBoxChild,
+  StyledFooterAnswer
 } from './styles/GeneralElements';
 import { ButtonError } from '../components/styles/ButtonElements';
 import { useSpring, animated } from 'react-spring';
@@ -16,6 +17,9 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Gameover from './Gameover';
 import Gameswipe from './Gameswipe';
+import Goodanswer from './Goodanswer';
+import Badanswer from './Badanswer';
+import Score from './Score';
 
 export default function Home({ userScore, triggerscore, setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, setUser, setLogged }) {
 
@@ -27,7 +31,9 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [result, setResult] = useState('');
-  const [gameover, setGameover] = useState(false)
+  const [gameover, setGameover] = useState(false);
+  const [rightanswer, setRightanswer] = useState([]);
+  const [wronganswer, setWronganswer] = useState([]);
 
   const navigateTo = (location) => {
     navigate(`/${location}`)
@@ -67,7 +73,7 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
           <StyledHeading>{t('headerhome')}</StyledHeading>
           {/* <button onClick={() => changeGame()} >change</button> */}
           <StyledCore>
-            <Game setGameover={setGameover} gameover={gameover} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+            <Game rightanswer={rightanswer} wronganswer={wronganswer} setRightanswer={setRightanswer} setWronganswer={setWronganswer} setGameover={setGameover} gameover={gameover} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
             <Records setPlayers={setPlayers} players={players} />
           </StyledCore>
           <StyledErrorBox display={!displayed ? 'none' : 'block'} >
@@ -76,19 +82,28 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
               <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
             </StyledErrorBoxChild>
           </StyledErrorBox>
-          <StyledFooter>
-            {!lastscore ?
+          {/* <StyledFooter> */}
+          {/* {!lastscore && (
               <StyledFooterDiv>
                 <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
               </StyledFooterDiv>
-              :
-              <>
-                <StyledFooterDiv>
-                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
-                </StyledFooterDiv>
-              </>
-            }
+
+            )}
+            {lastscore > 0 && (
+              <StyledFooterDiv>
+                <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
+                <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
+              </StyledFooterDiv>
+
+            )} */}
+          {/* </StyledFooter> */}
+          <StyledFooter>
+            <Score score={score} />
+            <StyledFooterAnswer>
+              {/* <Score score={score} /> */}
+              <Goodanswer rightanswer={rightanswer} />
+              <Badanswer wronganswer={wronganswer} />
+            </StyledFooterAnswer>
           </StyledFooter>
           {/* <StyledFooter>
             <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, { result: resultFooter })}</StyledSpanResult>

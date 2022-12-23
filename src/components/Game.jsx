@@ -23,10 +23,11 @@ import { Auth } from 'aws-amplify';
 import img from '../images/backgroundimg.jpg';
 import { useEffect } from 'react';
 import { countries } from '../data/countries';
+import Flag from './Flag';
 
 
 
-export default function Game({ setGameover, gameover, setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessage, setScore, score, setColor, navigateTo, setUser, setLogged, setLastscore }) {
+export default function Game({ rightanswer, wronganswer, setRightanswer, setWronganswer, setGameover, gameover, setTriggerscore, logged, setExistscore, existscore, lastscore, result, setResult, user, setDisplayed, setMessage, setScore, score, setColor, navigateTo, setUser, setLogged, setLastscore }) {
 
   const [heart, setHeart] = useState(['red', 'red', 'red'])
   const [arraycountries, setArraycountries] = useState(countries)
@@ -68,6 +69,8 @@ export default function Game({ setGameover, gameover, setTriggerscore, logged, s
     setTimeover(false)
     setGoodanswer(false)
     setStartTimer(true)
+    setRightanswer([])
+    setWronganswer([])
   }
 
 
@@ -126,12 +129,14 @@ export default function Game({ setGameover, gameover, setTriggerscore, logged, s
       setSeconds(5)
       setStartTimer(true)
       setOver(false)
+      setWronganswer([...wronganswer, {flag, result}])
     }
 
 
     if (timeover && lastlife) {
       setTimeover(false)
       setGameover(true)
+      setWronganswer([...wronganswer, flag])
       endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
       const mydiv = document.getElementsByClassName('answer')
       for (let i = 0; i < mydiv.length; i++) {
@@ -148,6 +153,7 @@ export default function Game({ setGameover, gameover, setTriggerscore, logged, s
           mydiv[i].style.backgroundColor = 'green'
         }
       }
+      setWronganswer([...wronganswer, {flag, result}])
       setLife(life - 1)
       setSeconds(5)
       setTimeover(false)
@@ -163,6 +169,7 @@ export default function Game({ setGameover, gameover, setTriggerscore, logged, s
       setStartTimer(true)
       setOver(false)
       setGoodanswer(false)
+      setRightanswer([...rightanswer, {flag, result}])
     }
     // eslint-disable-next-line
   }, [over, goodanswer, lastlife, timeover])
@@ -222,7 +229,7 @@ export default function Game({ setGameover, gameover, setTriggerscore, logged, s
     }
   }
 
-  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={!disabled ? (e) => handleSubmit(e, result, e.target.innerHTML, e.target, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled) : undefined} key={index}>{data}</StyledGameChildAnswer> })
+  const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={!disabled ? (e) => handleSubmit(e, result, e.target.innerHTML, e.target, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled, setRightanswer, setWronganswer) : undefined} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
@@ -240,7 +247,8 @@ export default function Game({ setGameover, gameover, setTriggerscore, logged, s
             : <></>}
         </StyledGameInfo>
         <StyledGameChildLeft>
-          <StyledImgFlag alt='flag' src={flag}></StyledImgFlag>
+          {/* <StyledImgFlag alt='flag' src={flag}></StyledImgFlag> */}
+          <Flag data={flag} />
         </StyledGameChildLeft>
         <StyledGameChild>
           {possibleAnwsers}

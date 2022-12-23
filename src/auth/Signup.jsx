@@ -65,7 +65,7 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
             // createPoint(newuser)
             return user
         } catch (error) {
-            setMessage(error);
+            setMessage('Password must have one uppercase, one numeric and be eight length longs characters ');
             console.log(error);
             setLoading(false);
         }
@@ -94,50 +94,54 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
 
 
     return (
-        <StyledFormCont as={animated.div} style={fade}>
-            <StyledFormHeading>{t('signup.heading')}</StyledFormHeading>
-            {message !== undefined ? <StyledSpanMessage style={{ marginBottom: "8%" }}>{t(`${message}`)}</StyledSpanMessage> : null}
-            <StyledForm onSubmit={handleSubmit((data) => {
-                setLoading(true)
-                signUp(data)
-                // reset()
-            })}>
-                <StyledInputContainer>
-                    <StyledInputForm {...register('username')} type="text" required />
-                    <label htmlFor='username'>{t('signup.username')}</label>
-                </StyledInputContainer>
-                <StyledInputContainer>
-                    <StyledInputForm {...register('password')} type={!revealedone ? 'password' : 'text'} required />
-                    <StyledImgPassword src={!revealedone ? eyepasswordclose : eyepassword} onClick={() => { setRevealedone(!revealedone) }} />
-                    <label htmlFor='password'>{t('signup.password')}</label>
-                </StyledInputContainer>
-                {/* <StyledInputContainer>
+        <>
+            <StyledFormCont as={animated.div} style={fade}>
+                <StyledFormHeading>{t('signup.heading')}</StyledFormHeading>
+                {message !== undefined ? <StyledSpanMessage style={{ marginBottom: "8%" }}>{t(`${message}`)}</StyledSpanMessage> : <></>}
+                <StyledForm onSubmit={handleSubmit((data) => {
+                    setLoading(true)
+                    signUp(data)
+                    // reset()
+                })}>
+                    <StyledInputContainer>
+                        <StyledInputForm {...register('username')} type="text" required />
+                        <label htmlFor='username'>{t('signup.username')}</label>
+                    </StyledInputContainer>
+                    <StyledInputContainer>
+                        <StyledInputForm {...register('password')} type={!revealedone ? 'password' : 'text'} required />
+                        <StyledImgPassword src={!revealedone ? eyepasswordclose : eyepassword} onClick={() => { setRevealedone(!revealedone) }} />
+                        <label htmlFor='password'>{t('signup.password')}</label>
+                    </StyledInputContainer>
+                    {/* <StyledInputContainer>
                     <StyledInputForm {...register('passwordConfirmation')} type={!revealedtwo ? 'password' : 'text'} required />
                     <StyledImgPassword src={!revealedtwo ? eyepasswordclose : eyepassword} onClick={() => { setRevealedtwo(!revealedtwo) }} />
                     <label htmlFor='passwordConfirmation'>{t('signup.passwordcon')}</label>
                 </StyledInputContainer> */}
-                <StyledInputContainer>
-                    <StyledInputForm {...register('email')} type="text" required />
-                    <label htmlFor='email'>Email</label>
-                </StyledInputContainer>
-                <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>
-                <StyledSpan>Do you have a confirmation <BtnLinkLog type='button' onClick={() => navigateTo('confirmation')} >code</BtnLinkLog> ?</StyledSpan>
-                <Btnlog type="submit" disabled={loading ? true : false} >{
-                    loading ?
-                        <ClipLoader
-                            color={color}
-                            loading={loading}
-                            // cssOverride={override}
-                            size={15}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                        />
-                        :
-                        <>
+                    <StyledInputContainer>
+                        <StyledInputForm {...register('email')} type="text" required />
+                        <label htmlFor='email'>Email</label>
+                    </StyledInputContainer>
+                    <StyledSpan>{t('signup.account')}<BtnLinkLog type='button' onClick={() => navigateTo('login')} >{t('signup.here')}</BtnLinkLog></StyledSpan>
+                    <StyledSpan>Do you have a confirmation <BtnLinkLog type='button' onClick={() => navigateTo('confirmation')} >code</BtnLinkLog> ?</StyledSpan>
+                    {loading && (
+                        <Btnlog type="submit" disabled={loading ? true : false} >
+                            <ClipLoader
+                                color={color}
+                                loading={loading}
+                                // cssOverride={override}
+                                size={15}
+                                aria-label="Loading Spinner"
+                                data-testid="loader"
+                            />
+                        </Btnlog>
+                    )}
+                    {!loading && (
+                        <Btnlog type="submit" disabled={loading ? true : false} >
                             {t('signup.button')}
-                        </>
-                }</Btnlog>
-            </StyledForm>
-        </StyledFormCont>
+                        </Btnlog>
+                    )}
+                </StyledForm>
+            </StyledFormCont>
+        </>
     )
 }

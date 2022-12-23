@@ -67,6 +67,7 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
     <NavMenuPar as={animated.div} style={fade}>
       <Nav >
         <NavMenu>
+          {console.log('this is render again')}
           <StyledSelect>
             <SelectNav />
           </StyledSelect>
@@ -76,7 +77,7 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
           {/* <NavLink to='/about' >
             {t('aboutnavbar')}
           </NavLink> */}
-          {logged ?
+          {logged && (
             <>
               {/* <NavLink to='/login' onClick={() => logout(setUser, setLogged)} > */}
               {/* <NavLink to='/login' onClick={() => signOut()} >
@@ -97,7 +98,8 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
                   </>
                   } */}
             </>
-            :
+          )}
+          {!logged && (
             <>
               <NavLink to='/login' >
                 {t('loginnavbar')}
@@ -106,7 +108,7 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
                 {t('signupnavbar')}
               </NavLink>
             </>
-          }
+          )}
         </NavMenu>
         {/* <StyledDropDownParent>
 

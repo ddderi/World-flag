@@ -75,10 +75,8 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
           <NavLinkLogin to='/forgotpassword' >Forgot your password ?</NavLinkLogin>
         </StyledDivLogin>
         <StyledSpan>{t('login.account')}<BtnLinkLog type='button' onClick={() => navigateTo('signup')} >{t('login.here')}</BtnLinkLog></StyledSpan>
-        {/* <Btnlog type='submit' >{t('login.button')}</Btnlog> */}
-
-        <Btnlog type='submit' disabled={loading ? true : false} >{
-          loading ?
+        {loading && (
+          <Btnlog type='submit' disabled={loading ? true : false} >
             <ClipLoader
               color={color}
               loading={loading}
@@ -87,16 +85,12 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
               aria-label="Loading Spinner"
               data-testid="loader"
             />
-            :
-            <>{t('login.button')}</>
-        }
-        </Btnlog>
-
-
-
+          </Btnlog>
+        )}
+        {!loading && (
+          <Btnlog type='submit' disabled={loading ? true : false} >{t('login.button')}</Btnlog>
+        )}
       </StyledForm>
-
-
     </StyledFormCont>
   )
 }
