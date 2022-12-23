@@ -9,15 +9,19 @@ import {
 } from './styles/GeneralElements';
 
 
-export default function Flaganswer({ data, colorborder }) {
+export default function Flaganswer({ countryTrigger, setCountryTrigger, setCountryname, data, colorborder }) {
+
+
+    const showCountry = () => {
+        setCountryTrigger(!countryTrigger)
+        setCountryname(data.result)
+    }
+
     return (
         <>
-            <StyledAnswer>
+            <StyledAnswer onClick={() => showCountry()} >
                 <StyledImgFlagAnswer colorborder={colorborder}  ><StyledImg src={data.flag} ></StyledImg ></StyledImgFlagAnswer>
-                {/* <StyledFlagName>{data.result}</StyledFlagName> */}
             </StyledAnswer>
-            <StyledFlagName>{data.result}</StyledFlagName>
-            {/* <StyledFooter><StyledFlagName>{data.result}</StyledFlagName></StyledFooter> */}
         </>
     )
 }

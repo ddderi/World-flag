@@ -10,11 +10,10 @@ import {
 } from './styles/GeneralElements';
 import Flaganswer from './Flaganswer';
 
-export default function Goodanswer({ rightanswer }) {
+export default function Goodanswer({ countryTrigger, setCountryTrigger, setCountryname, rightanswer }) {
 
-    const arraytest = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-    const responseMapped = rightanswer.map((data, index) => { return <Flaganswer colorborder={'green'} data={data} key={index} /> })
+    const responseMapped = rightanswer.map((data, index) => { return <Flaganswer countryTrigger={countryTrigger} setCountryTrigger={setCountryTrigger} setCountryname={setCountryname} colorborder={'green'} data={data} key={index} /> })
 
     return (
         <StyledFooterDivAnswer className='try'>

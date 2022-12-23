@@ -20,10 +20,10 @@ import Gameswipe from './Gameswipe';
 import Goodanswer from './Goodanswer';
 import Badanswer from './Badanswer';
 import Score from './Score';
+import Countrydetails from './Countrydetails';
 
 export default function Home({ userScore, triggerscore, setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, setUser, setLogged }) {
 
-  const [mainGame, setMainGame] = useState(true)
   const [color, setColor] = useState('')
   const [score, setScore] = useState(0)
   const [lastscore, setLastscore] = useState('')
@@ -34,6 +34,8 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
   const [gameover, setGameover] = useState(false);
   const [rightanswer, setRightanswer] = useState([]);
   const [wronganswer, setWronganswer] = useState([]);
+  const [countryname, setCountryname] = useState('');
+  const [countryTrigger, setCountryTrigger] = useState(false)
 
   const navigateTo = (location) => {
     navigate(`/${location}`)
@@ -44,46 +46,25 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
   })
 
 
-  const changeGame = () => {
-    setMainGame(!mainGame)
-  }
-
-  // function fontColor(basicfont) {
-  //   if (color === true) {
-  //     return 'green'
-  //   } else if (color === false) {
-  //     return 'red'
-  //   } else {
-  //     return basicfont
-  //   }
-  // }
-
-  // const transition = useTransition(gameover, {
-  //   from: { x: -500, y: 0},
-  //   enter: { x: 0, y: 0},
-  //   leave: { x: -500, y: 0}
-  // })
 
 
 
   return (
     <>
-      {mainGame && (
-        <StyledCont as={animated.div} style={fade} >
-          <StyledHeading>{t('headerhome')}</StyledHeading>
-          {/* <button onClick={() => changeGame()} >change</button> */}
-          <StyledCore>
-            <Game rightanswer={rightanswer} wronganswer={wronganswer} setRightanswer={setRightanswer} setWronganswer={setWronganswer} setGameover={setGameover} gameover={gameover} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
-            <Records setPlayers={setPlayers} players={players} />
-          </StyledCore>
-          <StyledErrorBox display={!displayed ? 'none' : 'block'} >
-            <StyledErrorBoxChild>
-              <span>{t("errorspanstart")}</span>
-              <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
-            </StyledErrorBoxChild>
-          </StyledErrorBox>
-          {/* <StyledFooter> */}
-          {/* {!lastscore && (
+      <StyledCont as={animated.div} style={fade} >
+        <StyledHeading>{t('headerhome')}</StyledHeading>
+        <StyledCore>
+          <Game rightanswer={rightanswer} wronganswer={wronganswer} setRightanswer={setRightanswer} setWronganswer={setWronganswer} setGameover={setGameover} gameover={gameover} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
+          <Records setPlayers={setPlayers} players={players} />
+        </StyledCore>
+        <StyledErrorBox display={!displayed ? 'none' : 'block'} >
+          <StyledErrorBoxChild>
+            <span>{t("errorspanstart")}</span>
+            <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
+          </StyledErrorBoxChild>
+        </StyledErrorBox>
+        {/* <StyledFooter> */}
+        {/* {!lastscore && (
               <StyledFooterDiv>
                 <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
               </StyledFooterDiv>
@@ -96,74 +77,20 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
               </StyledFooterDiv>
 
             )} */}
-          {/* </StyledFooter> */}
-          <StyledFooter>
-            <Score score={score} />
-            <StyledFooterAnswer>
-              {/* <Score score={score} /> */}
-              <Goodanswer rightanswer={rightanswer} />
-              <Badanswer wronganswer={wronganswer} />
-            </StyledFooterAnswer>
-          </StyledFooter>
-          {/* <StyledFooter>
-            <StyledSpanResult coloring={fontColor('white')} >{t(`${messageFooter}`, { result: resultFooter })}</StyledSpanResult>
-          </StyledFooter> */}
-        </StyledCont>
-      )}
-      {!mainGame && (
-        <StyledCont as={animated.div} style={fade} >
-          <StyledHeading>The tinder game</StyledHeading>
-          <button onClick={() => changeGame()} >change</button>
-          <StyledCore>
-            <Gameswipe />
-            <Records setPlayers={setPlayers} players={players} />
-            {/* <Game setGameover={setGameover} gameover={gameover} setTriggerscore={setTriggerscore} logged={logged} setExistscore={setExistscore} existscore={existscore} lastscore={lastscore} result={result} setResult={setResult} user={user} setDisplayed={setDisplayed} setMessage={setMessage} setScore={setScore} score={score} setColor={setColor} navigateTo={navigateTo} setUser={setUser} setLogged={setLogged} setLastscore={setLastscore} />
-            <Records setPlayers={setPlayers} players={players} /> */}
-          </StyledCore>
-          <StyledErrorBox display={!displayed ? 'none' : 'block'} >
-            <StyledErrorBoxChild>
-              <span>{t("errorspanstart")}</span>
-              <ButtonError onClick={() => setDisplayed(false)}>X</ButtonError>
-            </StyledErrorBoxChild>
-          </StyledErrorBox>
-          <StyledFooter>
-            {!lastscore ?
-              <StyledFooterDiv>
-                <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-              </StyledFooterDiv>
-              :
-              <>
-                <StyledFooterDiv>
-                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoreleft")}{score} </span>
-                  <span style={{ width: '50%', fontWeight: 'bold' }}>{t("scoremiddle")}{lastscore}</span>
-                </StyledFooterDiv>
-              </>
-            }
-          </StyledFooter>
+        {/* </StyledFooter> */}
+        <StyledFooter>
+          <Score score={score} />
+          <StyledFooterAnswer>
+            <Countrydetails countryTrigger={countryTrigger} countryname={countryname} />
+            <Badanswer countryTrigger={countryTrigger} setCountryTrigger={setCountryTrigger} setCountryname={setCountryname} wronganswer={wronganswer} />
+            <Goodanswer countryTrigger={countryTrigger} setCountryTrigger={setCountryTrigger} setCountryname={setCountryname} rightanswer={rightanswer} />
 
-
-        </StyledCont>
-      )}
-      {/* )} */}
+          </StyledFooterAnswer>
+        </StyledFooter>
+      </StyledCont>
       <>
-        {/* {transition((style, item) => 
-          item ? */}
-        {/* // <animated.div style={style}> */}
         <Gameover triggerscore={triggerscore} setTriggerscore={setTriggerscore} gameover={gameover} navigateTo={navigateTo} setGameover={setGameover} score={score} />
-        {/* // </animated.div> */}
-        {/* : */}
-        {/* null
-        )} */}
-
-        {/* <Gameover navigateTo={navigateTo} setGameover={setGameover} score={score} /> */}
-
-
-
-        {/* {gameover && (
-          <Gameover navigateTo={navigateTo} setGameover={setGameover} score={score} />
-        )} */}
       </>
-
     </>
   )
 }

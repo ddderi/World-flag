@@ -1,5 +1,4 @@
 import React from 'react';
-import Answer from './Answer';
 import { IoCloseSharp } from "react-icons/io5";
 import {
     StyledFooterDivAnswer,
@@ -11,15 +10,14 @@ import {
 } from './styles/GeneralElements';
 import Flaganswer from './Flaganswer';
 
-export default function Badanswer({ wronganswer }) {
+export default function Badanswer({ countryTrigger, setCountryTrigger, setCountryname, wronganswer }) {
 
-    const arraytest = [1, 2, 3, 10,11,12]
 
-    const responseMapped = wronganswer.map((data, index) => {return <Flaganswer colorborder={'red'} data={data} key={index} />})
+    const responseMapped = wronganswer.map((data, index) => { return <Flaganswer countryTrigger={countryTrigger} setCountryTrigger={setCountryTrigger} setCountryname={setCountryname} colorborder={'red'} data={data} key={index} /> })
 
 
     return (
-        <StyledFooterDivAnswer  >
+        <StyledFooterDivAnswer style={{ marginTop: '5%' }} >
             <IoCloseSharp size={25} ></IoCloseSharp>
             <StyledFooterDivFlagAnswer >
                 <StyledCornerTopLeft></StyledCornerTopLeft>

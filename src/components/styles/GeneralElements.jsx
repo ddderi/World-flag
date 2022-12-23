@@ -142,6 +142,12 @@ export const StyledHeartMapped = styled.div`
 
 `;
 
+export const StyledDivTransition = styled.div`
+width: 100%;
+height: 20px;
+
+
+`;
 
 
 export const StyledFooter = styled.div`
@@ -169,11 +175,12 @@ export const StyledFooter = styled.div`
 export const StyledFooterAnswer = styled.div`
 //background-color: rgba(255,255,255, 0.8);
   color: black;
-  width: 100%;
+  width: 90%;
   // min-height: 80%;
   // border-radius: 10px 10px;
   // box-shadow: 1px 1px 3px gray;
   margin-top: 1%;
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,7 +208,7 @@ display: inline-block;
 flex-direction: column;
 // border: solid 1px black;
 position: relative;
-min-height: 70px;
+min-height: 30px;
 padding-bottom: 5%;
 `;
 
