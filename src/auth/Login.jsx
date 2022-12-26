@@ -37,7 +37,7 @@ function Login({ setLoading, loading, color, setBestscoreuser, navigateTo, setUs
 
   async function signIn(data) {
     try {
-      const usernickname = data.username.toLowerCase()
+      const usernickname = data.username.toLowerCase().trim()
       const user = await Auth.signIn(usernickname, data.password);
       setLogged(true)
 

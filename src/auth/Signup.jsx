@@ -49,7 +49,7 @@ export default function Signup({ setLoading, loading, color, navigateTo, setUser
     async function signUp(data) {
         try {
             const { user } = await Auth.signUp({
-                username: data.username.toLowerCase(),
+                username: data.username.toLowerCase().trim(),
                 password: data.password,
                 attributes: {
                     email: data.email.toLowerCase()

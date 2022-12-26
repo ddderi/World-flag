@@ -29,6 +29,7 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
             const code = await Auth.forgotPassword(username)
             setStage(2)
             setMessageForgot(`Email sent to ${code.CodeDeliveryDetails.Destination}`)
+            setLoading(false)
         } catch (error) {
             setLoading(false)
             setMessageForgot('Username incorrect')
@@ -43,6 +44,7 @@ export default function ForgotPassword({ setMessage, setLoading, loading, color,
             if (change === 'SUCCESS') {
                 navigateTo('login')
                 setMessage('Succes, you can now login with your new credentials')
+                setLoading(false)
             }
             return change
         } catch (error) {
