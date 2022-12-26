@@ -85,3 +85,12 @@ export const ButtonError = styled.button`
   right: 5px;
   top: 5px;
 `;
+
+export const ButtonScrollDown = styled.button`
+// margin-top: 2%;
+margin-bottom: 4%;
+background-color: transparent;
+width: 90%;
+// border: none;
+
+`;

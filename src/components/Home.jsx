@@ -21,6 +21,7 @@ import Goodanswer from './Goodanswer';
 import Badanswer from './Badanswer';
 import Score from './Score';
 import Countrydetails from './Countrydetails';
+import Buttonscrolldown from './Buttonscrolldown';
 
 export default function Home({ userScore, triggerscore, setTriggerscore, logged, setExistscore, existscore, setMessage, user, setPlayers, players, setUser, setLogged }) {
 
@@ -35,7 +36,8 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
   const [rightanswer, setRightanswer] = useState([]);
   const [wronganswer, setWronganswer] = useState([]);
   const [countryname, setCountryname] = useState('');
-  const [countryTrigger, setCountryTrigger] = useState(false)
+  const [countryTrigger, setCountryTrigger] = useState(false);
+  const [toggleAnswer, setToggleAnswer] = useState(false);
 
   const navigateTo = (location) => {
     navigate(`/${location}`)
@@ -46,7 +48,9 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
   })
 
 
-
+const toggleUserAnswer = () => {
+  setToggleAnswer(!toggleAnswer)
+}
 
 
   return (
@@ -80,12 +84,15 @@ export default function Home({ userScore, triggerscore, setTriggerscore, logged,
         {/* </StyledFooter> */}
         <StyledFooter>
           <Score score={score} />
+          <Buttonscrolldown toggleUserAnswer={toggleUserAnswer} />
+          {toggleAnswer && (
           <StyledFooterAnswer>
             <Countrydetails countryTrigger={countryTrigger} countryname={countryname} />
             <Badanswer countryTrigger={countryTrigger} setCountryTrigger={setCountryTrigger} setCountryname={setCountryname} wronganswer={wronganswer} />
             <Goodanswer countryTrigger={countryTrigger} setCountryTrigger={setCountryTrigger} setCountryname={setCountryname} rightanswer={rightanswer} />
 
           </StyledFooterAnswer>
+          )}
         </StyledFooter>
       </StyledCont>
       <>

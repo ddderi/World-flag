@@ -159,9 +159,9 @@ export const StyledFooter = styled.div`
 
   border-radius: 10px 10px;
    box-shadow: 1px 1px 3px gray;
-  
+  margin: 1% 2% 2% 2%;
   width: 100%;
-  margin-top: 1%;
+  // margin-top: 1%;
   display: flex;
   flex-direction: column;
   justify-content: center;

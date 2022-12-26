@@ -51,7 +51,6 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
     try {
       const resultat = await startGame(arraycountries, setArraycountries, setResult, setAnswer, setFlag, setScore, setDisplayed, setDisabled)
       return resultat
-
     } catch (error) {
       console.log(error)
     }
@@ -82,13 +81,12 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
     // eslint-disable-next-line
   }, [life])
 
-  // const changeColor = () => {
-  //   setHeart([heart[0], heart[1], heart[2] = 'white'])
-  // }
+
 
   function startNewGameClick() {
     if (logged) {
       resetGame()
+
       // setOver(false)
       // setSeconds(5)
       setStartTimer(true)
@@ -116,7 +114,7 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
       setStartTimer(false)
       setSeconds(5)
       setOver(false)
-      endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
+      endOfGame(setArraycountries, user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
     }
     // eslint-disable-next-line
   }, [life])
@@ -129,7 +127,7 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
       setSeconds(5)
       setStartTimer(true)
       setOver(false)
-      setWronganswer([...wronganswer, {flag, result}])
+      setWronganswer([...wronganswer, { flag, result }])
     }
 
 
@@ -137,7 +135,7 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
       setTimeover(false)
       setGameover(true)
       setWronganswer([...wronganswer, flag])
-      endOfGame(user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
+      endOfGame(setArraycountries, user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore)
       const mydiv = document.getElementsByClassName('answer')
       for (let i = 0; i < mydiv.length; i++) {
         if (mydiv[i].innerHTML === result) {
@@ -153,7 +151,7 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
           mydiv[i].style.backgroundColor = 'green'
         }
       }
-      setWronganswer([...wronganswer, {flag, result}])
+      setWronganswer([...wronganswer, { flag, result }])
       setLife(life - 1)
       setSeconds(5)
       setTimeover(false)
@@ -169,7 +167,7 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
       setStartTimer(true)
       setOver(false)
       setGoodanswer(false)
-      setRightanswer([...rightanswer, {flag, result}])
+      setRightanswer([...rightanswer, { flag, result }])
     }
     // eslint-disable-next-line
   }, [over, goodanswer, lastlife, timeover])
@@ -229,31 +227,33 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
     }
   }
 
+
+
   const possibleAnwsers = answer.map((data, index) => { return <StyledGameChildAnswer className='answer' onClick={!disabled ? (e) => handleSubmit(e, result, e.target.innerHTML, e.target, setScore, score, setFlag, setResult, setInput, setAnswer, setColor, setDisplayed, setOver, setGoodanswer, life, lastlife, arraycountries, setArraycountries, setDisabled, setRightanswer, setWronganswer) : undefined} key={index}>{data}</StyledGameChildAnswer> })
 
   return (
     <StyledGameCont>
       <>
+        {console.log(arraycountries.length)}
         <BtnlogGame onClick={() =>
           startNewGameClick()
         }>{t("game.button")}</BtnlogGame>
         <StyledGameInfo>
-          {logged ?
+          {logged && (
             <>
               <StyledBestScore>Your best score : {userbestscore}</StyledBestScore>
               <Timer setTimeover={setTimeover} life={life} setOver={setOver} seconds={seconds} setSeconds={setSeconds} startTimer={startTimer} setStartTimer={setStartTimer} />
               <Life heart={heart} life={life} />
             </>
-            : <></>}
+          )}
         </StyledGameInfo>
         <StyledGameChildLeft>
-          {/* <StyledImgFlag alt='flag' src={flag}></StyledImgFlag> */}
           <Flag data={flag} />
         </StyledGameChildLeft>
         <StyledGameChild>
           {possibleAnwsers}
         </StyledGameChild>
       </>
-    </StyledGameCont>
+    </StyledGameCont >
   )
 }

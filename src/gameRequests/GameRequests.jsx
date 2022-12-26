@@ -2,21 +2,19 @@ import { flagCall } from '../requests/RequestUser';
 import { countries } from '../data/countries';
 
 
-export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycountries, setArraycountries) => {
+export const triggerAnswers = async (setResult, rightresult, setAnswer, result, valueToRemove, arraycountries, setArraycountries) => {
 
 
     let filteredCountry = countries.filter(country => country !== valueToRemove)
-
-    // let countriestomap = [...countries]
     let optionsAnswer = []
 
     for (let i = 0; i < 3; i++) {
-        
+
         const index = Math.floor(Math.random() * filteredCountry.length)
         console.log(index)
         Object.keys(filteredCountry[index]).forEach(async (key) => {
             optionsAnswer.push(filteredCountry[index][key])
-            filteredCountry.filter(country => country !== countries[index])
+            filteredCountry.filter(country => country !== filteredCountry[index])
             return optionsAnswer
         })
     }
@@ -24,37 +22,40 @@ export const triggerAnswers = async (setAnswer, result, valueToRemove, arraycoun
     ////
     const index = Math.floor(Math.random() * 4)
     if (index === 0) {
-        optionsAnswer.unshift(result)
+        optionsAnswer.unshift(rightresult)
         setAnswer(optionsAnswer)
     } else if (index === 1) {
-        const newArraySliced = [...optionsAnswer.slice(0, 1), result, ...optionsAnswer.slice(index)]
+        const newArraySliced = [...optionsAnswer.slice(0, 1), rightresult, ...optionsAnswer.slice(index)]
         setAnswer(newArraySliced)
     } else if (index === 2) {
-        const newArraySliced = [...optionsAnswer.slice(0, 2), result, ...optionsAnswer.slice(index)]
+        const newArraySliced = [...optionsAnswer.slice(0, 2), rightresult, ...optionsAnswer.slice(index)]
         setAnswer(newArraySliced)
     } else if (index === 3) {
-        optionsAnswer.push(result)
+        optionsAnswer.push(rightresult)
         setAnswer(optionsAnswer)
     }
+    setResult(rightresult)
     return optionsAnswer
 }
 
 
 export const startGame = async (arraycountries, setArraycountries, setResult, setAnswer, setFlag, setScore, setDisplayed, setDisabled) => {
     try {
+
         setDisabled(false)
         setResult('')
         setAnswer([])
         setDisplayed(false)
-        const index = Math.floor(Math.random() * countries.length)
-        Object.keys(countries[index]).forEach(async (key) => {
-            setResult(countries[index][key])
-            const valueToRemove = countries[index]
-            //    console.log(arraycountries[index][key])
-            //setResultFooter(countries[index][key])
+        const index = Math.floor(Math.random() * arraycountries.length)
+
+        Object.keys(arraycountries[index]).forEach(async (key) => {
+            let newarray = arraycountries.filter(country => country !== arraycountries[index])
+            setArraycountries(newarray)
+            let valueToRemove = arraycountries[index]
+            let rightresult = arraycountries[index][key]
             const resultFlag = await flagCall(`${key}`)
             setFlag(resultFlag.request.responseURL)
-            triggerAnswers(setAnswer, countries[index][key], valueToRemove, arraycountries, setArraycountries)
+            triggerAnswers(setResult, rightresult, setAnswer, countries[index][key], valueToRemove, arraycountries, setArraycountries)
         })
     } catch (error) {
         console.log(error)
@@ -62,7 +63,7 @@ export const startGame = async (arraycountries, setArraycountries, setResult, se
 }
 
 
-export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore) => {
+export const endOfGame = (setArraycountries, user, lastscore, score, createPoint, setTriggerscore, updatePoint, setLastscore, setFlag, setScore, setResult, setInput, existscore) => {
 
     if (score > localStorage.getItem('userscore')) {
         updatePoint(score)
@@ -73,6 +74,7 @@ export const endOfGame = (user, lastscore, score, createPoint, setTriggerscore, 
     if (score > lastscore) {
         setLastscore(score)
     }
+    setArraycountries(countries)
     setResult('')
     setInput('')
 }
