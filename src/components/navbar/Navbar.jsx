@@ -67,7 +67,6 @@ export default function Navbar({ ladderNavbar, setMessage, navigateTo, logged, s
     <NavMenuPar as={animated.div} style={fade}>
       <Nav >
         <NavMenu>
-          {console.log('this is render again')}
           <StyledSelect>
             <SelectNav />
           </StyledSelect>

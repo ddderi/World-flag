@@ -234,7 +234,6 @@ export default function Game({ rightanswer, wronganswer, setRightanswer, setWron
   return (
     <StyledGameCont>
       <>
-        {console.log(arraycountries.length)}
         <BtnlogGame onClick={() =>
           startNewGameClick()
         }>{t("game.button")}</BtnlogGame>
