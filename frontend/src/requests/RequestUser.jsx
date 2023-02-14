@@ -75,8 +75,10 @@ export async function checkCookie(navigateTo, setUser, setLogged, setMessage){
 
 
 export async function flagCall(country){
-    try{
-        const result = await axios.get(`https://countryflagsapi.com/png/${country}`)
+    try{                                    
+        const newcountry = country.toLowerCase()
+        //const result = await axios.get(`https://countryflagsapi.com/png/${newcountry}`)
+        const result = await axios.get(`https://flagcdn.com/256x192/${newcountry}.png`)
         return result
     }catch(error){
         console.log(error)
