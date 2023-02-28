@@ -26,12 +26,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login',[UserController::class,'login']);
 Route::post('/signup',[UserController::class,'register']);
 
+
 // Protected routes
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
     // router.put('/change_password', userCtrl.changePassword)
-    Route::put('change_password',[UserController::class,'update']);
+    Route::put('/change_password',[UserController::class,'update']);
     // router.put('/scores', userCtrl.updateScore)
+    Route::post('/logout',[UserController::class,'logout']);
     Route::post('create_score',[ScoreController::class,'create']);
     Route::put('update_score',[ScoreController::class,'update']);
 });

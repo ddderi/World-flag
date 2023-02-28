@@ -31,7 +31,7 @@ class UserController extends Controller
 
         $response = [
             'token' => $token,
-            'user' => 'User created successfully'
+            'user' => $user
         ];
 
         return response($response, 201); 
@@ -58,5 +58,57 @@ class UserController extends Controller
         
              return response($response, 201);
     }
+
+    public function logout(request $request) {
+        auth()->user()->tokens()->delete();
+        return [
+            'message' => 'Logged out'
+        ];
+    }
+
+
+    // public function update(Request $request){
+    //         $this->validate($request, [
+    //             'username' => 'required',
+    //             'current_password' => 'required|string',
+    //             'new_password' => 'required|confirmed|string'
+    //         ]);
+
+    //         $user= User::where('username', $request->username)->first();
+
+    //         if (!$user || !Hash::check($request->password, $user->password)) 
+    //     {
+    //         return back()->with('error', "Current Password is Invalid");
+    //     }
+    //     $user->password =  Hash::make($request->new_password);
+    //     $user->save();
+    //     return back()->with('success', "Password Changed Successfully");
+    // }
+
+    public function update(Request $request)
+{
+    $this->validate($request, [
+        'username' => 'required',
+        'current_password' => 'required|string',
+        'new_password' => 'required|confirmed|string'
+    ]);
+
+    $user = Auth::user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return response(['error' => 'Current password is invalid'], 401);
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    $response = [
+        'message' => 'Password changed successfully',
+        'user' => $user
+    ];
+
+    return response($response, 200);
+}
+
 
 }
