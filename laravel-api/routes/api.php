@@ -23,6 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // public routes
 
+Route::get('/test', function () {
+    return response()->json(['message' => 'Hello World!']);
+});
+
+
 Route::post('/login',[UserController::class,'login']);
 Route::post('/signup',[UserController::class,'register']);
 
