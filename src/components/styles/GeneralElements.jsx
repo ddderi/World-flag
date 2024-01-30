@@ -1,18 +1,15 @@
-import styled from 'styled-components';
-
-
+import styled from "styled-components";
 
 export const StyledHeading = styled.h1`
-//background-color: rgba(0, 0, 0, 0.89);
+  //background-color: rgba(0, 0, 0, 0.89);
 
-background-color: rgba(255,255,255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 
-color: black;
+  color: black;
 
-
-width: 100%;
-text-transform: uppercase;
-border-radius: 10px 10px;
+  width: 100%;
+  text-transform: uppercase;
+  border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
 `;
 
@@ -20,145 +17,168 @@ export const StyledCont = styled.div`
   text-align: center;
   // width: 55%;
   // position:absolute;
-	// left:50%;
-	// top:50%;
+  // left:50%;
+  // top:50%;
   // width: 85%;
 
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-	// transform: translate(-50%,-50%);
-  @media screen and (max-width: 905px){
+  // transform: translate(-50%,-50%);
+  @media screen and (max-width: 905px) {
     width: 95%;
     // width: 85%;
   }
   @media screen and (max-width: 280px) {
-    
-    top:55%;
-    
-    }
+    top: 55%;
+  }
   @media screen and (min-width: 905px) {
     width: 85%;
-    
-  } 
-
+  }
 `;
 
-
-
-
 export const StyledHome = styled(StyledHeading)`
+  background-color: rgba(0, 0, 0, 0.89);
 
+  //background-color: rgba(255,255,255, 0.8);
 
-
-
-background-color: rgba(0, 0, 0, 0.89);
-
-//background-color: rgba(255,255,255, 0.8);
-
-color: white;
-text-transform: uppercase;
-border-radius: 10px 10px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
 `;
 
-
 export const StyledHeadingFooter = styled.h3`
-width: 100%;
-border-bottom: 2px solid white;
+  width: 100%;
+  border-bottom: 2px solid white;
 `;
 
 export const StyledCore = styled.div`
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
-// margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  // margin: 0;
 
   // display: grid;
   // grid-template-columns: 1fr 1fr 1fr;
   // column-gap: 10px;
-//  @media screen and (min-width: 906px){
-//   display: flex;
-//   flex-direction: column;
-//   row-gap: 10px;
-//}
+  //  @media screen and (min-width: 906px){
+  //   display: flex;
+  //   flex-direction: column;
+  //   row-gap: 10px;
+  //}
   @media screen and (min-width: 765px) {
-
-  display: grid;
-   grid-template-columns: 1fr 1fr 1fr;
-   column-gap: 10px;
-
-  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
   }
-
 `;
 
 export const StyledCoreAbout = styled.div`
-display: inline-block;
-background-color: rgba(0, 0, 0, 0.89);
-color: white;
-border-radius: 10px 10px;
-box-shadow: 1px 1px 3px gray;
-margin-top: 1%;
-padding: 4%;
-display: flex;
-justify-content: center;
-align-items: center;
-overflow: hidden;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.89);
+  color: white;
+  border-radius: 10px 10px;
+  box-shadow: 1px 1px 3px gray;
+  margin-top: 1%;
+  padding: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `;
 
 export const StyledGameInfo = styled.div`
-position: absolute;
-top: 3px;
-right: 0px;
-width: 100%;
-display: flex;
-flex-direction: row;
-justify-content: space-around;
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+// export const StyledChoices = styled.div`
+//   color: black;
+// `;
+
+export const StyledChoices = styled.div`
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: ${({ ChoiceIsVisible }) => (ChoiceIsVisible ? "block" : "none")};
+`;
+
+export const StyledBtnCountries = styled.button`
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 10px 10px;
+  color: #fff;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 1%;
+  background-color: #e74c3c;
+  outline: none;
+  border: 0;
+  &:hover {
+    background-color: #d62c1a;
+  }
+`;
+
+export const StyledList = styled.div`
+  border-radius: 10px 10px;
+  background-color: #e74c3c;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  padding: 1%;
+  top: 100%;
+  position: absolute;
+  left: 1%;
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* or 'circle', 'disc', 'none', etc. */
+`;
+
+export const StyledListItem = styled.li`
+  color: black;
+  text-align: left;
 `;
 
 export const StyledBestScore = styled.div`
-
-color: black;
+  color: black;
+  margin-left: 5%;
 `;
 
 export const StyledTimer = styled.div`
-color: black;
-
+  color: black;
 `;
 
 export const StyledTimerLife = styled.div`
-color: ${props => props.nbrlife};
-
+  color: ${(props) => props.nbrlife};
 `;
 
-export const StyledHeartMapped = styled.div`
-
-
-`;
+export const StyledHeartMapped = styled.div``;
 
 export const StyledDivTransition = styled.div`
-width: 100%;
-height: 20px;
-
-
+  width: 100%;
+  height: 20px;
 `;
-
 
 export const StyledFooter = styled.div`
   //background-color: rgba(0, 0, 0, 0.89);
- // color: white;
-  background-color: rgba(255,255,255, 0.8);
+  // color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   color: black;
 
-
   border-radius: 10px 10px;
-   box-shadow: 1px 1px 3px gray;
+  box-shadow: 1px 1px 3px gray;
   margin: 1% 2% 2% 2%;
   width: 100%;
   // margin-top: 1%;
@@ -168,12 +188,11 @@ export const StyledFooter = styled.div`
   align-items: center;
   @media screen and (max-width: 280px) {
     height: 90px;
-    }
+  }
 `;
 
-
 export const StyledFooterAnswer = styled.div`
-//background-color: rgba(255,255,255, 0.8);
+  //background-color: rgba(255,255,255, 0.8);
   color: black;
   width: 90%;
   // min-height: 80%;
@@ -187,45 +206,39 @@ export const StyledFooterAnswer = styled.div`
   // @media screen and (max-width: 280px) {
   //   height: 90px;
   //   }
-
-
 `;
 
-
-
 export const StyledFooterDiv = styled.div`
- display: flex;
- flex-direction: column;
- margin: 2%;
- width: 100%;
- justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
 `;
 
-
 export const StyledFooterDivAnswer = styled(StyledFooterDiv)`
-display: inline-block;
-flex-direction: column;
-// border: solid 1px black;
-position: relative;
-min-height: 30px;
-padding-bottom: 5%;
+  display: inline-block;
+  flex-direction: column;
+  // border: solid 1px black;
+  position: relative;
+  min-height: 30px;
+  padding-bottom: 5%;
 `;
 
 export const StyledFooterDivFlagAnswer = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const StyledAnswer = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-padding: 2%;
-margin: auto;
-// position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2%;
+  margin: auto;
+  // position: relative;
 `;
 
 // export const StyledFlagAnswer = styled.div`
@@ -233,92 +246,82 @@ margin: auto;
 // margin: auto;
 // `;
 
-
 export const StyledImg = styled.img`
-width: 40px;
-height: 40px;
-border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 `;
 
 export const StyledImgFlagAnswer = styled.div`
-width: 35px;
-height: 35px;
-border-radius: 50%;
-//border: 2px solid red;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  //border: 2px solid red;
 
-display: flex;
-justify-content: center;
-align-items: center;
-border: 4px solid ${props => props.colorborder};
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid ${(props) => props.colorborder};
 `;
-
 
 export const StyledFlagName = styled.span`
+  display: none;
 
-display: none;
-
-${StyledAnswer}:hover &{
-  display: inline;
-  background-color: red;
-  position: absolute;
-  // top: 50%;
-  // left: 50%
-  // float: left;
-  // text-align: left;
-  // height: 15px;
-width: 300px;
-z-index: 1;
-
-}
-
+  ${StyledAnswer}:hover & {
+    display: inline;
+    background-color: red;
+    position: absolute;
+    // top: 50%;
+    // left: 50%
+    // float: left;
+    // text-align: left;
+    // height: 15px;
+    width: 300px;
+    z-index: 1;
+  }
 `;
 
-
-
 export const StyledCornerTopLeft = styled.div`
-position: absolute;
-height: 11px;
-width: 11px;
-top: 0px;
-left: 0px;
-border-left: 1px solid black;
-border-top: 1px solid black;
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  top: 0px;
+  left: 0px;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
 `;
 
 export const StyledCornerTopRight = styled.div`
-position: absolute;
-height: 11px;
-width: 11px;
-top: 0px;
-right: 0px;
-border-right: 1px solid black;
-border-top: 1px solid black;
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  top: 0px;
+  right: 0px;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 `;
 
 export const StyledCornerBottomLeft = styled.div`
-position: absolute;
-height: 11px;
-width: 11px;
-bottom: 0px;
-left: 0px;
-border-left: 1px solid black;
-border-bottom: 1px solid black;
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  bottom: 0px;
+  left: 0px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
 `;
 
 export const StyledCornerBottomRight = styled.div`
-position: absolute;
-height: 11px;
-width: 11px;
-right: 0px;
-bottom: 0px;
-border-right: 1px solid black;
-border-bottom: 1px solid black;
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  right: 0px;
+  bottom: 0px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 `;
 
-
 export const StyledGameCont = styled.div`
-
   position: relative;
   display: flex;
   width: 100%;
@@ -326,69 +329,60 @@ export const StyledGameCont = styled.div`
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
 
-
   //background-color: rgba(0, 0, 0, 0.89);
 
-  background-color: rgba(255,255,255, 0.8);
-
+  background-color: rgba(255, 255, 255, 0.8);
 
   justify-content: center;
   align-items: center;
   //padding: 2% 0%;
   // @media screen and (min-width: 765px) and (max-width: 1150px){
-    
+
   //   display: flex;
   // flex-direction: column;
   // justify-content: center;
   // align-items: center;
-  
-  
+
   // }
   @media screen and (min-width: 765px) {
     grid-column-start: 1;
     grid-column-end: 3;
-
   }
-
 `;
 
 export const StyledGameContTwo = styled(StyledGameCont)`
-display: flex;
-flex-direction: column;
-// border-radius: 10px 10px;
-//   box-shadow: 1px 1px 3px gray;
+  display: flex;
+  flex-direction: column;
+  // border-radius: 10px 10px;
+  //   box-shadow: 1px 1px 3px gray;
 `;
-
 
 export const StyledGameContChild = styled(StyledGameCont)`
- height: 100%;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-border-radius-top: 0px 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius-top: 0px 0px;
   box-shadow: 0px 0px 0px;
-  background-color: rgba(255,255,255, 0.0);
+  background-color: rgba(255, 255, 255, 0);
 `;
 
-
 export const StyledCardAnswer = styled.div`
-width: 150px;
-height: 70px;
-background-color: grey;
-margin: 4%;
-touch-action: none;
-// cursor: grab;
-
+  width: 150px;
+  height: 70px;
+  background-color: grey;
+  margin: 4%;
+  touch-action: none;
+  // cursor: grab;
 `;
 
 export const StyledCard = styled.div`
-
-width: 150px;
-height: 70px;
-background-color: red;
-margin: 4%;
-touch-action: none;
-cursor: grab;
+  width: 150px;
+  height: 70px;
+  background-color: red;
+  margin: 4%;
+  touch-action: none;
+  cursor: grab;
 `;
 
 export const StyledGameChildLeft = styled.div`
@@ -397,23 +391,20 @@ export const StyledGameChildLeft = styled.div`
   width: 95%;
 `;
 
-
 export const StyledImgFlag = styled.img`
-  width: 300px; 
-  height: 200px; 
+  width: 300px;
+  height: 200px;
   pointer-events: none;
   border: 8px solid white;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: 400px) {
     width: 95%;
   }
-  @media screen and (min-width: 400px){
-    width: 280px; 
+  @media screen and (min-width: 400px) {
+    width: 280px;
   }
 `;
 
-export const StyledImgFlagAnwserDone = styled.div`
-`;
-
+export const StyledImgFlagAnwserDone = styled.div``;
 
 export const StyledGameChild = styled.div`
   grid-column-start: 2;
@@ -423,24 +414,21 @@ export const StyledGameChild = styled.div`
   display: grid;
   // padding: 4%;
   height: 100px;
-  
+
   grid-template-rows: 22% 22% 22% 22%;
   grid-template-columns: 100%;
   grid-row-gap: 3%;
 
-  @media screen and (min-width: 550px){
+  @media screen and (min-width: 550px) {
     width: 65%;
   }
-  @media screen and (min-width: 1400px){
+  @media screen and (min-width: 1400px) {
     width: 55%;
   }
-  @media screen and (max-width: 1300px){
+  @media screen and (max-width: 1300px) {
     height: 150px;
-
   }
 `;
-
-
 
 export const StyledGameChildAnswer = styled.div`
   position: relative;
@@ -456,28 +444,26 @@ export const StyledGameChildAnswer = styled.div`
   //   margin-bottom: 1%;
   //   width: 70%;
   // }
-  @media screen and (max-width: 765px){
+  @media screen and (max-width: 765px) {
     // height: 20px;
   }
   &:hover {
     opacity: 1;
-    
   }
 `;
-
 
 export const StyledRecordsCont = styled.div`
   display: none;
   grid-column-start: 3;
   grid-column-end: 3;
-  
+
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px gray;
-  
+
   //color: white;
   //background-color: rgba(0, 0, 0, 0.89);
 
-  background-color: rgba(255,255,255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   color: black;
 
   @media screen and (min-width: 765px) {
@@ -486,17 +472,14 @@ export const StyledRecordsCont = styled.div`
     height: 100%;
   }
   @media screen and (min-width: 1000px) {
-
   }
- 
 `;
 
 export const LabelAccount = styled.label`
-color: white;
+  color: white;
 `;
 
-
-// BORDER BOTTOM RADIUS LEFTRIGHT 
+// BORDER BOTTOM RADIUS LEFTRIGHT
 
 // export const StyledRecordsChild = styled.div`
 //   width: 80%;
@@ -515,20 +498,19 @@ color: white;
 // BORDER STYLISH BOTTOM TOP
 
 export const StyledRecordsChildAll = styled.div`
-width: 80%;
-display: flex;
-flex-direction: column;
-border-top: 1px solid white;
-border-bottom: 1px solid white;
-border-top-left-radius: 10px;
-border-bottom-right-radius: 5px;
-padding: 1% 5% 1% 5%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 5px;
+  padding: 1% 5% 1% 5%;
 
+  //color: white;
+  color: black;
 
-//color: white;
-color: black;
-
-margin: 2% auto 2% auto;
+  margin: 2% auto 2% auto;
 `;
 
 export const StyledRecordsChildTop = styled.div`
@@ -551,205 +533,170 @@ export const StyledRecordsChildTop = styled.div`
 `;
 
 export const StyledRecordsChildBtm = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 `;
 
 export const StyledHeadingRecords = styled(StyledHeadingFooter)`
-
-display: none;
-@media screen and (min-width: 765px) {
-  display: block;
-}
+  display: none;
+  @media screen and (min-width: 765px) {
+    display: block;
+  }
 `;
 
 export const StyledHeadingRecordsPhone = styled(StyledHeadingFooter)`
-color: black;
-display: flex;
-justify-content: center;
-align-items: items;
-@media screen and (min-width: 765px) {
-  display: none;
-}
-
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: items;
+  @media screen and (min-width: 765px) {
+    display: none;
+  }
 `;
 
 export const StyledRecordsContPhone = styled.div`
-display: block;
-width: 80%;
-color: white;
-border-radius: 10px 10px;
-box-shadow: 1px 1px 3px gray;
+  display: block;
+  width: 80%;
+  color: white;
+  border-radius: 10px 10px;
+  box-shadow: 1px 1px 3px gray;
 
-background-color: rgba(255,255,255, 0.8);
-//background-color: rgba(0, 0, 0, 0.89);
+  background-color: rgba(255, 255, 255, 0.8);
+  //background-color: rgba(0, 0, 0, 0.89);
 
-// margin-left: 2%;
-// flex-direction: column;
-// justify-content: space-evenly;
-// align-items: center;
-// padding-bottom: 2%;
-// @media screen and (min-width: 765px) {
-//   display: block;
-//   height: 100%;
-// }
-
+  // margin-left: 2%;
+  // flex-direction: column;
+  // justify-content: space-evenly;
+  // align-items: center;
+  // padding-bottom: 2%;
+  // @media screen and (min-width: 765px) {
+  //   display: block;
+  //   height: 100%;
+  // }
 `;
 
-
-
-
-
-
-
 export const StyledFormHeading = styled.h1`
-  
-color: black;
-//color:#fff;	
-  text-transform:uppercase;
+  color: black;
+  //color:#fff;
+  text-transform: uppercase;
   font-size: 23px;
   margin: 2% 0 15% 0;
   display: block;
   text-align: center;
 `;
 
-
-export const StyledInputForm = styled.input`
-
-`;
+export const StyledInputForm = styled.input``;
 
 export const StyledFormCont = styled.div`
-
-  position:absolute;
-	left:50%;
-	top:50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: 70%;
-      padding: 6% 6%;
-	transform: translate(-50%,-50%);
-  background-color: rgba(255,255,255, 0.8);
+  padding: 6% 6%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
   // background-color: rgba(0, 0, 0, 0.89);
- //background: linear-gradient(68.9deg, #FFFFFF 14.96%, #3BADD1 22.14%, #ED53F0 70.52%, #CF58DC 75.06%, #DA36F4 89.61%);
-   //background: linear-gradient(225.82deg, rgba(172, 78, 217, 1) 6.47%, rgba(217, 78, 144, 1) 21.35%, rgba(78, 175, 217, 1) 85.9%, rgba(78, 175, 217, 1) 100%);
-	border-radius:3px;
+  //background: linear-gradient(68.9deg, #FFFFFF 14.96%, #3BADD1 22.14%, #ED53F0 70.52%, #CF58DC 75.06%, #DA36F4 89.61%);
+  //background: linear-gradient(225.82deg, rgba(172, 78, 217, 1) 6.47%, rgba(217, 78, 144, 1) 21.35%, rgba(78, 175, 217, 1) 85.9%, rgba(78, 175, 217, 1) 100%);
+  border-radius: 3px;
   @media screen and (max-width: 550px) {
     width: 80%;
     padding: 8% 8%;
-  } 
-  @media screen and (min-width: 551px) and (max-width: 791px){
+  }
+  @media screen and (min-width: 551px) and (max-width: 791px) {
     width: 60%;
     padding: 8% 8%;
   }
-    @media screen and (min-width: 792px){
-      width: 40%;
-      padding: 8% 8%;
-    }
-    @media screen and (min-width: 1005px) and (max-width: 1320px){
-      width: 35%;
-      padding: 4% 4%;
-    }
-    @media screen  and (min-width: 1320px){
-      width: 30%;
-      padding: 4% 4%;
-    }
-
+  @media screen and (min-width: 792px) {
+    width: 40%;
+    padding: 8% 8%;
+  }
+  @media screen and (min-width: 1005px) and (max-width: 1320px) {
+    width: 35%;
+    padding: 4% 4%;
+  }
+  @media screen and (min-width: 1320px) {
+    width: 30%;
+    padding: 4% 4%;
+  }
 `;
 
-export const StyledFormContAccount = styled(StyledFormCont)`
-
-
-
-`;
-
+export const StyledFormContAccount = styled(StyledFormCont)``;
 
 export const StyledImgPassword = styled.img`
- 
-position: absolute;
+  position: absolute;
   width: 40px;
   height: 40px;
   right: 5px;
   top: -3px;
   // z-index: 2;
-
-  
 `;
-
-
 
 export const StyledInputContainer = styled.div`
-  position:relative;
+  position: relative;
   width: 100%;
-  margin-bottom:15px;
-& label {
-  position:absolute;
-	top:0px;
-	left:0px;
-	font-size:16px;
-	// color:#fff;	
-  color: black;
-    pointer-event:none;
-	transition: all 0.5s ease-in-out;
-}
-& ${StyledInputForm} {
-  border:0;
-  border-bottom:1px solid #555;  
-  background:transparent;
-  width:100%;
-  padding:8px 0 5px 0;
-  font-size:16px;
-  // color:#fff;
-  color: black;
-}
-& ${StyledInputForm}:focus{
-  border:none;	
- outline:none;
- border-bottom:1px solid #e74c3c;	
-}
-& ${StyledInputForm}:focus ~ label{ 
-  top:-12px;
-	font-size:12px;
-}
-${StyledInputForm}:valid ~ label {
-  top:-12px;
-	font-size:12px;
-}
+  margin-bottom: 15px;
+  & label {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 16px;
+    // color:#fff;
+    color: black;
+    pointer-event: none;
+    transition: all 0.5s ease-in-out;
+  }
+  & ${StyledInputForm} {
+    border: 0;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    // color:#fff;
+    color: black;
+  }
+  & ${StyledInputForm}:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #e74c3c;
+  }
+  & ${StyledInputForm}:focus ~ label {
+    top: -12px;
+    font-size: 12px;
+  }
+  ${StyledInputForm}:valid ~ label {
+    top: -12px;
+    font-size: 12px;
+  }
 
-// & ${StyledInputForm}:focus ~ ${StyledImgPassword}{
+  // & ${StyledInputForm}:focus ~ ${StyledImgPassword}{
 
-//   display: block;
-// }
-
+  //   display: block;
+  // }
 `;
 
-
-
-
-
-
-
 export const StyledSpan = styled.span`
-color: black;
-font-size: 16px;
+  color: black;
+  font-size: 16px;
 `;
 
 export const StyledSpanMessage = styled(StyledSpan)`
-display: inline-block;
-color: red;
-margin-bottom: 4%; 
-text-align: center;
-width: 100%;
-
+  display: inline-block;
+  color: red;
+  margin-bottom: 4%;
+  text-align: center;
+  width: 100%;
 `;
 
 export const StyledSpanMessageGreen = styled(StyledSpan)`
-display: inline-block;
-color: red;
-margin-bottom: 4%; 
-text-align: center;
-width: 100%;
-
+  display: inline-block;
+  color: red;
+  margin-bottom: 4%;
+  text-align: center;
+  width: 100%;
 `;
-
 
 export const StyledForm = styled.form`
   display: flex;
@@ -758,15 +705,14 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledSpanResult = styled.span`
-  color: ${props => props.coloring};
+  color: ${(props) => props.coloring};
   font-weight: bold;
   width: 90%;
 `;
 
-
 export const StyledErrorBox = styled.div`
-  display: ${props => props.display};
-  background-color: rgba(255,255,255,1);
+  display: ${(props) => props.display};
+  background-color: rgba(255, 255, 255, 1);
   z-index: 3;
   position: absolute;
   left: 10%;
@@ -774,7 +720,7 @@ export const StyledErrorBox = styled.div`
   width: 80%;
   height: 100px;
   text-align: center;
-  
+
   border-radius: 10px 10px;
   box-shadow: 1px 1px 3px black;
 `;
@@ -790,54 +736,48 @@ export const StyledErrorBoxChild = styled.div`
 `;
 
 export const StyledUnconnected = styled.div`
-color: white;
-height: 300px;
-display: flex;
-justify-content: center;
-align-items: center;
+  color: white;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledGameOver = styled.div`
-color: white;
-display: flex;
-padding: 10%;
-margin: auto;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-height: 65%;
-width: 75%;
-background-color: rgba(0, 0, 0, 1);
-border-radius: 10px 10px;
-@media screen and (min-width: 750px){
+  color: white;
+  display: flex;
+  padding: 10%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
   width: 75%;
-  height: 55%;
-}
-@media screen and (min-width: 1000px){
-  width: 50%;
-  height: 45%;
-}
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 10px 10px;
+  @media screen and (min-width: 750px) {
+    width: 75%;
+    height: 55%;
+  }
+  @media screen and (min-width: 1000px) {
+    width: 50%;
+    height: 45%;
+  }
 
-position: absolute;
-// left: 55px;
+  position: absolute;
+  // left: 55px;
 
-
-// Gameover enfant div avec du margin a modifie !!!
+  // Gameover enfant div avec du margin a modifie !!!
 `;
 
 export const StyledParticles = styled.div`
-
-// z-index: 5;
-// position: absolute;
-
-
+  // z-index: 5;
+  // position: absolute;
 `;
 
 export const StyledSpanEmoji = styled.span`
-font-size: 60px;
-position: relative;
-top: 10%;
-left: 0%;
+  font-size: 60px;
+  position: relative;
+  top: 10%;
+  left: 0%;
 `;
-
-
