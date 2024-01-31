@@ -12,33 +12,20 @@ export const triggerAnswers = async (
   setStartTimer,
   newarray
 ) => {
-  //let filteredCountry = africa.filter((country) => country !== valueToRemove);
-  //let filteredCountry = arraycountries.filter((country) => country !== valueToRemove);
   let optionsAnswer = [];
-  //setArraycountries(filteredCountry);
-  //   for (let i = 0; i < 3; i++) {
-  //     const index = Math.floor(Math.random() * filteredCountry.length);
-  //     console.log("ici", index);
-  //     Object.keys(filteredCountry[index]).forEach(async (key) => {
-  //       optionsAnswer.push(filteredCountry[index][key]);
-  //       filteredCountry.filter((country) => country !== filteredCountry[index]);
-  //       return optionsAnswer;
-  //     });
-  //   }
   let tempArray = arraycountries;
   for (let i = 0; i < 3; i++) {
     const index = Math.floor(Math.random() * tempArray.length);
     console.log("START", tempArray.length);
 
-    // Get keys and add to optionsAnswer
     const keys = Object.keys(tempArray[index]);
     keys.forEach((key) => {
       optionsAnswer.push(tempArray[index][key]);
     });
 
-    // Remove the used country
+    // LIGNE 39 JUST AFTER
     tempArray = tempArray.filter((country, idx) => idx !== index);
-
+    console.log("ITS REMOVED ?", tempArray);
     console.log("ITS REMOVED ?", tempArray.length);
   }
 
@@ -108,7 +95,7 @@ export const startGame = async (
     setAnswer([]);
     setDisplayed(false);
     const index = Math.floor(Math.random() * arraycountries.length);
-
+    console.log(arraycountries);
     Object.keys(arraycountries[index]).forEach(async (key) => {
       let newarray = arraycountries.filter(
         (country) => country !== arraycountries[index]
@@ -123,7 +110,7 @@ export const startGame = async (
         setResult,
         rightresult,
         setAnswer,
-        africa[index][key],
+        arraycountries[index][key],
         valueToRemove,
         arraycountries,
         setArraycountries,
@@ -168,7 +155,7 @@ export const startGameParameters = async (
         setResult,
         rightresult,
         setAnswer,
-        countries[index][key],
+        arraycountries[index][key],
         valueToRemove,
         arraycountries,
         setArraycountries,
@@ -204,7 +191,7 @@ export const endOfGame = (
   if (score > lastscore) {
     setLastscore(score);
   }
-  setArraycountries(countries);
+  setArraycountries("");
   setResult("");
   setInput("");
 };

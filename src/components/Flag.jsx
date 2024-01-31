@@ -1,18 +1,10 @@
-import React from 'react';
+import React, { useRef } from "react";
 import {
   StyledCard,
   StyledImgFlag,
-}
-  from '../components/styles/GeneralElements';
-import { useSpring, animated } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
+} from "../components/styles/GeneralElements";
 
-export default function Flag({ data }) {
-
-
-  return (
-    
-    // <StyledImgFlag as={animated.div} src={data} ></StyledImgFlag>
-    <StyledImgFlag alt='flag' src={data}></StyledImgFlag>
-  )
-}
+const Flag = React.memo(({ data }) => {
+  return <StyledImgFlag alt="flag" src={data}></StyledImgFlag>;
+});
+export default Flag;

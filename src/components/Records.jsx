@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import { StyledHeadingRecordsPhone, StyledRecordsContPhone, StyledRecordsCont, StyledRecordsChild, StyledHeadingRecords, StyledRecordsChildTop, StyledRecordsChildAll, StyledRecordsChildBtm } from './styles/GeneralElements';
-import { useTranslation } from 'react-i18next';
-import moment from 'moment';
-import { useSpring, animated } from 'react-spring';
+import React, { useState, useRef } from "react";
+import {
+  StyledHeadingRecordsPhone,
+  StyledRecordsContPhone,
+  StyledRecordsCont,
+  StyledRecordsChild,
+  StyledHeadingRecords,
+  StyledRecordsChildTop,
+  StyledRecordsChildAll,
+  StyledRecordsChildBtm,
+} from "./styles/GeneralElements";
+import { useTranslation } from "react-i18next";
+import moment from "moment";
+import { useSpring, animated } from "react-spring";
 
 export default function Records({ ladderNavbar, players }) {
-
   const { t } = useTranslation();
-
 
   function compareDate(a, b) {
     if (a.score === b.score && a.updatedAt > b.updatedAt) {
@@ -18,39 +25,42 @@ export default function Records({ ladderNavbar, players }) {
     }
   }
 
-  players.sort(compareDate)
-
+  players.sort(compareDate);
 
   const playersMappedArray = players.map((data, index) => {
-    return <StyledRecordsChildAll key={index} >
-      <StyledRecordsChildTop>
-        <span>{data.owner}</span><span>{data.score}</span>
-      </StyledRecordsChildTop>
-      <StyledRecordsChildBtm>
-        <>
-          {moment(data.updatedAt).format("DD-MM-YYYY, h:mm a")}
-        </>
-      </StyledRecordsChildBtm>
-    </StyledRecordsChildAll>
-  })
+    return (
+      <StyledRecordsChildAll key={index}>
+        <StyledRecordsChildTop>
+          <span>{data.owner}</span>
+          <span>{data.score}</span>
+        </StyledRecordsChildTop>
+        <StyledRecordsChildBtm>
+          <>{moment(data.updatedAt).format("DD-MM-YYYY, h:mm a")}</>
+        </StyledRecordsChildBtm>
+      </StyledRecordsChildAll>
+    );
+  });
 
   const fade = useSpring({
-    from: { opacity: 0 }, opacity: 1
-  })
+    from: { opacity: 0 },
+    opacity: 1,
+  });
 
   return (
     <>
-      {ladderNavbar ?
+      {ladderNavbar ? (
         <StyledRecordsContPhone as={animated.div} style={fade}>
-          <StyledHeadingRecordsPhone>{t("records.header")}</StyledHeadingRecordsPhone>
+          <StyledHeadingRecordsPhone>
+            {t("records.header")}
+          </StyledHeadingRecordsPhone>
           {playersMappedArray}
         </StyledRecordsContPhone>
-        :
+      ) : (
         <StyledRecordsCont>
           <StyledHeadingRecords>{t("records.header")}</StyledHeadingRecords>
           {playersMappedArray}
         </StyledRecordsCont>
-      }
+      )}
     </>
-  )
+  );
 }

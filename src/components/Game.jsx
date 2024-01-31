@@ -57,6 +57,11 @@ export default function Game({
   setLogged,
   setLastscore,
 }) {
+  const [life, setLife] = useState(3);
+  const [startTimer, setStartTimer] = useState(false);
+  const [seconds, setSeconds] = useState(5);
+  const [over, setOver] = useState("");
+
   const [heart, setHeart] = useState(["red", "red", "red"]);
   const [arraycountries, setArraycountries] = useState(africa);
   const [flag, setFlag] = useState(null);
@@ -66,11 +71,8 @@ export default function Game({
   const userbestscore = localStorage.getItem("userscore");
   const [disabled, setDisabled] = useState(false);
 
-  const [startTimer, setStartTimer] = useState(false);
   const [goodanswer, setGoodanswer] = useState(false);
-  const [over, setOver] = useState("");
-  const [seconds, setSeconds] = useState(5);
-  const [life, setLife] = useState(3);
+
   const [ChoiceIsVisible, setChoiceIsVisible] = useState(false);
   const [lastlife, setLastlife] = useState(false);
   const [timeover, setTimeover] = useState(false);
@@ -81,6 +83,28 @@ export default function Game({
     Asia: false,
     America: false,
   });
+
+  const gameEnded = () => {
+    setLife(3);
+    setStartTimer(false);
+    setSeconds(5);
+    setOver(false);
+    endOfGame(
+      setArraycountries,
+      user,
+      lastscore,
+      score,
+      createPoint,
+      setTriggerscore,
+      updatePoint,
+      setLastscore,
+      setFlag,
+      setScore,
+      setResult,
+      setInput,
+      existscore
+    );
+  };
 
   useEffect(() => {
     const imag = new Image();
@@ -153,6 +177,19 @@ export default function Game({
   }
 
   useEffect(() => {
+    let combinedCountries = [];
+
+    if (choices.World) combinedCountries = combinedCountries.concat(countries);
+    if (choices.Africa) combinedCountries = combinedCountries.concat(africa);
+    if (choices.Europe) combinedCountries = combinedCountries.concat(europe);
+    if (choices.America) combinedCountries = combinedCountries.concat(america);
+    if (choices.Asia) combinedCountries = combinedCountries.concat(asia);
+
+    // Update the state with the new array of countries
+    setArraycountries(combinedCountries);
+  }, [choices]);
+
+  useEffect(() => {
     if (life === 2) setHeart([heart[0], heart[1], (heart[2] = "white")]);
     if (life === 1)
       setHeart([heart[0], (heart[2] = "white"), (heart[2] = "white")]);
@@ -168,26 +205,7 @@ export default function Game({
     }
     if (life < 0) {
       setGameover(true);
-      setLife(3);
-      setStartTimer(false);
-      setSeconds(5);
-      setOver(false);
-      endOfGame(
-        setArraycountries,
-        user,
-        lastscore,
-        score,
-        createPoint,
-        setTriggerscore,
-        updatePoint,
-        setLastscore,
-        setFlag,
-        setScore,
-        setResult,
-        setInput,
-        existscore,
-        arraycountries
-      );
+      gameEnded();
     }
     // eslint-disable-next-line
   }, [life]);
@@ -206,6 +224,7 @@ export default function Game({
       return trueCount >= 2 || (v == false && trueCount < 2);
     };
     if (checkAtLeastOne()) {
+      gameEnded();
       setChoices((prevChoices) => ({
         ...prevChoices,
         [k]: !prevChoices[k],
@@ -213,7 +232,7 @@ export default function Game({
     }
   };
 
-  console.log(choices);
+  //console.log(choices);
 
   useEffect(() => {
     if (over) {
@@ -387,15 +406,9 @@ export default function Game({
                   ></IoChevronDownCircleOutline>
                 </StyledBtnCountries>
                 {ChoiceIsVisible ? (
-                  //<StyledChoices ChoiceIsVisible={ChoiceIsVisible}>
                   <StyledList>
-                    {/* <StyledList> */}
                     {Object.entries(choices).map(([key, value]) => {
-                      // console.log(key, value);
-                      // //<div key={key}>{key}</div>;
-                      // return <li key={key}>{key}</li>;
                       return (
-                        // <StyledListItem key={key}>
                         <label key={key}>
                           <input
                             type="checkbox"
@@ -404,13 +417,10 @@ export default function Game({
                           />
                           {key}
                         </label>
-                        // </StyledListItem>
                       );
                     })}
-                    {/* </StyledList> */}
                   </StyledList>
                 ) : (
-                  // </StyledChoices>
                   <></>
                 )}
               </>

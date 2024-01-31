@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useRef } from "react";
 
-export default function Score({ score }) {
+const Score = React.memo(({ score }) => {
+  //const renderCountRef = useRef(0);
+  //renderCountRef.current += 1;
+
+  //console.log(`Score rendered ${renderCountRef.current} times`);
   return (
-    <span style={{ width: '50%', fontWeight: 'bold' }} >Score : {score}</span>
-  )
-}
+    <span style={{ width: "50%", fontWeight: "bold" }}>Score : {score}</span>
+  );
+});
+export default Score;
